@@ -18,7 +18,7 @@
 <meta property="og:description" content="1. ssh를 이용하여 파일 복사 및 전송하기ssh에서 제공하는 scp 명령어를 통해 로컬서버↔원격서버 파일을 양방향 전송할 수 있다.1.1 사용방법 원격 서버 → 로컬 서버로 파일 전송  1# scp [옵션] [계정명]@[원격지IP주소]:[원본 경로 및 파일] [전송받을 위치] 예제1) IP 111.222.333.444 서버의 abc라는 계정으로 /hom">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://hyunsuk2.github.io.git/images/ssh-upload-file.gif">
-<meta property="og:updated_time" content="2018-01-15T15:44:38.137Z">
+<meta property="og:updated_time" content="2019-01-06T14:30:48.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssh를 이용하여 원격 서버와 파일 양방향 전송하기">
 <meta name="twitter:description" content="1. ssh를 이용하여 파일 복사 및 전송하기ssh에서 제공하는 scp 명령어를 통해 로컬서버↔원격서버 파일을 양방향 전송할 수 있다.1.1 사용방법 원격 서버 → 로컬 서버로 파일 전송  1# scp [옵션] [계정명]@[원격지IP주소]:[원본 경로 및 파일] [전송받을 위치] 예제1) IP 111.222.333.444 서버의 abc라는 계정으로 /hom">
@@ -76,7 +76,7 @@
                                     <a class="main-nav-list-link" href="/hexo-theme-hueman/">Home</a>
                                 </li>
                             
-                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/IT/">IT</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/IT/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/IT/Linux/">Linux</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/IT/Security/">Security</a></li></ul></li></ul>
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/IT/">IT</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/IT/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/IT/Linux/">Linux</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/IT/Security/">Security</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/english/">english</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/english/diary/">diary</a></li></ul></li></ul>
                                     
                                 <li class="main-nav-list-item" >
                                     <a class="main-nav-list-link" href="https://about.me/hyunsuk/">About</a>
@@ -179,7 +179,7 @@
 </code></pre> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp abc@111.222.333.444:/home/abc/index.html /home/me/</span></span><br></pre></td></tr></table></figure>
 <pre><code>예제2) (ssh의 기본 22번 포트가 아닐경우)IP 111.222.333.444 서버의 
 abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디렉토리에 전송 받기
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -p 321 abc@111.222.333.444:/home/abc/index.html /home/me/ (ssh 포트가 321일경우)</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -P 321 abc@111.222.333.444:/home/abc/index.html /home/me/ (ssh 포트가 321일경우)</span></span><br></pre></td></tr></table></figure>
 </code></pre></li>
 </ul>
 <hr>
@@ -191,7 +191,7 @@ abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디
 </code></pre>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp /home/me/wow.html abc@111.222.333.444:/home/abc/</span></span><br></pre></td></tr></table></figure>
 <pre><code>예제2) (ssh의 기본 22번 포트가 아닐경우)로컬서버 /home/me/wow.html 파일을
  IP 111.222.333.444 서버의 /home/abc/ 디렉토리에 전송 하기
-</code></pre>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -p 321 /home/me/wow.html abc@111.222.333.444:/home/abc/ (ssh 포트가 321일경우)</span></span><br></pre></td></tr></table></figure>
+</code></pre>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -P 321 /home/me/wow.html abc@111.222.333.444:/home/abc/ (ssh 포트가 321일경우)</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>[주의사항]</strong><br>   옵션중에 –P와 –p가 있으니 대/소문자 확인을 하여야 한다.<br>   -P : 포트번호를 지정함<br>   -p : 원본파일 수정/사용시간 및 권한을 유지함<br>   -r : 하위 디렉토리 및 파일 모두 복사함</p>
 </li>
@@ -336,6 +336,16 @@ abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디
         
 <nav id="article-nav">
     
+        <a href="/2019/01/06/diary/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            &#39;영어 일기&#39;
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
     
         <a href="/2018/01/15/secuermap/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
@@ -354,6 +364,26 @@ abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/01/06/diary/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/)" alt="&#39;영어 일기&#39;" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/english/">english</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/english/diary/">diary</a></p>
+                            <p class="item-title"><a href="/2019/01/06/diary/" class="title">&#39;영어 일기&#39;</a></p>
+                            <p class="item-date"><time datetime="2019-01-06T14:32:03.000Z" itemprop="datePublished">2019-01-06</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -424,7 +454,7 @@ abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/IT/Angular/">Angular</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/Security/">Security</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/IT/Angular/">Angular</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/Security/">Security</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/english/">english</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/english/diary/">diary</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -434,7 +464,7 @@ abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -444,7 +474,7 @@ abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Security/">Security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-trans/">file trans</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/">scp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Security/">Security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/english/">english</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-trans/">file trans</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/">scp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -454,7 +484,7 @@ abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Security/" style="font-size: 10px;">Security</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/file-trans/" style="font-size: 10px;">file trans</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+            <a href="/tags/Security/" style="font-size: 10px;">Security</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/english/" style="font-size: 10px;">english</a> <a href="/tags/file-trans/" style="font-size: 10px;">file trans</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
         </div>
     </div>
 
