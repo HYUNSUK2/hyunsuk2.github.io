@@ -2,63 +2,63 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://hyunsuk2.github.io.git/</loc>
+        <loc>http://hyunsuk2.github.io/</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
 
 
     <url>
-        <loc>http://hyunsuk2.github.io.git/categories/IT/Hadoop/</loc>
+        <loc>http://hyunsuk2.github.io/categories/IT/Hadoop/</loc>
         <lastmod>2021-02-23T15:01:34.650Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io.git/categories/IT/</loc>
+        <loc>http://hyunsuk2.github.io/categories/IT/</loc>
         <lastmod>2021-02-23T15:01:34.650Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io.git/categories/IT/python/</loc>
+        <loc>http://hyunsuk2.github.io/categories/IT/python/</loc>
         <lastmod>2021-02-23T04:05:47.581Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io.git/categories/IT/Angular/</loc>
+        <loc>http://hyunsuk2.github.io/categories/IT/Angular/</loc>
         <lastmod>2021-02-21T14:14:21.837Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io.git/categories/english/diary/</loc>
+        <loc>http://hyunsuk2.github.io/categories/english/diary/</loc>
         <lastmod>2019-01-30T14:19:04.265Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io.git/categories/english/</loc>
+        <loc>http://hyunsuk2.github.io/categories/english/</loc>
         <lastmod>2019-01-30T14:19:04.265Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io.git/categories/IT/Linux/</loc>
+        <loc>http://hyunsuk2.github.io/categories/IT/Linux/</loc>
         <lastmod>2019-01-06T14:30:48.349Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io.git/categories/IT/Security/</loc>
+        <loc>http://hyunsuk2.github.io/categories/IT/Security/</loc>
         <lastmod>2018-01-14T16:35:04.043Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

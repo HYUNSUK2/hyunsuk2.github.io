@@ -3,11 +3,11 @@
   <title>Hyunsuk&#39;s Blog</title>
   
   <subtitle>Hyunsuk&#39;s Blog</subtitle>
-  <link href="http://hyunsuk2.github.io.git/feed.xml" rel="self"/>
+  <link href="http://hyunsuk2.github.io/rss.xml" rel="self"/>
   
-  <link href="http://hyunsuk2.github.io.git/"/>
+  <link href="http://hyunsuk2.github.io/"/>
   <updated>2021-02-23T15:01:34.650Z</updated>
-  <id>http://hyunsuk2.github.io.git/</id>
+  <id>http://hyunsuk2.github.io/</id>
   
   <author>
     <name>HyunSuk</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>하둡 공부 순서</title>
-    <link href="http://hyunsuk2.github.io.git/2021/02/23/hadoop-study-order/"/>
-    <id>http://hyunsuk2.github.io.git/2021/02/23/hadoop-study-order/</id>
+    <link href="http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/"/>
+    <id>http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/</id>
     <published>2021-02-23T14:29:21.000Z</published>
     <updated>2021-02-23T15:01:34.650Z</updated>
     
@@ -36,19 +36,19 @@
     
     
     
-    <category term="IT" scheme="http://hyunsuk2.github.io.git/categories/IT/"/>
+    <category term="IT" scheme="http://hyunsuk2.github.io/categories/IT/"/>
     
-    <category term="Hadoop" scheme="http://hyunsuk2.github.io.git/categories/IT/Hadoop/"/>
+    <category term="Hadoop" scheme="http://hyunsuk2.github.io/categories/IT/Hadoop/"/>
     
     
-    <category term="hadoop" scheme="http://hyunsuk2.github.io.git/tags/hadoop/"/>
+    <category term="hadoop" scheme="http://hyunsuk2.github.io/tags/hadoop/"/>
     
   </entry>
   
   <entry>
     <title>속도를 높이는 파이썬 코드</title>
-    <link href="http://hyunsuk2.github.io.git/2021/02/23/speed-up-python-code/"/>
-    <id>http://hyunsuk2.github.io.git/2021/02/23/speed-up-python-code/</id>
+    <link href="http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/"/>
+    <id>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</id>
     <published>2021-02-23T03:48:42.000Z</published>
     <updated>2021-02-23T04:05:47.581Z</updated>
     
@@ -62,19 +62,19 @@
     
     
     
-    <category term="IT" scheme="http://hyunsuk2.github.io.git/categories/IT/"/>
+    <category term="IT" scheme="http://hyunsuk2.github.io/categories/IT/"/>
     
-    <category term="python" scheme="http://hyunsuk2.github.io.git/categories/IT/python/"/>
+    <category term="python" scheme="http://hyunsuk2.github.io/categories/IT/python/"/>
     
     
-    <category term="python, speed up" scheme="http://hyunsuk2.github.io.git/tags/python-speed-up/"/>
+    <category term="python, speed up" scheme="http://hyunsuk2.github.io/tags/python-speed-up/"/>
     
   </entry>
   
   <entry>
     <title>하둡을 왜 쓰는 것일까?</title>
-    <link href="http://hyunsuk2.github.io.git/2021/02/21/start-hadoop-study/"/>
-    <id>http://hyunsuk2.github.io.git/2021/02/21/start-hadoop-study/</id>
+    <link href="http://hyunsuk2.github.io/2021/02/21/start-hadoop-study/"/>
+    <id>http://hyunsuk2.github.io/2021/02/21/start-hadoop-study/</id>
     <published>2021-02-21T12:34:49.000Z</published>
     <updated>2021-02-21T13:53:45.955Z</updated>
     
@@ -88,19 +88,19 @@
     
     
     
-    <category term="IT" scheme="http://hyunsuk2.github.io.git/categories/IT/"/>
+    <category term="IT" scheme="http://hyunsuk2.github.io/categories/IT/"/>
     
-    <category term="Hadoop" scheme="http://hyunsuk2.github.io.git/categories/IT/Hadoop/"/>
+    <category term="Hadoop" scheme="http://hyunsuk2.github.io/categories/IT/Hadoop/"/>
     
     
-    <category term="hadoop" scheme="http://hyunsuk2.github.io.git/tags/hadoop/"/>
+    <category term="hadoop" scheme="http://hyunsuk2.github.io/tags/hadoop/"/>
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/30/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/30/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/30/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/30/diary/</id>
     <published>2019-01-30T14:12:02.000Z</published>
     <updated>2019-01-30T14:19:04.265Z</updated>
     
@@ -114,17 +114,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/29/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/29/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/29/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/29/diary/</id>
     <published>2019-01-29T14:36:45.000Z</published>
     <updated>2019-01-29T15:16:47.862Z</updated>
     
@@ -138,17 +138,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/28/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/28/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/28/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/28/diary/</id>
     <published>2019-01-28T14:33:11.000Z</published>
     <updated>2019-01-28T14:44:10.600Z</updated>
     
@@ -162,17 +162,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/22/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/22/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/22/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/22/diary/</id>
     <published>2019-01-22T12:33:08.000Z</published>
     <updated>2019-01-22T13:14:58.314Z</updated>
     
@@ -186,17 +186,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/21/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/21/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/21/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/21/diary/</id>
     <published>2019-01-21T14:12:55.000Z</published>
     <updated>2019-01-21T14:21:00.284Z</updated>
     
@@ -210,17 +210,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/17/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/17/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/17/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/17/diary/</id>
     <published>2019-01-17T14:22:26.000Z</published>
     <updated>2019-01-17T14:45:25.744Z</updated>
     
@@ -234,17 +234,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/16/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/16/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/16/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/16/diary/</id>
     <published>2019-01-16T13:37:39.000Z</published>
     <updated>2019-01-16T14:14:44.673Z</updated>
     
@@ -258,17 +258,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/15/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/15/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/15/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/15/diary/</id>
     <published>2019-01-15T13:47:32.000Z</published>
     <updated>2019-01-15T14:37:41.959Z</updated>
     
@@ -282,17 +282,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/14/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/14/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/14/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/14/diary/</id>
     <published>2019-01-14T13:46:51.000Z</published>
     <updated>2019-01-15T14:30:02.714Z</updated>
     
@@ -306,17 +306,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/11/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/11/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/11/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/11/diary/</id>
     <published>2019-01-11T14:35:53.000Z</published>
     <updated>2019-01-11T14:36:28.315Z</updated>
     
@@ -330,17 +330,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/10/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/10/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/10/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/10/diary/</id>
     <published>2019-01-10T13:44:30.000Z</published>
     <updated>2019-01-10T14:28:26.414Z</updated>
     
@@ -354,17 +354,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/09/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/09/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/09/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/09/diary/</id>
     <published>2019-01-09T14:36:56.000Z</published>
     <updated>2019-01-09T14:39:30.425Z</updated>
     
@@ -378,17 +378,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/08/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/08/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/08/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/08/diary/</id>
     <published>2019-01-08T12:06:09.000Z</published>
     <updated>2019-01-08T12:36:12.443Z</updated>
     
@@ -402,17 +402,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/07/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/07/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/07/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/07/diary/</id>
     <published>2019-01-07T12:05:01.000Z</published>
     <updated>2019-01-08T12:36:12.338Z</updated>
     
@@ -426,17 +426,17 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
   </entry>
   
   <entry>
     <title>&#39;영어 일기&#39;</title>
-    <link href="http://hyunsuk2.github.io.git/2019/01/06/diary/"/>
-    <id>http://hyunsuk2.github.io.git/2019/01/06/diary/</id>
+    <link href="http://hyunsuk2.github.io/2019/01/06/diary/"/>
+    <id>http://hyunsuk2.github.io/2019/01/06/diary/</id>
     <published>2019-01-06T14:32:03.000Z</published>
     <updated>2019-01-06T14:45:54.564Z</updated>
     
@@ -451,19 +451,19 @@
     
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/categories/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
     
-    <category term="diary" scheme="http://hyunsuk2.github.io.git/categories/english/diary/"/>
+    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
     
     
-    <category term="english" scheme="http://hyunsuk2.github.io.git/tags/english/"/>
+    <category term="english" scheme="http://hyunsuk2.github.io/tags/english/"/>
     
   </entry>
   
   <entry>
     <title>ssh를 이용하여 원격 서버와 파일 양방향 전송하기</title>
-    <link href="http://hyunsuk2.github.io.git/2018/01/16/ssh/"/>
-    <id>http://hyunsuk2.github.io.git/2018/01/16/ssh/</id>
+    <link href="http://hyunsuk2.github.io/2018/01/16/ssh/"/>
+    <id>http://hyunsuk2.github.io/2018/01/16/ssh/</id>
     <published>2018-01-15T15:09:06.000Z</published>
     <updated>2019-01-06T14:30:48.349Z</updated>
     
@@ -477,23 +477,23 @@
     
     
     
-    <category term="IT" scheme="http://hyunsuk2.github.io.git/categories/IT/"/>
+    <category term="IT" scheme="http://hyunsuk2.github.io/categories/IT/"/>
     
-    <category term="Linux" scheme="http://hyunsuk2.github.io.git/categories/IT/Linux/"/>
+    <category term="Linux" scheme="http://hyunsuk2.github.io/categories/IT/Linux/"/>
     
     
-    <category term="ssh" scheme="http://hyunsuk2.github.io.git/tags/ssh/"/>
+    <category term="ssh" scheme="http://hyunsuk2.github.io/tags/ssh/"/>
     
-    <category term="scp" scheme="http://hyunsuk2.github.io.git/tags/scp/"/>
+    <category term="scp" scheme="http://hyunsuk2.github.io/tags/scp/"/>
     
-    <category term="file trans" scheme="http://hyunsuk2.github.io.git/tags/file-trans/"/>
+    <category term="file trans" scheme="http://hyunsuk2.github.io/tags/file-trans/"/>
     
   </entry>
   
   <entry>
     <title>angular 준비하기</title>
-    <link href="http://hyunsuk2.github.io.git/2018/01/15/angular/"/>
-    <id>http://hyunsuk2.github.io.git/2018/01/15/angular/</id>
+    <link href="http://hyunsuk2.github.io/2018/01/15/angular/"/>
+    <id>http://hyunsuk2.github.io/2018/01/15/angular/</id>
     <published>2018-01-14T15:40:21.000Z</published>
     <updated>2021-02-21T14:14:21.837Z</updated>
     
@@ -507,12 +507,12 @@
     
     
     
-    <category term="IT" scheme="http://hyunsuk2.github.io.git/categories/IT/"/>
+    <category term="IT" scheme="http://hyunsuk2.github.io/categories/IT/"/>
     
-    <category term="Angular" scheme="http://hyunsuk2.github.io.git/categories/IT/Angular/"/>
+    <category term="Angular" scheme="http://hyunsuk2.github.io/categories/IT/Angular/"/>
     
     
-    <category term="angular" scheme="http://hyunsuk2.github.io.git/tags/angular/"/>
+    <category term="angular" scheme="http://hyunsuk2.github.io/tags/angular/"/>
     
   </entry>
   
