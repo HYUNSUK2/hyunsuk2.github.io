@@ -1,519 +1,556 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hyunsuk&#39;s Blog</title>
-  
-  <subtitle>Hyunsuk&#39;s Blog</subtitle>
-  <link href="http://hyunsuk2.github.io/rss.xml" rel="self"/>
-  
-  <link href="http://hyunsuk2.github.io/"/>
-  <updated>2021-02-23T15:01:34.650Z</updated>
-  <id>http://hyunsuk2.github.io/</id>
-  
-  <author>
-    <name>HyunSuk</name>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Hyunsuk&#39;s Blog</title>
+    <link>http://hyunsuk2.github.io/</link>
     
-  </author>
-  
-  <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>하둡 공부 순서</title>
-    <link href="http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/"/>
-    <id>http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/</id>
-    <published>2021-02-23T14:29:21.000Z</published>
-    <updated>2021-02-23T15:01:34.650Z</updated>
+    <atom:link href="http://hyunsuk2.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
-    <content type="html"><![CDATA[<h1 id="하둡-공부-순서"><a href="#하둡-공부-순서" class="headerlink" title="하둡 공부 순서"></a>하둡 공부 순서</h1><ol><li>HDFS</li><li>MapReduce</li><li>YARN</li><li>Avro</li><li>Parquet</li><li>Flume</li><li>Sqoop</li><li>Pig</li><li>Hive</li><li>Crunch</li><li>Spark</li><li>Hbase</li><li>Zookeeper</li></ol><h1 id="하둡-에코-시스템"><a href="#하둡-에코-시스템" class="headerlink" title="하둡 에코 시스템"></a>하둡 에코 시스템</h1><p><img src="/images/hadoop_eco_system.png" alt="하둡 에코 시스템"></p><blockquote><p><strong>HDFS</strong>, <strong>MapReduce</strong>, <strong>YARN</strong>은 하둡 기반 구성 요소라서 정확하게 이해할 필요성이 있다<br>다른 요소들은 필요한 순서대로 공부하면 될 듯</p></blockquote>]]></content>
+    <description>Hyunsuk&#39;s Blog</description>
+    <pubDate>Tue, 23 Feb 2021 15:01:34 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
     
-    
+    <item>
+      <title>하둡 공부 순서</title>
+      <link>http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/</link>
+      <guid>http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/</guid>
+      <pubDate>Tue, 23 Feb 2021 14:29:21 GMT</pubDate>
       
-      
-    <summary type="html">&lt;h1 id=&quot;하둡-공부-순서&quot;&gt;&lt;a href=&quot;#하둡-공부-순서&quot; class=&quot;headerlink&quot; title=&quot;하둡 공부 순서&quot;&gt;&lt;/a&gt;하둡 공부 순서&lt;/h1&gt;&lt;ol&gt;
+        
+        
+      <description>&lt;h1 id=&quot;하둡-공부-순서&quot;&gt;&lt;a href=&quot;#하둡-공부-순서&quot; class=&quot;headerlink&quot; title=&quot;하둡 공부 순서&quot;&gt;&lt;/a&gt;하둡 공부 순서&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;HDFS&lt;/li&gt;
 &lt;li&gt;MapReduce&lt;/li&gt;
-&lt;li&gt;YARN&lt;/l</summary>
-      
-    
-    
-    
-    <category term="IT" scheme="http://hyunsuk2.github.io/categories/IT/"/>
-    
-    <category term="Hadoop" scheme="http://hyunsuk2.github.io/categories/IT/Hadoop/"/>
-    
-    
-    <category term="hadoop" scheme="http://hyunsuk2.github.io/tags/hadoop/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>속도를 높이는 파이썬 코드</title>
-    <link href="http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/"/>
-    <id>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</id>
-    <published>2021-02-23T03:48:42.000Z</published>
-    <updated>2021-02-23T04:05:47.581Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="기존-파이썬-코드를-빠르게-만드는-방법"><a href="#기존-파이썬-코드를-빠르게-만드는-방법" class="headerlink" title="기존 파이썬 코드를 빠르게 만드는 방법"></a>기존 파이썬 코드를 빠르게 만드는 방법</h3><ul><li><p>상황에 맞는 정확한 데이터 구조 사용<br> (list, tuple, set, dict, etc…)</p></li><li><p>for 루프 대신 while 루프 사용</p></li><li><p>컴프레헨션 사용</p></li><li><p>복수 할당 사용 ( a, b = 1, 2)</p></li><li><p>될 수 있으면 global 키워드를 줄이자 연산 작업에 많은 시간을 소요한다</p></li><li><p>라이브러리를 활용</p></li><li><p>제너레이터 사용</p></li><li><p>.사용 자제 (use sqart instead of math.sqart)</p></li><li><p>무한 반복문에 1 사용 True 사용 보다 런타임 줄일수 있음</p></li><li><p>큰 데이터 처리는 pandas, numpy, scipy 사용</p><p><a href="https://www.loginradius.com/blog/async/speed-up-python-code/">참조링크</a></p></li></ul>]]></content>
-    
-    
+&lt;li&gt;YARN&lt;/l</description>
+        
       
       
-    <summary type="html">&lt;h3 id=&quot;기존-파이썬-코드를-빠르게-만드는-방법&quot;&gt;&lt;a href=&quot;#기존-파이썬-코드를-빠르게-만드는-방법&quot; class=&quot;headerlink&quot; title=&quot;기존 파이썬 코드를 빠르게 만드는 방법&quot;&gt;&lt;/a&gt;기존 파이썬 코드를 빠르게 만드는 방법&lt;/</summary>
       
-    
-    
-    
-    <category term="IT" scheme="http://hyunsuk2.github.io/categories/IT/"/>
-    
-    <category term="python" scheme="http://hyunsuk2.github.io/categories/IT/python/"/>
-    
-    
-    <category term="python, speed up" scheme="http://hyunsuk2.github.io/tags/python-speed-up/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>하둡을 왜 쓰는 것일까?</title>
-    <link href="http://hyunsuk2.github.io/2021/02/21/start-hadoop-study/"/>
-    <id>http://hyunsuk2.github.io/2021/02/21/start-hadoop-study/</id>
-    <published>2021-02-21T12:34:49.000Z</published>
-    <updated>2021-02-21T13:53:45.955Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="하둡을-왜-쓰는-것일까"><a href="#하둡을-왜-쓰는-것일까" class="headerlink" title="하둡을 왜 쓰는 것일까?"></a>하둡을 왜 쓰는 것일까?</h3><h4 id="빅데이터-처리"><a href="#빅데이터-처리" class="headerlink" title="빅데이터 처리"></a>빅데이터 처리</h4><ul><li>인터넷 사용자들의 기록(비정형 데이터)</li><li>생물학의 데이터 과학 등</li></ul><h4 id="대용량-처리하기에는-기존-RDBMS는-비효율적"><a href="#대용량-처리하기에는-기존-RDBMS는-비효율적" class="headerlink" title="대용량 처리하기에는 기존 RDBMS는 비효율적"></a>대용량 처리하기에는 기존 RDBMS는 비효율적</h4><ul><li>비정형 데이터 분석 불가</li><li>확장하기가 힘들다</li><li>빅데이터 처리하기에 운영 비용이 기하급수적으로 비싸진다</li><li>빅데이터 처리 속도가 하둡 보다 느리다</li></ul>]]></content>
-    
-    
+      <content:encoded><![CDATA[<h1 id="하둡-공부-순서"><a href="#하둡-공부-순서" class="headerlink" title="하둡 공부 순서"></a>하둡 공부 순서</h1><ol><li>HDFS</li><li>MapReduce</li><li>YARN</li><li>Avro</li><li>Parquet</li><li>Flume</li><li>Sqoop</li><li>Pig</li><li>Hive</li><li>Crunch</li><li>Spark</li><li>Hbase</li><li>Zookeeper</li></ol><h1 id="하둡-에코-시스템"><a href="#하둡-에코-시스템" class="headerlink" title="하둡 에코 시스템"></a>하둡 에코 시스템</h1><p><img src="/images/hadoop_eco_system.png" alt="하둡 에코 시스템"></p><blockquote><p><strong>HDFS</strong>, <strong>MapReduce</strong>, <strong>YARN</strong>은 하둡 기반 구성 요소라서 정확하게 이해할 필요성이 있다<br>다른 요소들은 필요한 순서대로 공부하면 될 듯</p></blockquote>]]></content:encoded>
       
       
-    <summary type="html">&lt;h3 id=&quot;하둡을-왜-쓰는-것일까&quot;&gt;&lt;a href=&quot;#하둡을-왜-쓰는-것일까&quot; class=&quot;headerlink&quot; title=&quot;하둡을 왜 쓰는 것일까?&quot;&gt;&lt;/a&gt;하둡을 왜 쓰는 것일까?&lt;/h3&gt;&lt;h4 id=&quot;빅데이터-처리&quot;&gt;&lt;a href=&quot;#빅데이터</summary>
+      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
       
-    
-    
-    
-    <category term="IT" scheme="http://hyunsuk2.github.io/categories/IT/"/>
-    
-    <category term="Hadoop" scheme="http://hyunsuk2.github.io/categories/IT/Hadoop/"/>
-    
-    
-    <category term="hadoop" scheme="http://hyunsuk2.github.io/tags/hadoop/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/30/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/30/diary/</id>
-    <published>2019-01-30T14:12:02.000Z</published>
-    <updated>2019-01-30T14:19:04.265Z</updated>
-    
-    <content type="html"><![CDATA[<p>i asked that how should i try to learn speak english to teacher.<br>the teacher said that dont think in korean just think in english.<br>if i think in korean i have to translate to english, so when i think speaking english,<br>that make me bother and take time.<br>although it is unfamiliar to think in english first time i should do it to improve of it<br>let’s start to think in english during speaking or writing english</p>]]></content>
-    
-    
+      <category domain="http://hyunsuk2.github.io/categories/IT/Hadoop/">Hadoop</category>
       
       
-    <summary type="html">&lt;p&gt;i asked that how should i try to learn speak english to teacher.&lt;br&gt;the teacher said that dont think in korean just think in english.&lt;br&gt;</summary>
-      
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/29/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/29/diary/</id>
-    <published>2019-01-29T14:36:45.000Z</published>
-    <updated>2019-01-29T15:16:47.862Z</updated>
-    
-    <content type="html"><![CDATA[<p>i usually talk in english with engoo teacher during work<br>i realized i used same pattern and same word today<br>i wanna to express that deviate from the pattern and words i use<br>i can’t express it<br>i think that it is important to speak english well that think in freely<br>i wanna to think in english logic when i use it<br>the day would come someday</p>]]></content>
-    
-    
+      <category domain="http://hyunsuk2.github.io/tags/hadoop/">hadoop</category>
       
       
-    <summary type="html">&lt;p&gt;i usually talk in english with engoo teacher during work&lt;br&gt;i realized i used same pattern and same word today&lt;br&gt;i wanna to express that</summary>
+      <comments>http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/#disqus_thread</comments>
       
+    </item>
     
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/28/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/28/diary/</id>
-    <published>2019-01-28T14:33:11.000Z</published>
-    <updated>2019-01-28T14:44:10.600Z</updated>
-    
-    <content type="html"><![CDATA[<p>i got a health checkup today<br>i had though that i had some problem in body, but anything wasnt came out about problem so far.<br>to figure out weather my body condition is good or not, i need to wait.<br>i thing i might not have any problem with the body.<br>nothing with any problem for body is good, but sometime i feel pain on the body.<br>okay maybe it is good to trust medical checkup and i live as usual.<br>anyway i wanna success my morning project all weekday</p>]]></content>
-    
-    
+    <item>
+      <title>속도를 높이는 파이썬 코드</title>
+      <link>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</link>
+      <guid>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</guid>
+      <pubDate>Tue, 23 Feb 2021 03:48:42 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h3 id=&quot;기존-파이썬-코드를-빠르게-만드는-방법&quot;&gt;&lt;a href=&quot;#기존-파이썬-코드를-빠르게-만드는-방법&quot; class=&quot;headerlink&quot; title=&quot;기존 파이썬 코드를 빠르게 만드는 방법&quot;&gt;&lt;/a&gt;기존 파이썬 코드를 빠르게 만드는 방법&lt;/</description>
+        
       
       
-    <summary type="html">&lt;p&gt;i got a health checkup today&lt;br&gt;i had though that i had some problem in body, but anything wasnt came out about problem so far.&lt;br&gt;to fig</summary>
       
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/22/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/22/diary/</id>
-    <published>2019-01-22T12:33:08.000Z</published>
-    <updated>2019-01-22T13:14:58.314Z</updated>
-    
-    <content type="html"><![CDATA[<p>i talked with friend on the phone on the bus after work.<br>we talked lots of things and it was continued when i got home.<br>the part that made me thought is that some question that if i could go back to past<br>when did i wanna go back.<br>i said some childhood and explain why i decided<br>then, suddenly i realized that i am real adult.<br>i think i am not old but i am not young, so i have to be careful to spend time to do something<br>actually i still dont know what is the best choice to do, but i will remember i wont live for others.</p>]]></content>
-    
-    
+      <content:encoded><![CDATA[<h3 id="기존-파이썬-코드를-빠르게-만드는-방법"><a href="#기존-파이썬-코드를-빠르게-만드는-방법" class="headerlink" title="기존 파이썬 코드를 빠르게 만드는 방법"></a>기존 파이썬 코드를 빠르게 만드는 방법</h3><ul><li><p>상황에 맞는 정확한 데이터 구조 사용<br> (list, tuple, set, dict, etc…)</p></li><li><p>for 루프 대신 while 루프 사용</p></li><li><p>컴프레헨션 사용</p></li><li><p>복수 할당 사용 ( a, b = 1, 2)</p></li><li><p>될 수 있으면 global 키워드를 줄이자 연산 작업에 많은 시간을 소요한다</p></li><li><p>라이브러리를 활용</p></li><li><p>제너레이터 사용</p></li><li><p>.사용 자제 (use sqart instead of math.sqart)</p></li><li><p>무한 반복문에 1 사용 True 사용 보다 런타임 줄일수 있음</p></li><li><p>큰 데이터 처리는 pandas, numpy, scipy 사용</p><p><a href="https://www.loginradius.com/blog/async/speed-up-python-code/">참조링크</a></p></li></ul>]]></content:encoded>
       
       
-    <summary type="html">&lt;p&gt;i talked with friend on the phone on the bus after work.&lt;br&gt;we talked lots of things and it was continued when i got home.&lt;br&gt;the part th</summary>
+      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
       
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/21/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/21/diary/</id>
-    <published>2019-01-21T14:12:55.000Z</published>
-    <updated>2019-01-21T14:21:00.284Z</updated>
-    
-    <content type="html"><![CDATA[<p>wow i have to look back what i did for today to write a diary every week<br>it seem to good for our brain to remember something, but it’s a little bit difficult that<br>what i write for dairy<br>anyway i feel uncomfortable that the day i didnt wake up early to do my plan<br>i wrote that i failed to wake up here sometimes to reflect on myself here<br>but it’s been nothing changed… <br>what the hell i did how can i do that<br>i don’t know the way   </p>]]></content>
-    
-    
+      <category domain="http://hyunsuk2.github.io/categories/IT/python/">python</category>
       
       
-    <summary type="html">&lt;p&gt;wow i have to look back what i did for today to write a diary every week&lt;br&gt;it seem to good for our brain to remember something, but it’s</summary>
-      
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/17/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/17/diary/</id>
-    <published>2019-01-17T14:22:26.000Z</published>
-    <updated>2019-01-17T14:45:25.744Z</updated>
-    
-    <content type="html"><![CDATA[<p>we were working around the public park after launch with coworker<br>during working we were talking about success<br>then, one of my coworker tell me about his friend in college<br>the friend always wake up at 5am and do so many things for self-developer<br>since 20 years old.<br>even she coded if there is noting to say when she was hanging out with friend<br>we were wondering how she live so<br>whatever if i wanna be something, i would have to do in sincerely</p>]]></content>
-    
-    
+      <category domain="http://hyunsuk2.github.io/tags/python-speed-up/">python, speed up</category>
       
       
-    <summary type="html">&lt;p&gt;we were working around the public park after launch with coworker&lt;br&gt;during working we were talking about success&lt;br&gt;then, one of my cowo</summary>
+      <comments>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/#disqus_thread</comments>
       
+    </item>
     
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/16/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/16/diary/</id>
-    <published>2019-01-16T13:37:39.000Z</published>
-    <updated>2019-01-16T14:14:44.673Z</updated>
-    
-    <content type="html"><![CDATA[<p>it’s been a long time to go to gym since i went last time.<br>the reason why i did’nt go to gym is because i tried to go there when i adapt to getup early.<br>rather, i think not to go there has weakened my stamina<br>so i felt my health was becoming weak.<br>i would go to gym again to overcome that<br>health is most important thing for people</p>]]></content>
-    
-    
+    <item>
+      <title>하둡을 왜 쓰는 것일까?</title>
+      <link>http://hyunsuk2.github.io/2021/02/21/start-hadoop-study/</link>
+      <guid>http://hyunsuk2.github.io/2021/02/21/start-hadoop-study/</guid>
+      <pubDate>Sun, 21 Feb 2021 12:34:49 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h3 id=&quot;하둡을-왜-쓰는-것일까&quot;&gt;&lt;a href=&quot;#하둡을-왜-쓰는-것일까&quot; class=&quot;headerlink&quot; title=&quot;하둡을 왜 쓰는 것일까?&quot;&gt;&lt;/a&gt;하둡을 왜 쓰는 것일까?&lt;/h3&gt;&lt;h4 id=&quot;빅데이터-처리&quot;&gt;&lt;a href=&quot;#빅데이터</description>
+        
       
       
-    <summary type="html">&lt;p&gt;it’s been a long time to go to gym since i went last time.&lt;br&gt;the reason why i did’nt go to gym is because i tried to go there when i ada</summary>
       
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/15/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/15/diary/</id>
-    <published>2019-01-15T13:47:32.000Z</published>
-    <updated>2019-01-15T14:37:41.959Z</updated>
-    
-    <content type="html"><![CDATA[<p>today i got a salary offer for this year.<br>although it’s gone up a lot by rate i am not happy with that.<br>because i think evaluation of performance was not estimate in honest.<br>excecutive dont know that who work honestly and hard<br>they just like the people who are relate with there business<br>of course i think part of it is right<br>but they are needed to estimate in honest more </p>]]></content>
-    
-    
+      <content:encoded><![CDATA[<h3 id="하둡을-왜-쓰는-것일까"><a href="#하둡을-왜-쓰는-것일까" class="headerlink" title="하둡을 왜 쓰는 것일까?"></a>하둡을 왜 쓰는 것일까?</h3><h4 id="빅데이터-처리"><a href="#빅데이터-처리" class="headerlink" title="빅데이터 처리"></a>빅데이터 처리</h4><ul><li>인터넷 사용자들의 기록(비정형 데이터)</li><li>생물학의 데이터 과학 등</li></ul><h4 id="대용량-처리하기에는-기존-RDBMS는-비효율적"><a href="#대용량-처리하기에는-기존-RDBMS는-비효율적" class="headerlink" title="대용량 처리하기에는 기존 RDBMS는 비효율적"></a>대용량 처리하기에는 기존 RDBMS는 비효율적</h4><ul><li>비정형 데이터 분석 불가</li><li>확장하기가 힘들다</li><li>빅데이터 처리하기에 운영 비용이 기하급수적으로 비싸진다</li><li>빅데이터 처리 속도가 하둡 보다 느리다</li></ul>]]></content:encoded>
       
       
-    <summary type="html">&lt;p&gt;today i got a salary offer for this year.&lt;br&gt;although it’s gone up a lot by rate i am not happy with that.&lt;br&gt;because i think evaluation </summary>
+      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
       
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/14/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/14/diary/</id>
-    <published>2019-01-14T13:46:51.000Z</published>
-    <updated>2019-01-15T14:30:02.714Z</updated>
-    
-    <content type="html"><![CDATA[<p>finally i started making andorid application with a frined<br>actually we have lots of things to make that.<br>but isn’t the saying that the beginning is half done<br>so today is meaningful day.<br>although my friend dosnt enough time to do it because <br>he is preparing to get the job now<br>we have decided that we would meet once a week<br>i think the APP we are making is so useful to many things,<br>so i wanna finish this in success</p>]]></content>
-    
-    
+      <category domain="http://hyunsuk2.github.io/categories/IT/Hadoop/">Hadoop</category>
       
       
-    <summary type="html">&lt;p&gt;finally i started making andorid application with a frined&lt;br&gt;actually we have lots of things to make that.&lt;br&gt;but isn’t the saying that </summary>
-      
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/11/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/11/diary/</id>
-    <published>2019-01-11T14:35:53.000Z</published>
-    <updated>2019-01-11T14:36:28.315Z</updated>
-    
-    <content type="html"><![CDATA[<p>today is friday that i most like!<br>i used to like meeting freinds to drink and enjoy time on friday.<br>but i wanna take some rest these days.<br>ha, it is so difficult to wake up early morning.<br>i hope i get used to waking up early.<br>even though i have failed to get up some of days so far<br>it is gonna be better.</p>]]></content>
-    
-    
+      <category domain="http://hyunsuk2.github.io/tags/hadoop/">hadoop</category>
       
       
-    <summary type="html">&lt;p&gt;today is friday that i most like!&lt;br&gt;i used to like meeting freinds to drink and enjoy time on friday.&lt;br&gt;but i wanna take some rest thes</summary>
+      <comments>http://hyunsuk2.github.io/2021/02/21/start-hadoop-study/#disqus_thread</comments>
       
+    </item>
     
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/10/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/10/diary/</id>
-    <published>2019-01-10T13:44:30.000Z</published>
-    <updated>2019-01-10T14:28:26.414Z</updated>
-    
-    <content type="html"><![CDATA[<p>i was talking about life of employee with co worker during having dinner<br>one of us said that whatever the company does to us, we have to do our work in honest<br>i didnt agree with that opinion, although working is our seconds life, we have our life each.<br>so we dont have to sacrifice to the company.<br>we have lots of things to do for getting so many experience.<br>i think the purpose of living here is getting experience<br>enjoy life!~  </p>]]></content>
-    
-    
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/30/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/30/diary/</guid>
+      <pubDate>Wed, 30 Jan 2019 14:12:02 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;i asked that how should i try to learn speak english to teacher.&lt;br&gt;the teacher said that dont think in korean just think in english.&lt;br&gt;</description>
+        
       
       
-    <summary type="html">&lt;p&gt;i was talking about life of employee with co worker during having dinner&lt;br&gt;one of us said that whatever the company does to us, we have </summary>
       
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/09/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/09/diary/</id>
-    <published>2019-01-09T14:36:56.000Z</published>
-    <updated>2019-01-09T14:39:30.425Z</updated>
-    
-    <content type="html"><![CDATA[<p>i started to invest stocks 2days ago.<br>i saw a lots of profit when i checked my stock accont to find some stock i wanna invest.<br>the profit is what i get when i work for two days, so i felt good! please keep going up!~<br>anyway the reason i did it is that i wanted to recover my money that lost from investing bitcoin.<br>so i have to get money back~from anything…. although it is dangerous.<br>the plan for the investing is that i will forget that i invsted after investing all of money i deposit to invest.<br>i wish they are become big moeny when i check</p>]]></content>
-    
-    
+      <content:encoded><![CDATA[<p>i asked that how should i try to learn speak english to teacher.<br>the teacher said that dont think in korean just think in english.<br>if i think in korean i have to translate to english, so when i think speaking english,<br>that make me bother and take time.<br>although it is unfamiliar to think in english first time i should do it to improve of it<br>let’s start to think in english during speaking or writing english</p>]]></content:encoded>
       
       
-    <summary type="html">&lt;p&gt;i started to invest stocks 2days ago.&lt;br&gt;i saw a lots of profit when i checked my stock accont to find some stock i wanna invest.&lt;br&gt;the </summary>
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
       
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/08/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/08/diary/</id>
-    <published>2019-01-08T12:06:09.000Z</published>
-    <updated>2019-01-08T12:36:12.443Z</updated>
-    
-    <content type="html"><![CDATA[<p>i couldn’t concentrate on my work because of the hangover<br>i think dringking will make me to in panic. so i should stop dringking<br>i will try.<br>i was thinking that i spend time learning english more than learing programming during going back home after work<br>it is needed to be balanced between them.<br>to do these is that i should spend time efficiantly<br>there’s a lot to do if i want to do lots of things</p>]]></content>
-    
-    
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
-    <summary type="html">&lt;p&gt;i couldn’t concentrate on my work because of the hangover&lt;br&gt;i think dringking will make me to in panic. so i should stop dringking&lt;br&gt;i </summary>
       
+      <comments>http://hyunsuk2.github.io/2019/01/30/diary/#disqus_thread</comments>
+      
+    </item>
     
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;diary&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/07/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/07/diary/</id>
-    <published>2019-01-07T12:05:01.000Z</published>
-    <updated>2019-01-08T12:36:12.338Z</updated>
-    
-    <content type="html"><![CDATA[<p>i have to write diary in english here because i had party with company co worker.<br>i went out alone from comanpy party bucause i am having sick on my liver.<br>it is first time to get pain to this<br>i think its time that i have to consiser my healty.<br>i thought i had considered my  healty before, but i didnt do it.<br>if i have free time for tommow i think i have to check my body.<br>they give me some signal to ask me check my body.<br>i wanna live here in healthy</p>]]></content>
-    
-    
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/29/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/29/diary/</guid>
+      <pubDate>Tue, 29 Jan 2019 14:36:45 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;i usually talk in english with engoo teacher during work&lt;br&gt;i realized i used same pattern and same word today&lt;br&gt;i wanna to express that</description>
+        
       
       
-    <summary type="html">&lt;p&gt;i have to write diary in english here because i had party with company co worker.&lt;br&gt;i went out alone from comanpy party bucause i am hav</summary>
       
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&#39;영어 일기&#39;</title>
-    <link href="http://hyunsuk2.github.io/2019/01/06/diary/"/>
-    <id>http://hyunsuk2.github.io/2019/01/06/diary/</id>
-    <published>2019-01-06T14:32:03.000Z</published>
-    <updated>2019-01-06T14:45:54.564Z</updated>
-    
-    <content type="html"><![CDATA[<p>i will wirte english diary here from tommorow on<br>i hope i can archive that i made a plan for this year</p>]]></content>
-    
-    
+      <content:encoded><![CDATA[<p>i usually talk in english with engoo teacher during work<br>i realized i used same pattern and same word today<br>i wanna to express that deviate from the pattern and words i use<br>i can’t express it<br>i think that it is important to speak english well that think in freely<br>i wanna to think in english logic when i use it<br>the day would come someday</p>]]></content:encoded>
       
       
-    <summary type="html">&lt;p&gt;i will wirte english diary here from tommorow on&lt;br&gt;i hope i can archive that i made a plan for this year&lt;/p&gt;
-</summary>
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
       
-    
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/categories/english/"/>
-    
-    <category term="diary" scheme="http://hyunsuk2.github.io/categories/english/diary/"/>
-    
-    
-    <category term="english" scheme="http://hyunsuk2.github.io/tags/english/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ssh를 이용하여 원격 서버와 파일 양방향 전송하기</title>
-    <link href="http://hyunsuk2.github.io/2018/01/16/ssh/"/>
-    <id>http://hyunsuk2.github.io/2018/01/16/ssh/</id>
-    <published>2018-01-15T15:09:06.000Z</published>
-    <updated>2019-01-06T14:30:48.349Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-ssh를-이용하여-파일-복사-및-전송하기"><a href="#1-ssh를-이용하여-파일-복사-및-전송하기" class="headerlink" title="1. ssh를 이용하여 파일 복사 및 전송하기"></a>1. ssh를 이용하여 파일 복사 및 전송하기</h2><h6 id="ssh에서-제공하는-scp-명령어를-통해-로컬서버↔원격서버-파일을-양방향-전송할-수-있다"><a href="#ssh에서-제공하는-scp-명령어를-통해-로컬서버↔원격서버-파일을-양방향-전송할-수-있다" class="headerlink" title="ssh에서 제공하는 scp 명령어를 통해 로컬서버↔원격서버 파일을 양방향 전송할 수 있다."></a>ssh에서 제공하는 scp 명령어를 통해 로컬서버↔원격서버 파일을 양방향 전송할 수 있다.</h6><h4 id="1-1-사용방법"><a href="#1-1-사용방법" class="headerlink" title="1.1 사용방법"></a>1.1 사용방법</h4><ul><li><p>원격 서버 → 로컬 서버로 파일 전송</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp [옵션] [계정명]@[원격지IP주소]:[원본 경로 및 파일] [전송받을 위치]</span></span><br></pre></td></tr></table></figure><pre><code> 예제1) IP 111.222.333.444 서버의 abc라는 계정으로 /home/abc/index.html 파일을  로컬서버 /home/me/ 디렉토리에 전송 받기</code></pre> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp abc@111.222.333.444:/home/abc/index.html /home/me/</span></span><br></pre></td></tr></table></figure><pre><code> 예제2) (ssh의 기본 22번 포트가 아닐경우)IP 111.222.333.444 서버의  abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디렉토리에 전송 받기   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -P 321 abc@111.222.333.444:/home/abc/index.html /home/me/ (ssh 포트가 321일경우)</span></span><br></pre></td></tr></table></figure></code></pre></li></ul><hr><ul><li><p>로컬 서버 → 원격 서버로 파일 전송</p>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp [옵션] [원본 경로 및 파일] [계정명]@[원격지IP주소]:[전송할 경로]</span></span><br></pre></td></tr></table></figure><pre><code> 예제1) 로컬서버 /home/me/wow.html 파일을 IP 111.222.333.444 서버의 /home/abc/  디렉토리에 전송 하기</code></pre>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp /home/me/wow.html abc@111.222.333.444:/home/abc/</span></span><br></pre></td></tr></table></figure><pre><code> 예제2) (ssh의 기본 22번 포트가 아닐경우)로컬서버 /home/me/wow.html 파일을  IP 111.222.333.444 서버의 /home/abc/ 디렉토리에 전송 하기</code></pre>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -P 321 /home/me/wow.html abc@111.222.333.444:/home/abc/ (ssh 포트가 321일경우)</span></span><br></pre></td></tr></table></figure></li><li><p><strong>[주의사항]</strong><br>   옵션중에 –P와 –p가 있으니 대/소문자 확인을 하여야 한다.<br>   -P : 포트번호를 지정함<br>   -p : 원본파일 수정/사용시간 및 권한을 유지함<br>   -r : 하위 디렉토리 및 파일 모두 복사함</p></li></ul><hr><hr><hr><blockquote><p>상황을 가장 잘 활용하는 사람이 가장 좋은 상황을 맞는다</p><footer><strong>John Robert Wooden</strong></footer></blockquote>]]></content>
-    
-    
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
-    <summary type="html">&lt;h2 id=&quot;1-ssh를-이용하여-파일-복사-및-전송하기&quot;&gt;&lt;a href=&quot;#1-ssh를-이용하여-파일-복사-및-전송하기&quot; class=&quot;headerlink&quot; title=&quot;1. ssh를 이용하여 파일 복사 및 전송하기&quot;&gt;&lt;/a&gt;1. ssh를 이용하여 </summary>
       
+      <comments>http://hyunsuk2.github.io/2019/01/29/diary/#disqus_thread</comments>
+      
+    </item>
     
-    
-    
-    <category term="IT" scheme="http://hyunsuk2.github.io/categories/IT/"/>
-    
-    <category term="Linux" scheme="http://hyunsuk2.github.io/categories/IT/Linux/"/>
-    
-    
-    <category term="ssh" scheme="http://hyunsuk2.github.io/tags/ssh/"/>
-    
-    <category term="scp" scheme="http://hyunsuk2.github.io/tags/scp/"/>
-    
-    <category term="file trans" scheme="http://hyunsuk2.github.io/tags/file-trans/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>angular 준비하기</title>
-    <link href="http://hyunsuk2.github.io/2018/01/15/angular/"/>
-    <id>http://hyunsuk2.github.io/2018/01/15/angular/</id>
-    <published>2018-01-14T15:40:21.000Z</published>
-    <updated>2021-02-24T02:50:51.133Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-Angular-학습전-알아야-할-핵심-2가지"><a href="#1-Angular-학습전-알아야-할-핵심-2가지" class="headerlink" title="1 Angular 학습전 알아야 할 핵심 2가지"></a>1 Angular 학습전 알아야 할 핵심 2가지</h2><h3 id="1-1-Node-js"><a href="#1-1-Node-js" class="headerlink" title="1.1 Node.js"></a>1.1 Node.js</h3><ul><li>서버 사이드 자바 스크립트 실행환경</li><li>자바스크립트는 node.js가 설치된곳이면 어디서든지 실행 가능</li><li>자바 스크립트에게 브라우저라는 실행환경을 벗어나게 해줌</li></ul><h3 id="1-2-NPM-Node-Pakage-Manager"><a href="#1-2-NPM-Node-Pakage-Manager" class="headerlink" title="1.2 NPM(Node Pakage Manager)"></a>1.2 NPM(Node Pakage Manager)</h3><ul><li>node.js 의 패키지(자바스크립트, HTML, CSS 등) 관리도구</li><li>소스를 패키지로 공유할 수 있고 패키지 의존성 관리를 가능하게함</li><li>Angular 또한 NPM 기반으로 프로젝트를 구성하고 의존성 패키지를 관리함</li></ul><hr><h2 id="2-NPM-다루기"><a href="#2-NPM-다루기" class="headerlink" title="2 NPM 다루기"></a>2 NPM 다루기</h2><h3 id="2-1-package-json"><a href="#2-1-package-json" class="headerlink" title="2.1 package.json"></a>2.1 package.json</h3><ul><li>프로젝트 생성시에 제일 먼저 생성해야 할 JSON 파일로 패키지와 의존 패키지 정보등을 선언함<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;welcome-msg-app&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;main&quot;</span>: <span class="string">&quot;index.js&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;http-server&quot;</span>: <span class="string">&quot;^0.9.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;jquery&quot;</span>: <span class="string">&quot;^1.12.4&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;author&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h3 id="2-2-NPM-주요-명령어"><a href="#2-2-NPM-주요-명령어" class="headerlink" title="2.2 NPM 주요 명령어"></a>2.2 NPM 주요 명령어</h3><ul><li><p><strong>npm install:</strong> pakage.json 파일 있는 경우 파일에 선언된 의존패키지를 설치하고<br>npm install 뒤에 패키지명 입력하면 해당 패키지 설치함</p></li><li><p><strong>npm run:</strong> pakage.json의 scripts에 선언된 명령을 수행</p></li></ul><hr><hr><hr> <blockquote><p>사랑에는 실패가 없다.</p><footer><strong>Amelie Nothomb</strong></footer></blockquote>]]></content>
-    
-    
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/28/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/28/diary/</guid>
+      <pubDate>Mon, 28 Jan 2019 14:33:11 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;i got a health checkup today&lt;br&gt;i had though that i had some problem in body, but anything wasnt came out about problem so far.&lt;br&gt;to fig</description>
+        
       
       
-    <summary type="html">&lt;h2 id=&quot;1-Angular-학습전-알아야-할-핵심-2가지&quot;&gt;&lt;a href=&quot;#1-Angular-학습전-알아야-할-핵심-2가지&quot; class=&quot;headerlink&quot; title=&quot;1 Angular 학습전 알아야 할 핵심 2가지&quot;&gt;&lt;/a&gt;1 Angula</summary>
       
+      <content:encoded><![CDATA[<p>i got a health checkup today<br>i had though that i had some problem in body, but anything wasnt came out about problem so far.<br>to figure out weather my body condition is good or not, i need to wait.<br>i thing i might not have any problem with the body.<br>nothing with any problem for body is good, but sometime i feel pain on the body.<br>okay maybe it is good to trust medical checkup and i live as usual.<br>anyway i wanna success my morning project all weekday</p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/28/diary/#disqus_thread</comments>
+      
+    </item>
     
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/22/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/22/diary/</guid>
+      <pubDate>Tue, 22 Jan 2019 12:33:08 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;i talked with friend on the phone on the bus after work.&lt;br&gt;we talked lots of things and it was continued when i got home.&lt;br&gt;the part th</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>i talked with friend on the phone on the bus after work.<br>we talked lots of things and it was continued when i got home.<br>the part that made me thought is that some question that if i could go back to past<br>when did i wanna go back.<br>i said some childhood and explain why i decided<br>then, suddenly i realized that i am real adult.<br>i think i am not old but i am not young, so i have to be careful to spend time to do something<br>actually i still dont know what is the best choice to do, but i will remember i wont live for others.</p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/22/diary/#disqus_thread</comments>
+      
+    </item>
     
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/21/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/21/diary/</guid>
+      <pubDate>Mon, 21 Jan 2019 14:12:55 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;wow i have to look back what i did for today to write a diary every week&lt;br&gt;it seem to good for our brain to remember something, but it’s</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>wow i have to look back what i did for today to write a diary every week<br>it seem to good for our brain to remember something, but it’s a little bit difficult that<br>what i write for dairy<br>anyway i feel uncomfortable that the day i didnt wake up early to do my plan<br>i wrote that i failed to wake up here sometimes to reflect on myself here<br>but it’s been nothing changed… <br>what the hell i did how can i do that<br>i don’t know the way   </p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/21/diary/#disqus_thread</comments>
+      
+    </item>
     
-    <category term="IT" scheme="http://hyunsuk2.github.io/categories/IT/"/>
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/17/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/17/diary/</guid>
+      <pubDate>Thu, 17 Jan 2019 14:22:26 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;we were working around the public park after launch with coworker&lt;br&gt;during working we were talking about success&lt;br&gt;then, one of my cowo</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>we were working around the public park after launch with coworker<br>during working we were talking about success<br>then, one of my coworker tell me about his friend in college<br>the friend always wake up at 5am and do so many things for self-developer<br>since 20 years old.<br>even she coded if there is noting to say when she was hanging out with friend<br>we were wondering how she live so<br>whatever if i wanna be something, i would have to do in sincerely</p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/17/diary/#disqus_thread</comments>
+      
+    </item>
     
-    <category term="Angular" scheme="http://hyunsuk2.github.io/categories/IT/Angular/"/>
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/16/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/16/diary/</guid>
+      <pubDate>Wed, 16 Jan 2019 13:37:39 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;it’s been a long time to go to gym since i went last time.&lt;br&gt;the reason why i did’nt go to gym is because i tried to go there when i ada</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>it’s been a long time to go to gym since i went last time.<br>the reason why i did’nt go to gym is because i tried to go there when i adapt to getup early.<br>rather, i think not to go there has weakened my stamina<br>so i felt my health was becoming weak.<br>i would go to gym again to overcome that<br>health is most important thing for people</p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/16/diary/#disqus_thread</comments>
+      
+    </item>
     
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/15/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/15/diary/</guid>
+      <pubDate>Tue, 15 Jan 2019 13:47:32 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;today i got a salary offer for this year.&lt;br&gt;although it’s gone up a lot by rate i am not happy with that.&lt;br&gt;because i think evaluation </description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>today i got a salary offer for this year.<br>although it’s gone up a lot by rate i am not happy with that.<br>because i think evaluation of performance was not estimate in honest.<br>excecutive dont know that who work honestly and hard<br>they just like the people who are relate with there business<br>of course i think part of it is right<br>but they are needed to estimate in honest more </p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/15/diary/#disqus_thread</comments>
+      
+    </item>
     
-    <category term="angular" scheme="http://hyunsuk2.github.io/tags/angular/"/>
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/14/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/14/diary/</guid>
+      <pubDate>Mon, 14 Jan 2019 13:46:51 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;finally i started making andorid application with a frined&lt;br&gt;actually we have lots of things to make that.&lt;br&gt;but isn’t the saying that </description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>finally i started making andorid application with a frined<br>actually we have lots of things to make that.<br>but isn’t the saying that the beginning is half done<br>so today is meaningful day.<br>although my friend dosnt enough time to do it because <br>he is preparing to get the job now<br>we have decided that we would meet once a week<br>i think the APP we are making is so useful to many things,<br>so i wanna finish this in success</p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/14/diary/#disqus_thread</comments>
+      
+    </item>
     
-  </entry>
-  
-</feed>
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/11/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/11/diary/</guid>
+      <pubDate>Fri, 11 Jan 2019 14:35:53 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;today is friday that i most like!&lt;br&gt;i used to like meeting freinds to drink and enjoy time on friday.&lt;br&gt;but i wanna take some rest thes</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>today is friday that i most like!<br>i used to like meeting freinds to drink and enjoy time on friday.<br>but i wanna take some rest these days.<br>ha, it is so difficult to wake up early morning.<br>i hope i get used to waking up early.<br>even though i have failed to get up some of days so far<br>it is gonna be better.</p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/11/diary/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/10/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/10/diary/</guid>
+      <pubDate>Thu, 10 Jan 2019 13:44:30 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;i was talking about life of employee with co worker during having dinner&lt;br&gt;one of us said that whatever the company does to us, we have </description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>i was talking about life of employee with co worker during having dinner<br>one of us said that whatever the company does to us, we have to do our work in honest<br>i didnt agree with that opinion, although working is our seconds life, we have our life each.<br>so we dont have to sacrifice to the company.<br>we have lots of things to do for getting so many experience.<br>i think the purpose of living here is getting experience<br>enjoy life!~  </p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/10/diary/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/09/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/09/diary/</guid>
+      <pubDate>Wed, 09 Jan 2019 14:36:56 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;i started to invest stocks 2days ago.&lt;br&gt;i saw a lots of profit when i checked my stock accont to find some stock i wanna invest.&lt;br&gt;the </description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>i started to invest stocks 2days ago.<br>i saw a lots of profit when i checked my stock accont to find some stock i wanna invest.<br>the profit is what i get when i work for two days, so i felt good! please keep going up!~<br>anyway the reason i did it is that i wanted to recover my money that lost from investing bitcoin.<br>so i have to get money back~from anything…. although it is dangerous.<br>the plan for the investing is that i will forget that i invsted after investing all of money i deposit to invest.<br>i wish they are become big moeny when i check</p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/09/diary/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/08/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/08/diary/</guid>
+      <pubDate>Tue, 08 Jan 2019 12:06:09 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;i couldn’t concentrate on my work because of the hangover&lt;br&gt;i think dringking will make me to in panic. so i should stop dringking&lt;br&gt;i </description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>i couldn’t concentrate on my work because of the hangover<br>i think dringking will make me to in panic. so i should stop dringking<br>i will try.<br>i was thinking that i spend time learning english more than learing programming during going back home after work<br>it is needed to be balanced between them.<br>to do these is that i should spend time efficiantly<br>there’s a lot to do if i want to do lots of things</p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/08/diary/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>&#39;diary&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/07/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/07/diary/</guid>
+      <pubDate>Mon, 07 Jan 2019 12:05:01 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;i have to write diary in english here because i had party with company co worker.&lt;br&gt;i went out alone from comanpy party bucause i am hav</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>i have to write diary in english here because i had party with company co worker.<br>i went out alone from comanpy party bucause i am having sick on my liver.<br>it is first time to get pain to this<br>i think its time that i have to consiser my healty.<br>i thought i had considered my  healty before, but i didnt do it.<br>if i have free time for tommow i think i have to check my body.<br>they give me some signal to ask me check my body.<br>i wanna live here in healthy</p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/07/diary/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>&#39;영어 일기&#39;</title>
+      <link>http://hyunsuk2.github.io/2019/01/06/diary/</link>
+      <guid>http://hyunsuk2.github.io/2019/01/06/diary/</guid>
+      <pubDate>Sun, 06 Jan 2019 14:32:03 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;i will wirte english diary here from tommorow on&lt;br&gt;i hope i can archive that i made a plan for this year&lt;/p&gt;
+</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>i will wirte english diary here from tommorow on<br>i hope i can archive that i made a plan for this year</p>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      
+      
+      <category domain="http://hyunsuk2.github.io/tags/english/">english</category>
+      
+      
+      <comments>http://hyunsuk2.github.io/2019/01/06/diary/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>ssh를 이용하여 원격 서버와 파일 양방향 전송하기</title>
+      <link>http://hyunsuk2.github.io/2018/01/16/ssh/</link>
+      <guid>http://hyunsuk2.github.io/2018/01/16/ssh/</guid>
+      <pubDate>Mon, 15 Jan 2018 15:09:06 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;1-ssh를-이용하여-파일-복사-및-전송하기&quot;&gt;&lt;a href=&quot;#1-ssh를-이용하여-파일-복사-및-전송하기&quot; class=&quot;headerlink&quot; title=&quot;1. ssh를 이용하여 파일 복사 및 전송하기&quot;&gt;&lt;/a&gt;1. ssh를 이용하여 </description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="1-ssh를-이용하여-파일-복사-및-전송하기"><a href="#1-ssh를-이용하여-파일-복사-및-전송하기" class="headerlink" title="1. ssh를 이용하여 파일 복사 및 전송하기"></a>1. ssh를 이용하여 파일 복사 및 전송하기</h2><h6 id="ssh에서-제공하는-scp-명령어를-통해-로컬서버↔원격서버-파일을-양방향-전송할-수-있다"><a href="#ssh에서-제공하는-scp-명령어를-통해-로컬서버↔원격서버-파일을-양방향-전송할-수-있다" class="headerlink" title="ssh에서 제공하는 scp 명령어를 통해 로컬서버↔원격서버 파일을 양방향 전송할 수 있다."></a>ssh에서 제공하는 scp 명령어를 통해 로컬서버↔원격서버 파일을 양방향 전송할 수 있다.</h6><h4 id="1-1-사용방법"><a href="#1-1-사용방법" class="headerlink" title="1.1 사용방법"></a>1.1 사용방법</h4><ul><li><p>원격 서버 → 로컬 서버로 파일 전송</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp [옵션] [계정명]@[원격지IP주소]:[원본 경로 및 파일] [전송받을 위치]</span></span><br></pre></td></tr></table></figure><pre><code> 예제1) IP 111.222.333.444 서버의 abc라는 계정으로 /home/abc/index.html 파일을  로컬서버 /home/me/ 디렉토리에 전송 받기</code></pre> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp abc@111.222.333.444:/home/abc/index.html /home/me/</span></span><br></pre></td></tr></table></figure><pre><code> 예제2) (ssh의 기본 22번 포트가 아닐경우)IP 111.222.333.444 서버의  abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디렉토리에 전송 받기   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -P 321 abc@111.222.333.444:/home/abc/index.html /home/me/ (ssh 포트가 321일경우)</span></span><br></pre></td></tr></table></figure></code></pre></li></ul><hr><ul><li><p>로컬 서버 → 원격 서버로 파일 전송</p>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp [옵션] [원본 경로 및 파일] [계정명]@[원격지IP주소]:[전송할 경로]</span></span><br></pre></td></tr></table></figure><pre><code> 예제1) 로컬서버 /home/me/wow.html 파일을 IP 111.222.333.444 서버의 /home/abc/  디렉토리에 전송 하기</code></pre>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp /home/me/wow.html abc@111.222.333.444:/home/abc/</span></span><br></pre></td></tr></table></figure><pre><code> 예제2) (ssh의 기본 22번 포트가 아닐경우)로컬서버 /home/me/wow.html 파일을  IP 111.222.333.444 서버의 /home/abc/ 디렉토리에 전송 하기</code></pre>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -P 321 /home/me/wow.html abc@111.222.333.444:/home/abc/ (ssh 포트가 321일경우)</span></span><br></pre></td></tr></table></figure></li><li><p><strong>[주의사항]</strong><br>   옵션중에 –P와 –p가 있으니 대/소문자 확인을 하여야 한다.<br>   -P : 포트번호를 지정함<br>   -p : 원본파일 수정/사용시간 및 권한을 유지함<br>   -r : 하위 디렉토리 및 파일 모두 복사함</p></li></ul><hr><hr><hr><blockquote><p>상황을 가장 잘 활용하는 사람이 가장 좋은 상황을 맞는다</p><footer><strong>John Robert Wooden</strong></footer></blockquote>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/IT/Linux/">Linux</category>
+      
+      
+      <category domain="http://hyunsuk2.github.io/tags/ssh/">ssh</category>
+      
+      <category domain="http://hyunsuk2.github.io/tags/scp/">scp</category>
+      
+      <category domain="http://hyunsuk2.github.io/tags/file-trans/">file trans</category>
+      
+      
+      <comments>http://hyunsuk2.github.io/2018/01/16/ssh/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>angular 준비하기</title>
+      <link>http://hyunsuk2.github.io/2018/01/15/angular/</link>
+      <guid>http://hyunsuk2.github.io/2018/01/15/angular/</guid>
+      <pubDate>Sun, 14 Jan 2018 15:40:21 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;1-Angular-학습전-알아야-할-핵심-2가지&quot;&gt;&lt;a href=&quot;#1-Angular-학습전-알아야-할-핵심-2가지&quot; class=&quot;headerlink&quot; title=&quot;1 Angular 학습전 알아야 할 핵심 2가지&quot;&gt;&lt;/a&gt;1 Angula</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="1-Angular-학습전-알아야-할-핵심-2가지"><a href="#1-Angular-학습전-알아야-할-핵심-2가지" class="headerlink" title="1 Angular 학습전 알아야 할 핵심 2가지"></a>1 Angular 학습전 알아야 할 핵심 2가지</h2><h3 id="1-1-Node-js"><a href="#1-1-Node-js" class="headerlink" title="1.1 Node.js"></a>1.1 Node.js</h3><ul><li>서버 사이드 자바 스크립트 실행환경</li><li>자바스크립트는 node.js가 설치된곳이면 어디서든지 실행 가능</li><li>자바 스크립트에게 브라우저라는 실행환경을 벗어나게 해줌</li></ul><h3 id="1-2-NPM-Node-Pakage-Manager"><a href="#1-2-NPM-Node-Pakage-Manager" class="headerlink" title="1.2 NPM(Node Pakage Manager)"></a>1.2 NPM(Node Pakage Manager)</h3><ul><li>node.js 의 패키지(자바스크립트, HTML, CSS 등) 관리도구</li><li>소스를 패키지로 공유할 수 있고 패키지 의존성 관리를 가능하게함</li><li>Angular 또한 NPM 기반으로 프로젝트를 구성하고 의존성 패키지를 관리함</li></ul><hr><h2 id="2-NPM-다루기"><a href="#2-NPM-다루기" class="headerlink" title="2 NPM 다루기"></a>2 NPM 다루기</h2><h3 id="2-1-package-json"><a href="#2-1-package-json" class="headerlink" title="2.1 package.json"></a>2.1 package.json</h3><ul><li>프로젝트 생성시에 제일 먼저 생성해야 할 JSON 파일로 패키지와 의존 패키지 정보등을 선언함<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;welcome-msg-app&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;main&quot;</span>: <span class="string">&quot;index.js&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;http-server&quot;</span>: <span class="string">&quot;^0.9.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;jquery&quot;</span>: <span class="string">&quot;^1.12.4&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;author&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h3 id="2-2-NPM-주요-명령어"><a href="#2-2-NPM-주요-명령어" class="headerlink" title="2.2 NPM 주요 명령어"></a>2.2 NPM 주요 명령어</h3><ul><li><p><strong>npm install:</strong> pakage.json 파일 있는 경우 파일에 선언된 의존패키지를 설치하고<br>npm install 뒤에 패키지명 입력하면 해당 패키지 설치함</p></li><li><p><strong>npm run:</strong> pakage.json의 scripts에 선언된 명령을 수행</p></li></ul><hr><hr><hr> <blockquote><p>사랑에는 실패가 없다.</p><footer><strong>Amelie Nothomb</strong></footer></blockquote>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/IT/Angular/">Angular</category>
+      
+      
+      <category domain="http://hyunsuk2.github.io/tags/angular/">angular</category>
+      
+      
+      <comments>http://hyunsuk2.github.io/2018/01/15/angular/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>
