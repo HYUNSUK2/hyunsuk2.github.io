@@ -9,8 +9,36 @@
     <atom:link href="http://hyunsuk2.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hyunsuk&#39;s Blog</description>
-    <pubDate>Tue, 23 Feb 2021 15:01:34 GMT</pubDate>
+    <pubDate>Thu, 25 Feb 2021 09:18:03 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>beautifulsoup으로 이미지 크롤링 안될 때 다른 방법으로 크롤링하기</title>
+      <link>http://hyunsuk2.github.io/2021/02/25/python-row-crawling/</link>
+      <guid>http://hyunsuk2.github.io/2021/02/25/python-row-crawling/</guid>
+      <pubDate>Thu, 25 Feb 2021 02:25:55 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h3 id=&quot;이미지-태그나-클래스명-등으로-크롤링-하려는데-안될-때-어떻게-해야할까&quot;&gt;&lt;a href=&quot;#이미지-태그나-클래스명-등으로-크롤링-하려는데-안될-때-어떻게-해야할까&quot; class=&quot;headerlink&quot; title=&quot;이미지 태그나 클래스명 등</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h3 id="이미지-태그나-클래스명-등으로-크롤링-하려는데-안될-때-어떻게-해야할까"><a href="#이미지-태그나-클래스명-등으로-크롤링-하려는데-안될-때-어떻게-해야할까" class="headerlink" title="이미지 태그나 클래스명 등으로 크롤링 하려는데 안될 때 어떻게 해야할까?"></a>이미지 태그나 클래스명 등으로 크롤링 하려는데 안될 때 어떻게 해야할까?</h3><blockquote><p>여러가지 방법이 있겠지만 이번 글에서는 <strong>python, re(정규식) 모듈, requests 모듈</strong>을 이용해서 크롤링을 해보려고한다<br>다음 이미지에서 강아지를 검색하면 브라우저 검색창에 아래 url이 나온다</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;search.daum.net&#x2F;search?w&#x3D;img&amp;nil_search&#x3D;btn&amp;DA&#x3D;NTB&amp;enc&#x3D;utf8&amp;q&#x3D;%EA%B0%95%EC%95%84%EC%A7%80</span><br></pre></td></tr></table></figure><blockquote><p>이 url을 이용해서 python으로 request를 날려보자<br>아래 사진을 보면 이미지 불러오는 url이 보인다 저 url을 정규식으로 추줄해보자<br>더 좋은 정규식이 있을 텐데 저는 저렇게 해서 추출했습니다<br>(정규식 내용은 분량이 큽니다 관심이 있으면 따로 찾아보자)<br><img src="/images/python-row-crawling-code_url.png" alt="code url"></p><ol><li>코드를 보자 정규식을 선언하고</li><li>url을 뽑아내는 전처리 작업을하고</li><li>이미지를 저장하는 코드룰 볼 수 있다</li></ol></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">t1 = time.time()</span><br><span class="line"><span class="comment"># 정규식 선언</span></span><br><span class="line">reg = re.<span class="built_in">compile</span>(<span class="string">&#x27;oimgurl: &quot;.&#123;0,300&#125;&quot;, cpid&#x27;</span>)</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;https://search.daum.net/search?w=img&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q=%EA%B0%95%EC%95%84%EC%A7%80&#x27;</span></span><br><span class="line">html = requests.get(url=url)</span><br><span class="line">html_raw_data = <span class="built_in">str</span>(html.content)</span><br><span class="line"></span><br><span class="line">reg_iter = reg.finditer(html_raw_data)</span><br><span class="line"></span><br><span class="line"><span class="comment">#url 이미지를 저장하는 함수</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_img</span>(<span class="params">idx, img_url</span>):</span></span><br><span class="line">    res = requests.get(img_url).content</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&#x27;<span class="subst">&#123;idx&#125;</span>.jpg&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(res)</span><br><span class="line">        print(<span class="string">f&#x27;save <span class="subst">&#123;idx&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx, res_data <span class="keyword">in</span> <span class="built_in">enumerate</span>(reg_iter):</span><br><span class="line">    <span class="comment"># url 을 뽑아내는 전처리 작업</span></span><br><span class="line">    img_url = res_data.group().split(<span class="string">&#x27;oimgurl:&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;, cpid&#x27;</span>)[<span class="number">0</span>].replace(<span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    save_img(idx, img_url)</span><br><span class="line"></span><br><span class="line">t2 = time.time()</span><br><span class="line"></span><br><span class="line">print(t2-t1)</span><br></pre></td></tr></table></figure><blockquote><p>이렇게 하면 이미지가 저장되는 걸 볼 수 있다<br><img src="/images/python-row-crawling-get_dog_picture.PNG" alt="강아지 이미지"><br>작업이 4초 넘게 걸렸는데 다음 포스트에서는 thread 와 비동기 함수를 사용하여<br>작업 시간을 단축시키는 포스트를 올려보겠습니다  </p></blockquote>]]></content:encoded>
+      
+      
+      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      
+      <category domain="http://hyunsuk2.github.io/categories/IT/python/">python</category>
+      
+      
+      <category domain="http://hyunsuk2.github.io/tags/python-crawling/">python, crawling</category>
+      
+      
+      <comments>http://hyunsuk2.github.io/2021/02/25/python-row-crawling/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>하둡 공부 순서</title>
@@ -521,34 +549,6 @@
       
       
       <comments>http://hyunsuk2.github.io/2018/01/16/ssh/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>angular 준비하기</title>
-      <link>http://hyunsuk2.github.io/2018/01/15/angular/</link>
-      <guid>http://hyunsuk2.github.io/2018/01/15/angular/</guid>
-      <pubDate>Sun, 14 Jan 2018 15:40:21 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;1-Angular-학습전-알아야-할-핵심-2가지&quot;&gt;&lt;a href=&quot;#1-Angular-학습전-알아야-할-핵심-2가지&quot; class=&quot;headerlink&quot; title=&quot;1 Angular 학습전 알아야 할 핵심 2가지&quot;&gt;&lt;/a&gt;1 Angula</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="1-Angular-학습전-알아야-할-핵심-2가지"><a href="#1-Angular-학습전-알아야-할-핵심-2가지" class="headerlink" title="1 Angular 학습전 알아야 할 핵심 2가지"></a>1 Angular 학습전 알아야 할 핵심 2가지</h2><h3 id="1-1-Node-js"><a href="#1-1-Node-js" class="headerlink" title="1.1 Node.js"></a>1.1 Node.js</h3><ul><li>서버 사이드 자바 스크립트 실행환경</li><li>자바스크립트는 node.js가 설치된곳이면 어디서든지 실행 가능</li><li>자바 스크립트에게 브라우저라는 실행환경을 벗어나게 해줌</li></ul><h3 id="1-2-NPM-Node-Pakage-Manager"><a href="#1-2-NPM-Node-Pakage-Manager" class="headerlink" title="1.2 NPM(Node Pakage Manager)"></a>1.2 NPM(Node Pakage Manager)</h3><ul><li>node.js 의 패키지(자바스크립트, HTML, CSS 등) 관리도구</li><li>소스를 패키지로 공유할 수 있고 패키지 의존성 관리를 가능하게함</li><li>Angular 또한 NPM 기반으로 프로젝트를 구성하고 의존성 패키지를 관리함</li></ul><hr><h2 id="2-NPM-다루기"><a href="#2-NPM-다루기" class="headerlink" title="2 NPM 다루기"></a>2 NPM 다루기</h2><h3 id="2-1-package-json"><a href="#2-1-package-json" class="headerlink" title="2.1 package.json"></a>2.1 package.json</h3><ul><li>프로젝트 생성시에 제일 먼저 생성해야 할 JSON 파일로 패키지와 의존 패키지 정보등을 선언함<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;welcome-msg-app&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;main&quot;</span>: <span class="string">&quot;index.js&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;http-server&quot;</span>: <span class="string">&quot;^0.9.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;jquery&quot;</span>: <span class="string">&quot;^1.12.4&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;author&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h3 id="2-2-NPM-주요-명령어"><a href="#2-2-NPM-주요-명령어" class="headerlink" title="2.2 NPM 주요 명령어"></a>2.2 NPM 주요 명령어</h3><ul><li><p><strong>npm install:</strong> pakage.json 파일 있는 경우 파일에 선언된 의존패키지를 설치하고<br>npm install 뒤에 패키지명 입력하면 해당 패키지 설치함</p></li><li><p><strong>npm run:</strong> pakage.json의 scripts에 선언된 명령을 수행</p></li></ul><hr><hr><hr> <blockquote><p>사랑에는 실패가 없다.</p><footer><strong>Amelie Nothomb</strong></footer></blockquote>]]></content:encoded>
-      
-      
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
-      
-      <category domain="http://hyunsuk2.github.io/categories/IT/Angular/">Angular</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/angular/">angular</category>
-      
-      
-      <comments>http://hyunsuk2.github.io/2018/01/15/angular/#disqus_thread</comments>
       
     </item>
     
