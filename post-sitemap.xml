@@ -10,7 +10,7 @@
 
     <url>
         <loc>http://hyunsuk2.github.io/2021/02/26/python-crawling-thread-async/</loc>
-        <lastmod>2021-02-26T02:04:59.317Z</lastmod>
+        <lastmod>2021-02-26T02:10:39.250Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -18,7 +18,15 @@
 
     <url>
         <loc>http://hyunsuk2.github.io/2021/02/25/python-row-crawling/</loc>
-        <lastmod>2021-02-26T02:00:53.301Z</lastmod>
+        <lastmod>2021-02-26T02:09:33.762Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</loc>
+        <lastmod>2021-02-26T02:09:33.743Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -35,14 +43,6 @@
     <url>
         <loc>http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/</loc>
         <lastmod>2021-02-23T15:01:34.650Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</loc>
-        <lastmod>2021-02-23T04:05:47.581Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
