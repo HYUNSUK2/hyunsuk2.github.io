@@ -4,9 +4,9 @@
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Hyunsuk&#39;s Blog</title>
-    <link>http://hyunsuk2.github.io/</link>
+    <link>https://hyunsuk2.github.io/</link>
     
-    <atom:link href="http://hyunsuk2.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://hyunsuk2.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hyunsuk&#39;s Blog</description>
     <pubDate>Sun, 29 Sep 2024 14:00:07 GMT</pubDate>
@@ -14,8 +14,8 @@
     
     <item>
       <title>Java 가상쓰레드 속도 비교</title>
-      <link>http://hyunsuk2.github.io/2024/09/29/thread/</link>
-      <guid>http://hyunsuk2.github.io/2024/09/29/thread/</guid>
+      <link>https://hyunsuk2.github.io/2024/09/29/thread/</link>
+      <guid>https://hyunsuk2.github.io/2024/09/29/thread/</guid>
       <pubDate>Sun, 29 Sep 2024 13:20:36 GMT</pubDate>
       
       <description>&lt;h2 id=&quot;목표&quot;&gt;&lt;a href=&quot;#목표&quot; class=&quot;headerlink&quot; title=&quot;목표&quot;&gt;&lt;/a&gt;목표&lt;/h2&gt;&lt;blockquote&gt;
@@ -28,26 +28,26 @@
       <content:encoded><![CDATA[<h2 id="목표"><a href="#목표" class="headerlink" title="목표"></a>목표</h2><blockquote><p>일반 thread 와 가상 thread 속도 비교하기(IO작업)</p></blockquote><h2 id="일반-thread-코드"><a href="#일반-thread-코드" class="headerlink" title="일반 thread 코드"></a>일반 thread 코드</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.URI;</span><br><span class="line"><span class="keyword">import</span> java.net.http.HttpClient;</span><br><span class="line"><span class="keyword">import</span> java.net.http.HttpRequest;</span><br><span class="line"><span class="keyword">import</span> java.net.http.HttpResponse;</span><br><span class="line"><span class="keyword">import</span> java.time.Duration;</span><br><span class="line"><span class="keyword">import</span> java.time.Instant;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CompletableFuture;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PlatformThreadTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">client</span> <span class="operator">=</span> HttpClient.newHttpClient();</span><br><span class="line">        <span class="type">var</span> <span class="variable">request</span> <span class="operator">=</span> HttpRequest.newBuilder()</span><br><span class="line">                .uri(<span class="keyword">new</span> <span class="title class_">URI</span>(<span class="string">&quot;http://localhost:4000/&quot;</span>))</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">totalRequests</span> <span class="operator">=</span> <span class="number">100000</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">batchSize</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">numBatches</span> <span class="operator">=</span> totalRequests / batchSize;</span><br><span class="line"></span><br><span class="line">        <span class="type">Instant</span> <span class="variable">start</span> <span class="operator">=</span> Instant.now();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">batch</span> <span class="operator">=</span> <span class="number">0</span>; batch &lt; numBatches; batch++) &#123;</span><br><span class="line">            <span class="type">var</span> <span class="variable">executor</span> <span class="operator">=</span> Executors.newFixedThreadPool(batchSize);</span><br><span class="line">            CompletableFuture&lt;?&gt;[] futures = <span class="keyword">new</span> <span class="title class_">CompletableFuture</span>&lt;?&gt;[batchSize];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; batchSize; i++) &#123;</span><br><span class="line">                futures[i] = CompletableFuture.runAsync(() -&gt; &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        HttpResponse&lt;String&gt; response = client.send(request, HttpResponse.BodyHandlers.ofString());</span><br><span class="line">                        <span class="comment">// System.out.println(&quot;Response code: &quot; + response.statusCode());</span></span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, executor);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            CompletableFuture.allOf(futures).join();</span><br><span class="line">            executor.shutdown();</span><br><span class="line">            executor.awaitTermination(<span class="number">1</span>, TimeUnit.MINUTES);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">Instant</span> <span class="variable">end</span> <span class="operator">=</span> Instant.now();</span><br><span class="line">        System.out.println(<span class="string">&quot;Time taken with platform threads: &quot;</span> + Duration.between(start, end).toMillis() + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><span id="more"></span><hr><h2 id="가상-thread-코드"><a href="#가상-thread-코드" class="headerlink" title="가상 thread 코드"></a>가상 thread 코드</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.URI;</span><br><span class="line"><span class="keyword">import</span> java.net.http.HttpClient;</span><br><span class="line"><span class="keyword">import</span> java.net.http.HttpRequest;</span><br><span class="line"><span class="keyword">import</span> java.net.http.HttpResponse;</span><br><span class="line"><span class="keyword">import</span> java.time.Duration;</span><br><span class="line"><span class="keyword">import</span> java.time.Instant;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CompletableFuture;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">VirtualThreadTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">client</span> <span class="operator">=</span> HttpClient.newHttpClient();</span><br><span class="line">        <span class="type">var</span> <span class="variable">request</span> <span class="operator">=</span> HttpRequest.newBuilder()</span><br><span class="line">                .uri(<span class="keyword">new</span> <span class="title class_">URI</span>(<span class="string">&quot;http://localhost:4000/&quot;</span>))</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">totalRequests</span> <span class="operator">=</span> <span class="number">100000</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">batchSize</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">numBatches</span> <span class="operator">=</span> totalRequests / batchSize;</span><br><span class="line"></span><br><span class="line">        <span class="type">Instant</span> <span class="variable">start</span> <span class="operator">=</span> Instant.now();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">batch</span> <span class="operator">=</span> <span class="number">0</span>; batch &lt; numBatches; batch++) &#123;</span><br><span class="line">            <span class="type">var</span> <span class="variable">executor</span> <span class="operator">=</span> Executors.newVirtualThreadPerTaskExecutor();</span><br><span class="line">            CompletableFuture&lt;?&gt;[] futures = <span class="keyword">new</span> <span class="title class_">CompletableFuture</span>&lt;?&gt;[batchSize];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; batchSize; i++) &#123;</span><br><span class="line">                futures[i] = CompletableFuture.runAsync(() -&gt; &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        HttpResponse&lt;String&gt; response = client.send(request, HttpResponse.BodyHandlers.ofString());</span><br><span class="line">                        <span class="comment">// System.out.println(&quot;Response code: &quot; + response.statusCode());</span></span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, executor);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            CompletableFuture.allOf(futures).join();</span><br><span class="line">            executor.shutdown();</span><br><span class="line">            executor.awaitTermination(<span class="number">1</span>, TimeUnit.MINUTES);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">Instant</span> <span class="variable">end</span> <span class="operator">=</span> Instant.now();</span><br><span class="line">        System.out.println(<span class="string">&quot;Time taken with virtual threads: &quot;</span> + Duration.between(start, end).toMillis() + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><h2 id="server-코드"><a href="#server-코드" class="headerlink" title="server 코드"></a>server 코드</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hostname = <span class="string">&#x27;127.0.0.1&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> port = <span class="number">4000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.<span class="property">statusCode</span> = <span class="number">200</span>;</span><br><span class="line">  res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/plain&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">end</span>(<span class="string">&#x27;Hello, World!\n&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.<span class="title function_">listen</span>(port, hostname, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Server running at http://<span class="subst">$&#123;hostname&#125;</span>:<span class="subst">$&#123;port&#125;</span>/`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><hr><ul><li>client 10만 request 결과 <ul><li>일반 thread 12초 </li><li>가상 thread 6초</li></ul></li></ul><h2 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h2><hr><blockquote><p>일반, 가상 쓰레드로 각각 10만번 요청했을 때 6, 12초가 걸렸다.<br>cpu 연산에서는 차이가 없겠지만 IO 작업이 주 일때는 가상 쓰레드를 이용하자</p></blockquote>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/JAVA/">JAVA</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/thread/">thread</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/virtual-thread/">virtual thread</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/java21/">java21</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/JAVA/">JAVA</category>
       
       
-      <comments>http://hyunsuk2.github.io/2024/09/29/thread/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/thread/">thread</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/virtual-thread/">virtual thread</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/java21/">java21</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2024/09/29/thread/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Sqlalchemy Pool_recycle 설정</title>
-      <link>http://hyunsuk2.github.io/2024/06/29/mysql-db-timeout/</link>
-      <guid>http://hyunsuk2.github.io/2024/06/29/mysql-db-timeout/</guid>
+      <link>https://hyunsuk2.github.io/2024/06/29/mysql-db-timeout/</link>
+      <guid>https://hyunsuk2.github.io/2024/06/29/mysql-db-timeout/</guid>
       <pubDate>Sat, 29 Jun 2024 07:43:41 GMT</pubDate>
       
       <description>&lt;h4 id=&quot;sqlalchemy-pool-recycle옵션&quot;&gt;&lt;a href=&quot;#sqlalchemy-pool-recycle옵션&quot; class=&quot;headerlink&quot; title=&quot;sqlalchemy pool_recycle옵션&quot;&gt;&lt;/a&gt;&lt;strong&gt;sqlalchemy pool_recycle옵션&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
@@ -64,30 +64,30 @@
       <content:encoded><![CDATA[<h4 id="sqlalchemy-pool-recycle옵션"><a href="#sqlalchemy-pool-recycle옵션" class="headerlink" title="sqlalchemy pool_recycle옵션"></a><strong>sqlalchemy pool_recycle옵션</strong></h4><ul><li>세팅한 값(초) 후에 db 커넥션 풀을 다시 만든다. 디폴트는 -1</li></ul><h4 id="언제-세팅해야할까"><a href="#언제-세팅해야할까" class="headerlink" title="언제 세팅해야할까?"></a><strong>언제 세팅해야할까?</strong></h4><ul><li>mysql 처럼 디폴트로 커넥션 타임 아웃이 있는 db를 사용할 때 설정해줘야 한다 mysql을 사용하는데 pool_recycle 세팅을 안 한하고 배치 같은 작업을 돌린다면 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, &#x27;MySQL server has gone away&#x27;)</span><br></pre></td></tr></table></figure>에러를 보게 될 것이다<br></li></ul><h4 id="사용-예시"><a href="#사용-예시" class="headerlink" title="사용 예시"></a><strong>사용 예시</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POOL_RECYCLE_TIME = <span class="number">60</span> * <span class="number">60</span> * <span class="number">4</span></span><br><span class="line">engine = create_engine(<span class="string">f&quot;mariadb+pymysql://<span class="subst">&#123;user&#125;</span>:<span class="subst">&#123;passwd&#125;</span>@<span class="subst">&#123;host&#125;</span>:<span class="subst">&#123;port&#125;</span>/<span class="subst">&#123;database&#125;</span>?charset=utf8mb4&quot;</span>, pool_recycle=POOL_RECYCLE_TIME)</span><br></pre></td></tr></table></figure><span id="more"></span><h4 id="db-별-디폴트-커넥션-타임-아웃"><a href="#db-별-디폴트-커넥션-타임-아웃" class="headerlink" title="db 별 디폴트 커넥션 타임 아웃"></a>db 별 디폴트 커넥션 타임 아웃</h4><ol><li>MySQL - 8시간 (28800초)</li><li>PostgreSQL - 서버 설정에 따라 다름, 기본적으로는 타임아웃을 설정하지 않음</li><li>SQL Server - 클라이언트 측 설정에 따라 다름, 기본적으로는 <code>remote query timeout</code> 옵션이 600초(10분)</li><li>Oracle - <code>SQLNET.EXPIRE_TIME</code> 설정에 따라 다름, 기본값은 설정되어 있지 않음</li><li>SQLite - 연결 타임아웃에 대한 기본 설정은 없음</li><li>MongoDB - 10분 (600000ms), <code>net.timeout</code> 설정에 따라 다름</li></ol><h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><ul><li><a href="https://docs.sqlalchemy.org/en/13/core/engines.html#sqlalchemy.create_engine.params.pool_recycle">https://docs.sqlalchemy.org/en/13/core/engines.html#sqlalchemy.create_engine.params.pool_recycle</a></li><li><a href="https://docs.sqlalchemy.org/en/13/core/pooling.html#pool-setting-recycle">https://docs.sqlalchemy.org/en/13/core/pooling.html#pool-setting-recycle</a></li></ul>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/python/">python</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/mysql-timeout/">mysql timeout</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/sqlalchemy/">sqlalchemy</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/pool-recycle/">pool_recycle</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/MySQL-server-has-gone-away/">MySQL server has gone away</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/pyhton/">pyhton</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/python/">python</category>
       
       
-      <comments>http://hyunsuk2.github.io/2024/06/29/mysql-db-timeout/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/mysql-timeout/">mysql timeout</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/sqlalchemy/">sqlalchemy</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/pool-recycle/">pool_recycle</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/MySQL-server-has-gone-away/">MySQL server has gone away</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/pyhton/">pyhton</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2024/06/29/mysql-db-timeout/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Git 설정과 자주 쓰는 명령어</title>
-      <link>http://hyunsuk2.github.io/2023/12/22/git-command/</link>
-      <guid>http://hyunsuk2.github.io/2023/12/22/git-command/</guid>
+      <link>https://hyunsuk2.github.io/2023/12/22/git-command/</link>
+      <guid>https://hyunsuk2.github.io/2023/12/22/git-command/</guid>
       <pubDate>Fri, 22 Dec 2023 06:02:39 GMT</pubDate>
       
       <description>&lt;h2 id=&quot;git-세팅&quot;&gt;&lt;a href=&quot;#git-세팅&quot; class=&quot;headerlink&quot; title=&quot;git 세팅&quot;&gt;&lt;/a&gt;git 세팅&lt;/h2&gt;&lt;hr&gt;
@@ -103,28 +103,28 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h2 id="git-세팅"><a href="#git-세팅" class="headerlink" title="git 세팅"></a>git 세팅</h2><hr><h4 id="이름-세팅"><a href="#이름-세팅" class="headerlink" title="이름 세팅"></a>이름 세팅</h4><ul>git config --global user.name "Your Name"<p>ex) 이름 세팅</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;hyunsuk&quot;</span></span><br></pre></td></tr></table></figure></ul><span id="more"></span><h4 id="이메일-세팅"><a href="#이메일-세팅" class="headerlink" title="이메일 세팅"></a>이메일 세팅</h4><ul>git config --global user.email you@example.com<p>ex) 이메일 세팅</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email ohs11244@naver.com</span><br></pre></td></tr></table></figure></ul> <h2 id="git-자주-쓰는-명령어"><a href="#git-자주-쓰는-명령어" class="headerlink" title="git 자주 쓰는 명령어"></a>git 자주 쓰는 명령어</h2><hr><p>git pull</p><ul>원격 저장소 파일과 동기화 시키기</ul>git status<ul>신규, 변경 파일 상태 확인 명령어</ul>git log<ul>작업 이력 확인</ul>git checkout -b [branch_name]<ul>신규 branch를 만들고 해당 branch로 변경<p>ex) 새로 생성한 모든 파일 스테이징 상태로 만들기</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add ./* </span><br></pre></td></tr></table></figure></ul><p>git add [대상]</p><ul>신규 생성 파일 스테이징 상태(commit 할 수 았는 상태)로 만들어 줌<p>ex) 새로 생성한 모든 파일 스테이징 상태로 만들기</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add ./* </span><br></pre></td></tr></table></figure></ul><p>git commit -m “메세지 등록”</p><ul>파일들 원격으로 올리기(push) 하기 전 메세지 등록<p>ex) 원격 올리기 전 메세지 등록</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;write message&quot;</span> </span><br></pre></td></tr></table></figure></ul><p>git push origin [branch name]</p><ul>[branch name]을 origin(원격 저장소 url) 로 업로드<p>ex) 원격 저장로 업로드</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin develop</span><br></pre></td></tr></table></figure></ul><p>git stash</p><ul>최근 commit 시점에서부터 변경된 사항들을 백업하고 최근 commit 상태로 돌려 줌</ul><p>git stash pop</p><ul>git stash로 백업한 부분을 꺼내와 현재 파일과 합침</ul><p>git remote -v</p><ul>git 원격 저장소 url 주소 확인</ul><p>git remote add [원격 저장소 별칭] [url]</p><ul>원격 저장소 주소를 별칭으로 세팅함<p>ex) 원격 저장소 주소 세팅</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:HYUNSUK2/hyunsuk2.github.io.git</span><br></pre></td></tr></table></figure></ul>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/git/">git</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/git/">git</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/git-command/">git command</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/git-setting/">git setting</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/git-%EC%9E%90%EC%A3%BC-%EC%93%B0%EB%8A%94-%EB%AA%85%EB%A0%B9%EC%96%B4/">git 자주 쓰는 명령어</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/git/">git</category>
       
       
-      <comments>http://hyunsuk2.github.io/2023/12/22/git-command/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/git/">git</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/git-command/">git command</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/git-setting/">git setting</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/git-%EC%9E%90%EC%A3%BC-%EC%93%B0%EB%8A%94-%EB%AA%85%EB%A0%B9%EC%96%B4/">git 자주 쓰는 명령어</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2023/12/22/git-command/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Zeromq 기본 개념</title>
-      <link>http://hyunsuk2.github.io/2022/09/22/zmq/</link>
-      <guid>http://hyunsuk2.github.io/2022/09/22/zmq/</guid>
+      <link>https://hyunsuk2.github.io/2022/09/22/zmq/</link>
+      <guid>https://hyunsuk2.github.io/2022/09/22/zmq/</guid>
       <pubDate>Thu, 22 Sep 2022 11:41:45 GMT</pubDate>
       
       <description>&lt;h2 id=&quot;zeromq-정리-1&quot;&gt;&lt;a href=&quot;#zeromq-정리-1&quot; class=&quot;headerlink&quot; title=&quot;zeromq 정리 1&quot;&gt;&lt;/a&gt;zeromq 정리 1&lt;/h2&gt;&lt;p&gt;zeromq 개인 공부로 zmq 공식 문서 보고 필요한거 정리한 내용&lt;/p&gt;
@@ -137,28 +137,28 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h2 id="zeromq-정리-1"><a href="#zeromq-정리-1" class="headerlink" title="zeromq 정리 1"></a>zeromq 정리 1</h2><p>zeromq 개인 공부로 zmq 공식 문서 보고 필요한거 정리한 내용</p><blockquote><p>ref <a href="https://zguide.zeromq.org/docs/">https://zguide.zeromq.org/docs/</a></p></blockquote><span id="more"></span><h2 id="zeromq-특징"><a href="#zeromq-특징" class="headerlink" title="zeromq 특징"></a>zeromq 특징</h2><ol><li>빠르다</li><li>여러 소켓 조합으로 방대한 네트워크 조합을 만들 수 있다</li><li>가볍다</li><li>유연하다</li></ol><ul><li>패턴</li></ul><ol><li><p>request-reply<br>클라이언트와 서비스의 집합을 연결하는 패턴<br>이것은 원격 프로시저 호출 및 작업 분산의 패턴</p></li><li><p>publish-subscribe<br> publisher와 subscribe의 집합을 연결하는 패턴, 이것은 데이터 분산 패턴</p></li><li><p>pipeline<br> 여러 단계와 루프를 가질 수 있는 fan-out &#x2F; fan-in 패턴으로 노드를 연결<br> 이것은 병렬 작업 분산 및 수집 패턴</p></li><li><p>exclusive pair<br> 독점 쌍의 두 소켓을 연결하는 패턴<br> 이것은 특정 고급적인 낮은 수준의 패턴</p></li></ol><ul><li>유효 소켓 조합</li></ul><ol><li>PUB and SUB</li><li>REQ and REP</li><li>REQ and ROUTER</li><li>DEALER and REP</li><li>DEALER and ROUTER</li><li>DEALER and DEALER</li><li>ROUTER and ROUTER</li><li>PUSH and PULL</li><li>PAIR and PAIR</li></ol><ul><li>연결 방법</li></ul><ol><li>inproc<br>한 프로세스에서 스레드를 연결하기 위한 가장 빠른 방법</li><li>ipc</li><li>tcp</li><li>pgm</li><li>epgm</li></ol><ul><li>socket 조합 참고</li></ul><ol><li>한 코어에 여러 프로세스보다 여러 코어에 한 프로세스로 시작하는 게 좋음, 또한 스레드로 worker를 실행하면<br>네트워크 홉, 지연 시간 및 네트워크 트래픽이 없음</li></ol>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/zeromq/">zeromq</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/zeromq/">zeromq</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/message-queue/">message queue</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/network-communication/">network communication</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/zmq/">zmq</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/zeromq/">zeromq</category>
       
       
-      <comments>http://hyunsuk2.github.io/2022/09/22/zmq/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/zeromq/">zeromq</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/message-queue/">message queue</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/network-communication/">network communication</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/zmq/">zmq</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2022/09/22/zmq/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>예시로 알아보는 Python Heap Memory</title>
-      <link>http://hyunsuk2.github.io/2021/02/27/python-heap-memory/</link>
-      <guid>http://hyunsuk2.github.io/2021/02/27/python-heap-memory/</guid>
+      <link>https://hyunsuk2.github.io/2021/02/27/python-heap-memory/</link>
+      <guid>https://hyunsuk2.github.io/2021/02/27/python-heap-memory/</guid>
       <pubDate>Sat, 27 Feb 2021 06:47:51 GMT</pubDate>
       
         
@@ -171,26 +171,26 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h3 id="프로세스-메모리는-크게-code-data-stack-heap-영역이-있는데-이번-글에서는-stack-heap-영역을-다룰-예정이다"><a href="#프로세스-메모리는-크게-code-data-stack-heap-영역이-있는데-이번-글에서는-stack-heap-영역을-다룰-예정이다" class="headerlink" title="프로세스 메모리는 크게 code, data, stack, heap 영역이 있는데 이번 글에서는 stack, heap 영역을 다룰 예정이다"></a>프로세스 메모리는 크게 code, data, stack, heap 영역이 있는데 이번 글에서는 stack, heap 영역을 다룰 예정이다</h3><h4 id="그럼-heap-영역은-왜-알아야-할까"><a href="#그럼-heap-영역은-왜-알아야-할까" class="headerlink" title="그럼 heap 영역은 왜 알아야 할까?"></a>그럼 heap 영역은 왜 알아야 할까?</h4><ol><li>파이썬은 모든 게 객체이기 때문, 즉 값을 heap에 저장하고 stack에서 참조한다</li><li>모든 thread는 자기 process heap memory 영역을 공유한다 이걸 이용해서 좀 더 유연한 프로세스를 만들 수 있다</li><li>객체를 무분별하게 생성하지 않기 위해서</li><li>버그를 찾기 위해</li><li>기타 등등…</li></ol><h4 id="간단하게-예시를-들면"><a href="#간단하게-예시를-들면" class="headerlink" title="간단하게 예시를 들면"></a>간단하게 예시를 들면</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"></span><br><span class="line">detect_word = <span class="string">&#x27;dog&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 문장에 탐지 단어가 있는지 확인하는 함수</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_worker</span>():</span><br><span class="line">    <span class="keyword">global</span> detect_word</span><br><span class="line">    text = <span class="string">&#x27;dogs are cute&#x27;</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        check = detect_word <span class="keyword">in</span> text</span><br><span class="line">        <span class="built_in">print</span>(check)</span><br><span class="line">        <span class="keyword">if</span> check <span class="keyword">is</span> <span class="literal">False</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 탐지 단어를 바꾸는 함수</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">change_worker</span>():</span><br><span class="line">    <span class="keyword">global</span> detect_word</span><br><span class="line">    sleep(<span class="number">3</span>)</span><br><span class="line">    detect_word = <span class="string">&#x27;cat&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tread1 = Thread(target=print_worker)</span><br><span class="line">tread1.start()</span><br><span class="line"></span><br><span class="line">tread2 = Thread(target=change_worker)</span><br><span class="line">tread2.start()</span><br></pre></td></tr></table></figure><pre><code>실행 결과는 TrueTrueTrueFalse</code></pre><blockquote><p>heap 메모리 그림을 보면 프로세스 실행 3초 뒤<br>thread2가 detect_word를 cat으로 바꾸었기 때문에<br>heap 메모리를 공유하는 thread1의 detect_word도 cat을 가리키고 있다<br>dog는 reference counting이 0이 되어 GC에 의해 메모리 해제된다</p></blockquote><img src="/2021/02/27/python-heap-memory/thread-heap.PNG" class=""><blockquote><p>간단한 예시지만 이런 특징을 사용해서 좀 더 유연한 프로그램을 만들 수 있다<br>thread 프로그래밍이 장점이 많지만 메모리를 공유하기 때문에 <strong>연산 작업할 때는 lock을 사용하여 thread-safe</strong>하게 신경 써야 한다<br>하지만 <strong>lock은 처리 시간을 느리게 하므로</strong> 주의가 필요하다 </p></blockquote>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/python/">python</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/python/">python</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/memory/">memory</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/heap/">heap</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/python/">python</category>
       
       
-      <comments>http://hyunsuk2.github.io/2021/02/27/python-heap-memory/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/python/">python</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/memory/">memory</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/heap/">heap</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2021/02/27/python-heap-memory/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>자료구조 시간 복잡도</title>
-      <link>http://hyunsuk2.github.io/2021/02/26/data-structure-timecomplexity/</link>
-      <guid>http://hyunsuk2.github.io/2021/02/26/data-structure-timecomplexity/</guid>
+      <link>https://hyunsuk2.github.io/2021/02/26/data-structure-timecomplexity/</link>
+      <guid>https://hyunsuk2.github.io/2021/02/26/data-structure-timecomplexity/</guid>
       <pubDate>Fri, 26 Feb 2021 14:17:06 GMT</pubDate>
       
         
@@ -203,32 +203,32 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h2 id="자료구조별-시간-복잡도"><a href="#자료구조별-시간-복잡도" class="headerlink" title="자료구조별 시간 복잡도"></a>자료구조별 시간 복잡도</h2><h4 id="실무에서-주로-사용했던-자료구조-시간복잡도를-정리해봤다-작업의-시간복잡도를-보고-효율적인-자료구조를-선택하자"><a href="#실무에서-주로-사용했던-자료구조-시간복잡도를-정리해봤다-작업의-시간복잡도를-보고-효율적인-자료구조를-선택하자" class="headerlink" title="실무에서 주로 사용했던 자료구조 시간복잡도를 정리해봤다 작업의 시간복잡도를 보고 효율적인 자료구조를 선택하자"></a>실무에서 주로 사용했던 자료구조 시간복잡도를 정리해봤다 작업의 시간복잡도를 보고 효율적인 자료구조를 선택하자</h4><table><thead><tr><th>자료구조</th><th>접근</th><th>검색</th><th>입력</th><th>삭제</th></tr></thead><tbody><tr><td>array list</td><td>O(1)</td><td>O(n)</td><td>O(n)</td><td>O(n)</td></tr><tr><td>set</td><td>O(1)</td><td>O(1)</td><td>O(1)</td><td>O(1)</td></tr><tr><td>stack</td><td>O(n)</td><td>O(n)</td><td>O(1)</td><td>O(1)</td></tr><tr><td>queue</td><td>O(n)</td><td>O(n)</td><td>O(1)</td><td>O(1)</td></tr><tr><td>singled-linked list</td><td>O(n)</td><td>O(n)</td><td>O(1)</td><td>O(1)</td></tr><tr><td>doubly-linked list</td><td>O(n)</td><td>O(n)</td><td>O(1)</td><td>O(1)</td></tr><tr><td>hash table</td><td>N&#x2F;A</td><td>O(log(n))</td><td>O(log(n)</td><td>O(log(n)</td></tr><tr><td>binary tree</td><td>O(log(n))</td><td>O(log(n))</td><td>O(log(n))</td><td>O(log(n))</td></tr></tbody></table><blockquote><p>습관적으로 탐색할 때도 list를 많이 사용했는데 탐색할 때는 list 대신 set을 사용하자</p></blockquote><h2 id="시간-복잡도-그래프"><a href="#시간-복잡도-그래프" class="headerlink" title="시간 복잡도 그래프"></a>시간 복잡도 그래프</h2><img src="/2021/02/26/data-structure-timecomplexity/time%20complexity.PNG" class=""><h4 id="참조링크"><a href="#참조링크" class="headerlink" title="참조링크"></a>참조링크</h4><ol><li><a href="https://www.ics.uci.edu/~pattis/ICS-33/lectures/complexitypython.txt">파이썬 자료구조 시간복잡도</a></li><li><a href="https://www.bigocheatsheet.com/">자료구조 시간복잡도</a></li></ol>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/data-structure/">data structure</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/data-structure/">data structure</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/list/">list</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/stack/">stack</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/queue/">queue</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/hash-table/">hash table</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/binary-tree/">binary tree</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/data-structure/">data structure</category>
       
       
-      <comments>http://hyunsuk2.github.io/2021/02/26/data-structure-timecomplexity/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/data-structure/">data structure</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/list/">list</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/stack/">stack</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/queue/">queue</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/hash-table/">hash table</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/binary-tree/">binary tree</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2021/02/26/data-structure-timecomplexity/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Python 병렬처리로 크롤링 시간 단축하기</title>
-      <link>http://hyunsuk2.github.io/2021/02/26/python-crawling-thread-async/</link>
-      <guid>http://hyunsuk2.github.io/2021/02/26/python-crawling-thread-async/</guid>
+      <link>https://hyunsuk2.github.io/2021/02/26/python-crawling-thread-async/</link>
+      <guid>https://hyunsuk2.github.io/2021/02/26/python-crawling-thread-async/</guid>
       <pubDate>Fri, 26 Feb 2021 00:51:06 GMT</pubDate>
       
       <description>&lt;h2 id=&quot;thread-와-concurrent-futures-사용으로-병렬-처리하기&quot;&gt;&lt;a href=&quot;#thread-와-concurrent-futures-사용으로-병렬-처리하기&quot; class=&quot;headerlink&quot; title=&quot;thread 와 concurrent.futures 사용으로 병렬 처리하기&quot;&gt;&lt;/a&gt;thread 와 concurrent.futures 사용으로 병렬 처리하기&lt;/h2&gt;&lt;h3 id=&quot;1-thread-사용으로-병렬-처리&quot;&gt;&lt;a href=&quot;#1-thread-사용으로-병렬-처리&quot; class=&quot;headerlink&quot; title=&quot;1. thread 사용으로 병렬 처리&quot;&gt;&lt;/a&gt;1. thread 사용으로 병렬 처리&lt;/h3&gt;&lt;h4 id=&quot;저번-코드에서-save-img-함수를-multi-thread로-실행하면-좀-더-빠른-결과물을-얻을-수-있을-것-같다&quot;&gt;&lt;a href=&quot;#저번-코드에서-save-img-함수를-multi-thread로-실행하면-좀-더-빠른-결과물을-얻을-수-있을-것-같다&quot; class=&quot;headerlink&quot; title=&quot;저번 코드에서 save_img 함수를 multi thread로 실행하면 좀 더 빠른 결과물을 얻을 수 있을 것 같다&quot;&gt;&lt;/a&gt;저번 코드에서 save_img 함수를 multi thread로 실행하면 좀 더 빠른 결과물을 얻을 수 있을 것 같다&lt;/h4&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; requests&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; re&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; threading&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; time&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t1 = time.time()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;reg = re.&lt;span class=&quot;built_in&quot;&gt;compile&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&amp;#x27;oimgurl: &amp;quot;.&amp;#123;0,300&amp;#125;&amp;quot;, cpid&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;url = &lt;span class=&quot;string&quot;&gt;&amp;#x27;https://search.daum.net/search?w=img&amp;amp;nil_search=btn&amp;amp;DA=NTB&amp;amp;enc=utf8&amp;amp;q=%EA%B0%95%EC%95%84%EC%A7%80&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;html = requests.get(url=url)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;html_raw_data = &lt;span class=&quot;built_in&quot;&gt;str&lt;/span&gt;(html.content)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;reg_iter = reg.finditer(html_raw_data)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;thread_list = []&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title function_&quot;&gt;save_img&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;idx, img_url&lt;/span&gt;):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    res = requests.get(img_url).content&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;open&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;f&amp;#x27;&lt;span class=&quot;subst&quot;&gt;&amp;#123;idx&amp;#125;&lt;/span&gt;.jpg&amp;#x27;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&amp;#x27;wb&amp;#x27;&lt;/span&gt;) &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; f:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        f.write(res)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;f&amp;#x27;save &lt;span class=&quot;subst&quot;&gt;&amp;#123;idx&amp;#125;&lt;/span&gt;&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; idx, res_data &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;enumerate&lt;/span&gt;(reg_iter):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    img_url = res_data.group().split(&lt;span class=&quot;string&quot;&gt;&amp;#x27;oimgurl:&amp;#x27;&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;].split(&lt;span class=&quot;string&quot;&gt;&amp;#x27;, cpid&amp;#x27;&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;].replace(&lt;span class=&quot;string&quot;&gt;&amp;#x27;&amp;quot;&amp;#x27;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&amp;#x27;&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    thread_worker = threading.Thread(target=save_img, args=(idx, img_url))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    thread_worker.start()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    thread_list.append(thread_worker)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; thread &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; thread_list:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    thread.join()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;t2 = time.time()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;print&lt;/span&gt;(t2-t1)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -251,28 +251,28 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h2 id="thread-와-concurrent-futures-사용으로-병렬-처리하기"><a href="#thread-와-concurrent-futures-사용으로-병렬-처리하기" class="headerlink" title="thread 와 concurrent.futures 사용으로 병렬 처리하기"></a>thread 와 concurrent.futures 사용으로 병렬 처리하기</h2><h3 id="1-thread-사용으로-병렬-처리"><a href="#1-thread-사용으로-병렬-처리" class="headerlink" title="1. thread 사용으로 병렬 처리"></a>1. thread 사용으로 병렬 처리</h3><h4 id="저번-코드에서-save-img-함수를-multi-thread로-실행하면-좀-더-빠른-결과물을-얻을-수-있을-것-같다"><a href="#저번-코드에서-save-img-함수를-multi-thread로-실행하면-좀-더-빠른-결과물을-얻을-수-있을-것-같다" class="headerlink" title="저번 코드에서 save_img 함수를 multi thread로 실행하면 좀 더 빠른 결과물을 얻을 수 있을 것 같다"></a>저번 코드에서 save_img 함수를 multi thread로 실행하면 좀 더 빠른 결과물을 얻을 수 있을 것 같다</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">t1 = time.time()</span><br><span class="line">reg = re.<span class="built_in">compile</span>(<span class="string">&#x27;oimgurl: &quot;.&#123;0,300&#125;&quot;, cpid&#x27;</span>)</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;https://search.daum.net/search?w=img&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q=%EA%B0%95%EC%95%84%EC%A7%80&#x27;</span></span><br><span class="line">html = requests.get(url=url)</span><br><span class="line">html_raw_data = <span class="built_in">str</span>(html.content)</span><br><span class="line"></span><br><span class="line">reg_iter = reg.finditer(html_raw_data)</span><br><span class="line">thread_list = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save_img</span>(<span class="params">idx, img_url</span>):</span><br><span class="line">    res = requests.get(img_url).content</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&#x27;<span class="subst">&#123;idx&#125;</span>.jpg&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(res)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;save <span class="subst">&#123;idx&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx, res_data <span class="keyword">in</span> <span class="built_in">enumerate</span>(reg_iter):</span><br><span class="line">    img_url = res_data.group().split(<span class="string">&#x27;oimgurl:&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;, cpid&#x27;</span>)[<span class="number">0</span>].replace(<span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    thread_worker = threading.Thread(target=save_img, args=(idx, img_url))</span><br><span class="line">    thread_worker.start()</span><br><span class="line">    thread_list.append(thread_worker)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> thread <span class="keyword">in</span> thread_list:</span><br><span class="line">    thread.join()</span><br><span class="line"></span><br><span class="line">t2 = time.time()</span><br><span class="line"><span class="built_in">print</span>(t2-t1)</span><br></pre></td></tr></table></figure><p>작업결과</p><img src="/2021/02/26/python-crawling-thread-async/result.PNG" class=""><h5 id="작업-시간이-1초대로-단축된-걸-확인-할-수-있다"><a href="#작업-시간이-1초대로-단축된-걸-확인-할-수-있다" class="headerlink" title="작업 시간이 1초대로 단축된 걸 확인 할 수 있다"></a>작업 시간이 1초대로 단축된 걸 확인 할 수 있다</h5><h3 id="2-concurrent-futures-사용으로-병렬-처리하기"><a href="#2-concurrent-futures-사용으로-병렬-처리하기" class="headerlink" title="2. concurrent.futures 사용으로 병렬 처리하기"></a>2. concurrent.futures 사용으로 병렬 처리하기</h3><h4 id="concurrent-futures는-비동기-처리-고수준-인터페이스-모듈이다-이-모듈을-써서-작업-시간을-줄여보자"><a href="#concurrent-futures는-비동기-처리-고수준-인터페이스-모듈이다-이-모듈을-써서-작업-시간을-줄여보자" class="headerlink" title="concurrent.futures는 비동기 처리 고수준 인터페이스 모듈이다 이 모듈을 써서 작업 시간을 줄여보자"></a>concurrent.futures는 비동기 처리 고수준 인터페이스 모듈이다 이 모듈을 써서 작업 시간을 줄여보자</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor</span><br><span class="line"></span><br><span class="line">t1 = time.time()</span><br><span class="line">reg = re.<span class="built_in">compile</span>(<span class="string">&#x27;oimgurl: &quot;.&#123;0,300&#125;&quot;, cpid&#x27;</span>)</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;https://search.daum.net/search?w=img&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q=%EA%B0%95%EC%95%84%EC%A7%80&#x27;</span></span><br><span class="line">html = requests.get(url=url)</span><br><span class="line">html_raw_data = <span class="built_in">str</span>(html.content)</span><br><span class="line"></span><br><span class="line">reg_iter = reg.finditer(html_raw_data)</span><br><span class="line">thread_list = []</span><br><span class="line"></span><br><span class="line"><span class="comment">#url 이미지를 저장하는 함수</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save_img</span>(<span class="params">idx, img_url</span>):</span><br><span class="line">    res = requests.get(img_url).content</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&#x27;<span class="subst">&#123;idx&#125;</span>.jpg&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="comment"># 이미지 관련 작업은 pillow 모듈을 사용하는게 좋다</span></span><br><span class="line">        <span class="comment"># 예제에서는 사용 안함 (따로 설치가 필요)  </span></span><br><span class="line">        f.write(res)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;save <span class="subst">&#123;idx&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">10</span>) <span class="keyword">as</span> executor:</span><br><span class="line">    <span class="keyword">for</span> idx, res_data <span class="keyword">in</span> <span class="built_in">enumerate</span>(reg_iter):</span><br><span class="line">        <span class="comment"># url 을 뽑아내는 전처리 작업</span></span><br><span class="line">        img_url = res_data.group().split(<span class="string">&#x27;oimgurl:&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;, cpid&#x27;</span>)[<span class="number">0</span>].replace(<span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        executor.submit(save_img, idx, img_url)</span><br><span class="line"></span><br><span class="line">t2 = time.time()</span><br><span class="line"><span class="built_in">print</span>(t2 - t1)</span><br></pre></td></tr></table></figure><p>작업결과</p><img src="/2021/02/26/python-crawling-thread-async/dog2.PNG" class=""><h5 id="마찬가지로-작업-시간이-1초대로-단축된-걸-확인-할-수-있다"><a href="#마찬가지로-작업-시간이-1초대로-단축된-걸-확인-할-수-있다" class="headerlink" title="마찬가지로 작업 시간이 1초대로 단축된 걸 확인 할 수 있다"></a>마찬가지로 작업 시간이 1초대로 단축된 걸 확인 할 수 있다</h5><blockquote><h3 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h3><ul><li>I&#x2F;O 작업이 있을 때 병렬 처리 작업을 활용하여 작업 시간을 단축시킬수 있다</li><li>상황에 따라 다르지만 될 수 있으면 thread 모듈보단 고수준 비동기 concurrent.futures 모듈을 사용하자 병렬처리 작업의 결과물을 리턴 받는 등 다양한 함수를 제공한다 <a href="https://docs.python.org/ko/3/library/concurrent.futures.html">참조링크</a></li></ul></blockquote><span id="more"></span>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/python/">python</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/python/">python</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/crawling/">crawling</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/thread/">thread</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/concurrent-futures/">concurrent.futures</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/python/">python</category>
       
       
-      <comments>http://hyunsuk2.github.io/2021/02/26/python-crawling-thread-async/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/python/">python</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/crawling/">crawling</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/thread/">thread</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/concurrent-futures/">concurrent.futures</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2021/02/26/python-crawling-thread-async/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Beautifulsoup으로 이미지 크롤링 안될 때 다른 방법으로 크롤링하기</title>
-      <link>http://hyunsuk2.github.io/2021/02/25/python-row-crawling/</link>
-      <guid>http://hyunsuk2.github.io/2021/02/25/python-row-crawling/</guid>
+      <link>https://hyunsuk2.github.io/2021/02/25/python-row-crawling/</link>
+      <guid>https://hyunsuk2.github.io/2021/02/25/python-row-crawling/</guid>
       <pubDate>Thu, 25 Feb 2021 02:25:55 GMT</pubDate>
       
         
@@ -285,24 +285,24 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h3 id="이미지-태그나-클래스명-등으로-크롤링-하려는데-안될-때-어떻게-해야할까"><a href="#이미지-태그나-클래스명-등으로-크롤링-하려는데-안될-때-어떻게-해야할까" class="headerlink" title="이미지 태그나 클래스명 등으로 크롤링 하려는데 안될 때 어떻게 해야할까?"></a>이미지 태그나 클래스명 등으로 크롤링 하려는데 안될 때 어떻게 해야할까?</h3><blockquote><p>여러가지 방법이 있겠지만 이번 글에서는 <strong>python, re(정규식) 모듈, requests 모듈</strong>을 이용해서 크롤링을 해보려고한다<br>다음 이미지에서 강아지를 검색하면 브라우저 검색창에 아래 url이 나온다</p></blockquote><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://search.daum.net/search?w=img&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q=%EA%B0%95%EC%95%84%EC%A7%80</span><br></pre></td></tr></table></figure><blockquote><p>이 url을 이용해서 python으로 request를 날려보자<br>아래 사진을 보면 이미지 불러오는 url이 보인다 저 url을 정규식으로 추줄해보자<br>더 좋은 정규식이 있을 텐데 저는 저렇게 해서 추출했습니다<br>(정규식 내용은 분량이 큽니다 관심이 있으면 따로 찾아보자)<br><img src="/images/python-row-crawling-code_url.png" alt="code url"></p><ol><li>코드를 보자 정규식을 선언하고</li><li>url을 뽑아내는 전처리 작업을하고</li><li>이미지를 저장하는 코드룰 볼 수 있다</li></ol></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">t1 = time.time()</span><br><span class="line"><span class="comment"># 정규식 선언</span></span><br><span class="line">reg = re.<span class="built_in">compile</span>(<span class="string">&#x27;oimgurl: &quot;.&#123;0,300&#125;&quot;, cpid&#x27;</span>)</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;https://search.daum.net/search?w=img&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q=%EA%B0%95%EC%95%84%EC%A7%80&#x27;</span></span><br><span class="line">html = requests.get(url=url)</span><br><span class="line">html_raw_data = <span class="built_in">str</span>(html.content)</span><br><span class="line"></span><br><span class="line">reg_iter = reg.finditer(html_raw_data)</span><br><span class="line"></span><br><span class="line"><span class="comment">#url 이미지를 저장하는 함수</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save_img</span>(<span class="params">idx, img_url</span>):</span><br><span class="line">    res = requests.get(img_url).content</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&#x27;<span class="subst">&#123;idx&#125;</span>.jpg&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="comment"># 이미지 관련 작업은 pillow 모듈을 사용하는게 좋다</span></span><br><span class="line">        <span class="comment"># 예제에서는 사용 안함 (따로 설치가 필요)  </span></span><br><span class="line">        f.write(res)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;save <span class="subst">&#123;idx&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx, res_data <span class="keyword">in</span> <span class="built_in">enumerate</span>(reg_iter):</span><br><span class="line">    <span class="comment"># url 을 뽑아내는 전처리 작업</span></span><br><span class="line">    img_url = res_data.group().split(<span class="string">&#x27;oimgurl:&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;, cpid&#x27;</span>)[<span class="number">0</span>].replace(<span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    save_img(idx, img_url)</span><br><span class="line"></span><br><span class="line">t2 = time.time()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(t2-t1)</span><br></pre></td></tr></table></figure><blockquote><p>이렇게 하면 이미지가 저장되는 걸 볼 수 있다<br><img src="/images/python-row-crawling-get_dog_picture.PNG" alt="강아지 이미지"><br>작업이 4초 넘게 걸렸는데 다음 포스트에서는 thread 와 비동기 함수를 사용하여<br>작업 시간을 단축시키는 포스트를 올려보겠습니다  </p></blockquote>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/python/">python</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/python/">python</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/crawling/">crawling</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/python/">python</category>
       
       
-      <comments>http://hyunsuk2.github.io/2021/02/25/python-row-crawling/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/python/">python</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/crawling/">crawling</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2021/02/25/python-row-crawling/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>하둡 공부 순서</title>
-      <link>http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/</link>
-      <guid>http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/</guid>
+      <link>https://hyunsuk2.github.io/2021/02/23/hadoop-study-order/</link>
+      <guid>https://hyunsuk2.github.io/2021/02/23/hadoop-study-order/</guid>
       <pubDate>Tue, 23 Feb 2021 14:29:21 GMT</pubDate>
       
         
@@ -318,22 +318,22 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h1 id="하둡-공부-순서"><a href="#하둡-공부-순서" class="headerlink" title="하둡 공부 순서"></a>하둡 공부 순서</h1><ol><li>HDFS</li><li>MapReduce</li><li>YARN</li><li>Avro</li><li>Parquet</li><li>Flume</li><li>Sqoop</li><li>Pig</li><li>Hive</li><li>Crunch</li><li>Spark</li><li>Hbase</li><li>Zookeeper</li></ol><h1 id="하둡-에코-시스템"><a href="#하둡-에코-시스템" class="headerlink" title="하둡 에코 시스템"></a>하둡 에코 시스템</h1><p><img src="/images/hadoop_eco_system.png" alt="하둡 에코 시스템"></p><blockquote><p><strong>HDFS</strong>, <strong>MapReduce</strong>, <strong>YARN</strong>은 하둡 기반 구성 요소라서 정확하게 이해할 필요성이 있다<br>다른 요소들은 필요한 순서대로 공부하면 될 듯</p></blockquote>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/Hadoop/">Hadoop</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/hadoop/">hadoop</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/Hadoop/">Hadoop</category>
       
       
-      <comments>http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/hadoop/">hadoop</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2021/02/23/hadoop-study-order/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>속도를 높이는 파이썬 코드</title>
-      <link>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</link>
-      <guid>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</guid>
+      <link>https://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</link>
+      <guid>https://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</guid>
       <pubDate>Tue, 23 Feb 2021 03:48:42 GMT</pubDate>
       
         
@@ -346,24 +346,24 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h3 id="기존-파이썬-코드를-빠르게-만드는-방법"><a href="#기존-파이썬-코드를-빠르게-만드는-방법" class="headerlink" title="기존 파이썬 코드를 빠르게 만드는 방법"></a>기존 파이썬 코드를 빠르게 만드는 방법</h3><ul><li>상황에 맞는 정확한 데이터 구조 사용<br> (list, tuple, set, dict, etc…)</li><li>for 루프 대신 while 루프 사용</li><li>컴프레헨션 사용</li><li>복수 할당 사용 ( a, b &#x3D; 1, 2)</li><li>될 수 있으면 global 키워드를 줄이자 연산 작업에 많은 시간을 소요한다</li><li>라이브러리를 활용</li><li>제너레이터 사용</li><li>.사용 자제 (use sqart instead of math.sqart)</li><li>무한 반복문에 1 사용 True 사용 보다 런타임 줄일수 있음</li><li>큰 데이터 처리는 pandas, numpy, scipy 사용</li></ul><p> <a href="https://www.loginradius.com/blog/async/speed-up-python-code/">참조링크</a></p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/python/">python</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/python/">python</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/speed-up/">speed up</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/python/">python</category>
       
       
-      <comments>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/python/">python</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/speed-up/">speed up</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2021/02/23/speed-up-python-code/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>하둡을 왜 쓰는 것일까?</title>
-      <link>http://hyunsuk2.github.io/2021/02/21/start-hadoop-study/</link>
-      <guid>http://hyunsuk2.github.io/2021/02/21/start-hadoop-study/</guid>
+      <link>https://hyunsuk2.github.io/2021/02/21/start-hadoop-study/</link>
+      <guid>https://hyunsuk2.github.io/2021/02/21/start-hadoop-study/</guid>
       <pubDate>Sun, 21 Feb 2021 12:34:49 GMT</pubDate>
       
         
@@ -376,22 +376,22 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h3 id="하둡을-왜-쓰는-것일까"><a href="#하둡을-왜-쓰는-것일까" class="headerlink" title="하둡을 왜 쓰는 것일까?"></a>하둡을 왜 쓰는 것일까?</h3><h4 id="빅데이터-처리"><a href="#빅데이터-처리" class="headerlink" title="빅데이터 처리"></a>빅데이터 처리</h4><ul><li>인터넷 사용자들의 기록(비정형 데이터)</li><li>생물학의 데이터 과학 등</li></ul><h4 id="대용량-처리하기에는-기존-RDBMS는-비효율적"><a href="#대용량-처리하기에는-기존-RDBMS는-비효율적" class="headerlink" title="대용량 처리하기에는 기존 RDBMS는 비효율적"></a>대용량 처리하기에는 기존 RDBMS는 비효율적</h4><ul><li>비정형 데이터 분석 불가</li><li>확장하기가 힘들다</li><li>빅데이터 처리하기에 운영 비용이 기하급수적으로 비싸진다</li><li>빅데이터 처리 속도가 하둡 보다 느리다</li></ul>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/Hadoop/">Hadoop</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/hadoop/">hadoop</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/Hadoop/">Hadoop</category>
       
       
-      <comments>http://hyunsuk2.github.io/2021/02/21/start-hadoop-study/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/hadoop/">hadoop</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2021/02/21/start-hadoop-study/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/30/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/30/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/30/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/30/diary/</guid>
       <pubDate>Wed, 30 Jan 2019 14:12:02 GMT</pubDate>
       
         
@@ -404,20 +404,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>i asked that how should i try to learn speak english to teacher.<br>the teacher said that dont think in korean just think in english.<br>if i think in korean i have to translate to english, so when i think speaking english,<br>that make me bother and take time.<br>although it is unfamiliar to think in english first time i should do it to improve of it<br>let’s start to think in english during speaking or writing english</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/30/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/30/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/29/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/29/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/29/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/29/diary/</guid>
       <pubDate>Tue, 29 Jan 2019 14:36:45 GMT</pubDate>
       
         
@@ -430,20 +430,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>i usually talk in english with engoo teacher during work<br>i realized i used same pattern and same word today<br>i wanna to express that deviate from the pattern and words i use<br>i can’t express it<br>i think that it is important to speak english well that think in freely<br>i wanna to think in english logic when i use it<br>the day would come someday</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/29/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/29/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/28/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/28/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/28/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/28/diary/</guid>
       <pubDate>Mon, 28 Jan 2019 14:33:11 GMT</pubDate>
       
         
@@ -456,20 +456,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>i got a health checkup today<br>i had though that i had some problem in body, but anything wasnt came out about problem so far.<br>to figure out weather my body condition is good or not, i need to wait.<br>i thing i might not have any problem with the body.<br>nothing with any problem for body is good, but sometime i feel pain on the body.<br>okay maybe it is good to trust medical checkup and i live as usual.<br>anyway i wanna success my morning project all weekday</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/28/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/28/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/22/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/22/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/22/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/22/diary/</guid>
       <pubDate>Tue, 22 Jan 2019 12:33:08 GMT</pubDate>
       
         
@@ -482,20 +482,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>i talked with friend on the phone on the bus after work.<br>we talked lots of things and it was continued when i got home.<br>the part that made me thought is that some question that if i could go back to past<br>when did i wanna go back.<br>i said some childhood and explain why i decided<br>then, suddenly i realized that i am real adult.<br>i think i am not old but i am not young, so i have to be careful to spend time to do something<br>actually i still dont know what is the best choice to do, but i will remember i wont live for others.</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/22/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/22/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/21/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/21/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/21/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/21/diary/</guid>
       <pubDate>Mon, 21 Jan 2019 14:12:55 GMT</pubDate>
       
         
@@ -508,20 +508,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>wow i have to look back what i did for today to write a diary every week<br>it seem to good for our brain to remember something, but it’s a little bit difficult that<br>what i write for dairy<br>anyway i feel uncomfortable that the day i didnt wake up early to do my plan<br>i wrote that i failed to wake up here sometimes to reflect on myself here<br>but it’s been nothing changed… <br>what the hell i did how can i do that<br>i don’t know the way   </p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/21/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/21/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/17/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/17/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/17/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/17/diary/</guid>
       <pubDate>Thu, 17 Jan 2019 14:22:26 GMT</pubDate>
       
         
@@ -534,20 +534,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>we were working around the public park after launch with coworker<br>during working we were talking about success<br>then, one of my coworker tell me about his friend in college<br>the friend always wake up at 5am and do so many things for self-developer<br>since 20 years old.<br>even she coded if there is noting to say when she was hanging out with friend<br>we were wondering how she live so<br>whatever if i wanna be something, i would have to do in sincerely</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/17/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/17/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/16/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/16/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/16/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/16/diary/</guid>
       <pubDate>Wed, 16 Jan 2019 13:37:39 GMT</pubDate>
       
         
@@ -560,20 +560,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>it’s been a long time to go to gym since i went last time.<br>the reason why i did’nt go to gym is because i tried to go there when i adapt to getup early.<br>rather, i think not to go there has weakened my stamina<br>so i felt my health was becoming weak.<br>i would go to gym again to overcome that<br>health is most important thing for people</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/16/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/16/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/15/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/15/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/15/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/15/diary/</guid>
       <pubDate>Tue, 15 Jan 2019 13:47:32 GMT</pubDate>
       
         
@@ -586,20 +586,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>today i got a salary offer for this year.<br>although it’s gone up a lot by rate i am not happy with that.<br>because i think evaluation of performance was not estimate in honest.<br>excecutive dont know that who work honestly and hard<br>they just like the people who are relate with there business<br>of course i think part of it is right<br>but they are needed to estimate in honest more </p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/15/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/15/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/14/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/14/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/14/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/14/diary/</guid>
       <pubDate>Mon, 14 Jan 2019 13:46:51 GMT</pubDate>
       
         
@@ -612,20 +612,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>finally i started making andorid application with a frined<br>actually we have lots of things to make that.<br>but isn’t the saying that the beginning is half done<br>so today is meaningful day.<br>although my friend dosnt enough time to do it because <br>he is preparing to get the job now<br>we have decided that we would meet once a week<br>i think the APP we are making is so useful to many things,<br>so i wanna finish this in success</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/14/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/14/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/11/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/11/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/11/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/11/diary/</guid>
       <pubDate>Fri, 11 Jan 2019 14:35:53 GMT</pubDate>
       
         
@@ -638,20 +638,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>today is friday that i most like!<br>i used to like meeting freinds to drink and enjoy time on friday.<br>but i wanna take some rest these days.<br>ha, it is so difficult to wake up early morning.<br>i hope i get used to waking up early.<br>even though i have failed to get up some of days so far<br>it is gonna be better.</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/11/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/11/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/10/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/10/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/10/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/10/diary/</guid>
       <pubDate>Thu, 10 Jan 2019 13:44:30 GMT</pubDate>
       
         
@@ -664,20 +664,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>i was talking about life of employee with co worker during having dinner<br>one of us said that whatever the company does to us, we have to do our work in honest<br>i didnt agree with that opinion, although working is our seconds life, we have our life each.<br>so we dont have to sacrifice to the company.<br>we have lots of things to do for getting so many experience.<br>i think the purpose of living here is getting experience<br>enjoy life!~  </p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/10/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/10/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/09/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/09/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/09/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/09/diary/</guid>
       <pubDate>Wed, 09 Jan 2019 14:36:56 GMT</pubDate>
       
         
@@ -690,20 +690,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>i started to invest stocks 2days ago.<br>i saw a lots of profit when i checked my stock accont to find some stock i wanna invest.<br>the profit is what i get when i work for two days, so i felt good! please keep going up!~<br>anyway the reason i did it is that i wanted to recover my money that lost from investing bitcoin.<br>so i have to get money back~from anything…. although it is dangerous.<br>the plan for the investing is that i will forget that i invsted after investing all of money i deposit to invest.<br>i wish they are become big moeny when i check</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/09/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/09/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/08/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/08/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/08/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/08/diary/</guid>
       <pubDate>Tue, 08 Jan 2019 12:06:09 GMT</pubDate>
       
         
@@ -716,20 +716,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>i couldn’t concentrate on my work because of the hangover<br>i think dringking will make me to in panic. so i should stop dringking<br>i will try.<br>i was thinking that i spend time learning english more than learing programming during going back home after work<br>it is needed to be balanced between them.<br>to do these is that i should spend time efficiantly<br>there’s a lot to do if i want to do lots of things</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/08/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/08/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;Diary&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/07/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/07/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/07/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/07/diary/</guid>
       <pubDate>Mon, 07 Jan 2019 12:05:01 GMT</pubDate>
       
         
@@ -742,20 +742,20 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>i have to write diary in english here because i had party with company co worker.<br>i went out alone from comanpy party bucause i am having sick on my liver.<br>it is first time to get pain to this<br>i think its time that i have to consiser my healty.<br>i thought i had considered my  healty before, but i didnt do it.<br>if i have free time for tommow i think i have to check my body.<br>they give me some signal to ask me check my body.<br>i wanna live here in healthy</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/07/diary/#disqus_thread</comments>
+      <comments>https://hyunsuk2.github.io/2019/01/07/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>&#39;영어 일기&#39;</title>
-      <link>http://hyunsuk2.github.io/2019/01/06/diary/</link>
-      <guid>http://hyunsuk2.github.io/2019/01/06/diary/</guid>
+      <link>https://hyunsuk2.github.io/2019/01/06/diary/</link>
+      <guid>https://hyunsuk2.github.io/2019/01/06/diary/</guid>
       <pubDate>Sun, 06 Jan 2019 14:32:03 GMT</pubDate>
       
         
@@ -769,22 +769,22 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<p>i will wirte english diary here from tommorow on<br>i hope i can archive that i made a plan for this year</p>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/">english</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/english/diary/">diary</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/english/">english</category>
+      <category domain="https://hyunsuk2.github.io/categories/english/diary/">diary</category>
       
       
-      <comments>http://hyunsuk2.github.io/2019/01/06/diary/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/english/">english</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2019/01/06/diary/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Ssh를 이용하여 원격 서버와 파일 양방향 전송하기</title>
-      <link>http://hyunsuk2.github.io/2018/01/16/ssh/</link>
-      <guid>http://hyunsuk2.github.io/2018/01/16/ssh/</guid>
+      <link>https://hyunsuk2.github.io/2018/01/16/ssh/</link>
+      <guid>https://hyunsuk2.github.io/2018/01/16/ssh/</guid>
       <pubDate>Mon, 15 Jan 2018 15:09:06 GMT</pubDate>
       
         
@@ -797,26 +797,26 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h2 id="1-ssh를-이용하여-파일-복사-및-전송하기"><a href="#1-ssh를-이용하여-파일-복사-및-전송하기" class="headerlink" title="1. ssh를 이용하여 파일 복사 및 전송하기"></a>1. ssh를 이용하여 파일 복사 및 전송하기</h2><h6 id="ssh에서-제공하는-scp-명령어를-통해-로컬서버↔원격서버-파일을-양방향-전송할-수-있다"><a href="#ssh에서-제공하는-scp-명령어를-통해-로컬서버↔원격서버-파일을-양방향-전송할-수-있다" class="headerlink" title="ssh에서 제공하는 scp 명령어를 통해 로컬서버↔원격서버 파일을 양방향 전송할 수 있다."></a>ssh에서 제공하는 scp 명령어를 통해 로컬서버↔원격서버 파일을 양방향 전송할 수 있다.</h6><h4 id="1-1-사용방법"><a href="#1-1-사용방법" class="headerlink" title="1.1 사용방법"></a>1.1 사용방법</h4><ul><li>원격 서버 → 로컬 서버로 파일 전송 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp [옵션] [계정명]@[원격지IP주소]:[원본 경로 및 파일] [전송받을 위치]</span></span><br></pre></td></tr></table></figure><pre><code> 예제1) IP 111.222.333.444 서버의 abc라는 계정으로 /home/abc/index.html 파일을  로컬서버 /home/me/ 디렉토리에 전송 받기</code></pre> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp abc@111.222.333.444:/home/abc/index.html /home/me/</span></span><br></pre></td></tr></table></figure><pre><code> 예제2) (ssh의 기본 22번 포트가 아닐경우)IP 111.222.333.444 서버의  abc라는 계정으로 /home/abc/index.html 파일을 로컬서버 /home/me/ 디렉토리에 전송 받기   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -P 321 abc@111.222.333.444:/home/abc/index.html /home/me/ (ssh 포트가 321일경우)</span></span><br></pre></td></tr></table></figure></code></pre></li></ul><hr><ul><li>로컬 서버 → 원격 서버로 파일 전송   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp [옵션] [원본 경로 및 파일] [계정명]@[원격지IP주소]:[전송할 경로]</span></span><br></pre></td></tr></table></figure><pre><code> 예제1) 로컬서버 /home/me/wow.html 파일을 IP 111.222.333.444 서버의 /home/abc/  디렉토리에 전송 하기</code></pre>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp /home/me/wow.html abc@111.222.333.444:/home/abc/</span></span><br></pre></td></tr></table></figure><pre><code> 예제2) (ssh의 기본 22번 포트가 아닐경우)로컬서버 /home/me/wow.html 파일을  IP 111.222.333.444 서버의 /home/abc/ 디렉토리에 전송 하기</code></pre>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -P 321 /home/me/wow.html abc@111.222.333.444:/home/abc/ (ssh 포트가 321일경우)</span></span><br></pre></td></tr></table></figure></li><li><strong>[주의사항]</strong><br>   옵션중에 –P와 –p가 있으니 대&#x2F;소문자 확인을 하여야 한다.<br>   -P : 포트번호를 지정함<br>   -p : 원본파일 수정&#x2F;사용시간 및 권한을 유지함<br>   -r : 하위 디렉토리 및 파일 모두 복사함</li></ul><hr><hr><hr><blockquote><p>상황을 가장 잘 활용하는 사람이 가장 좋은 상황을 맞는다</p><footer><strong>John Robert Wooden</strong></footer></blockquote>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/Linux/">Linux</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/ssh/">ssh</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/scp/">scp</category>
-      
-      <category domain="http://hyunsuk2.github.io/tags/file-trans/">file trans</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/Linux/">Linux</category>
       
       
-      <comments>http://hyunsuk2.github.io/2018/01/16/ssh/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/ssh/">ssh</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/scp/">scp</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/file-trans/">file trans</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2018/01/16/ssh/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Angular 준비하기</title>
-      <link>http://hyunsuk2.github.io/2018/01/15/angular/</link>
-      <guid>http://hyunsuk2.github.io/2018/01/15/angular/</guid>
+      <link>https://hyunsuk2.github.io/2018/01/15/angular/</link>
+      <guid>https://hyunsuk2.github.io/2018/01/15/angular/</guid>
       <pubDate>Sun, 14 Jan 2018 15:40:21 GMT</pubDate>
       
         
@@ -829,22 +829,22 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h2 id="1-Angular-학습전-알아야-할-핵심-2가지"><a href="#1-Angular-학습전-알아야-할-핵심-2가지" class="headerlink" title="1 Angular 학습전 알아야 할 핵심 2가지"></a>1 Angular 학습전 알아야 할 핵심 2가지</h2><h3 id="1-1-Node-js"><a href="#1-1-Node-js" class="headerlink" title="1.1 Node.js"></a>1.1 Node.js</h3><ul><li>서버 사이드 자바 스크립트 실행환경</li><li>자바스크립트는 node.js가 설치된곳이면 어디서든지 실행 가능</li><li>자바 스크립트에게 브라우저라는 실행환경을 벗어나게 해줌</li></ul><h3 id="1-2-NPM-Node-Pakage-Manager"><a href="#1-2-NPM-Node-Pakage-Manager" class="headerlink" title="1.2 NPM(Node Pakage Manager)"></a>1.2 NPM(Node Pakage Manager)</h3><ul><li>node.js 의 패키지(자바스크립트, HTML, CSS 등) 관리도구</li><li>소스를 패키지로 공유할 수 있고 패키지 의존성 관리를 가능하게함</li><li>Angular 또한 NPM 기반으로 프로젝트를 구성하고 의존성 패키지를 관리함</li></ul><hr><h2 id="2-NPM-다루기"><a href="#2-NPM-다루기" class="headerlink" title="2 NPM 다루기"></a>2 NPM 다루기</h2><h3 id="2-1-package-json"><a href="#2-1-package-json" class="headerlink" title="2.1 package.json"></a>2.1 package.json</h3><ul><li>프로젝트 생성시에 제일 먼저 생성해야 할 JSON 파일로 패키지와 의존 패키지 정보등을 선언함<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;welcome-msg-app&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;index.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;http-server&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^0.9.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;jquery&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^1.12.4&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;test&quot;</span><span class="punctuation">:</span> <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ISC&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li></ul><h3 id="2-2-NPM-주요-명령어"><a href="#2-2-NPM-주요-명령어" class="headerlink" title="2.2 NPM 주요 명령어"></a>2.2 NPM 주요 명령어</h3><ul><li><p><strong>npm install:</strong> pakage.json 파일 있는 경우 파일에 선언된 의존패키지를 설치하고<br>npm install 뒤에 패키지명 입력하면 해당 패키지 설치함</p></li><li><p><strong>npm run:</strong> pakage.json의 scripts에 선언된 명령을 수행</p></li></ul><hr><hr><hr> <blockquote><p>사랑에는 실패가 없다.</p><footer><strong>Amelie Nothomb</strong></footer></blockquote>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/Angular/">Angular</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/angular/">angular</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/Angular/">Angular</category>
       
       
-      <comments>http://hyunsuk2.github.io/2018/01/15/angular/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/angular/">angular</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2018/01/15/angular/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>컴퓨터 보안 진로</title>
-      <link>http://hyunsuk2.github.io/2018/01/15/secuermap/</link>
-      <guid>http://hyunsuk2.github.io/2018/01/15/secuermap/</guid>
+      <link>https://hyunsuk2.github.io/2018/01/15/secuermap/</link>
+      <guid>https://hyunsuk2.github.io/2018/01/15/secuermap/</guid>
       <pubDate>Sun, 14 Jan 2018 15:40:21 GMT</pubDate>
       
         
@@ -857,15 +857,15 @@ git config --global user.name &quot;Your Name&quot;
       <content:encoded><![CDATA[<h2 id="1-컴퓨터-보안-입문-하고자-할-때-알아야할-것"><a href="#1-컴퓨터-보안-입문-하고자-할-때-알아야할-것" class="headerlink" title="1 컴퓨터 보안 입문 하고자 할 때 알아야할 것"></a>1 컴퓨터 보안 입문 하고자 할 때 알아야할 것</h2><h4 id="보안을-처음-시작하려는-사람들은-보안회사에-들어가면-크게-4가지-일-중-하나를-하고-싶어한다"><a href="#보안을-처음-시작하려는-사람들은-보안회사에-들어가면-크게-4가지-일-중-하나를-하고-싶어한다" class="headerlink" title="보안을 처음 시작하려는 사람들은 보안회사에 들어가면 크게 4가지 일 중 하나를 하고 싶어한다"></a>보안을 처음 시작하려는 사람들은 보안회사에 들어가면 크게 4가지 일 중 하나를 하고 싶어한다</h4><h5 id="1-웹해킹"><a href="#1-웹해킹" class="headerlink" title="1. 웹해킹"></a>1. 웹해킹</h5><h5 id="2-시스템-해킹"><a href="#2-시스템-해킹" class="headerlink" title="2. 시스템 해킹"></a>2. 시스템 해킹</h5><h5 id="3-어플리케이션-해킹"><a href="#3-어플리케이션-해킹" class="headerlink" title="3. 어플리케이션 해킹"></a>3. 어플리케이션 해킹</h5><h5 id="4-네트워크-해킹"><a href="#4-네트워크-해킹" class="headerlink" title="4. 네트워크 해킹"></a>4. 네트워크 해킹</h5><h6 id="이것들을-하기-위한-보안-학습-로드맵을-보자"><a href="#이것들을-하기-위한-보안-학습-로드맵을-보자" class="headerlink" title="이것들을 하기 위한 보안 학습 로드맵을 보자"></a>이것들을 하기 위한 보안 학습 로드맵을 보자</h6><p><img src="/images/securityloademap.png" alt="보안 공부 로드맵"></p><blockquote><p>로드맵을 보면 알다시피 보안을 하기 위해선 <strong>컴퓨터의 전반적인 지식</strong>을 알아야 할 수 있는것이다.<br> 때문에 처음부터 보안회사를 들어 가는것 보다는 웹해킹을 하고싶으면 <strong>웹개발 회사</strong>, 시스템 해킹을 하고싶으면 <strong>시스템 개발 등</strong> 으로 진로를 잡고, <strong>나중에 경력이 쌓이면</strong> 보안 진로로 가는게 좋다고 생각한다. 컴퓨터의 기본은 개발이 아닐까?</p></blockquote><h2 id="2-필자가-아는-국내-보안-진로-분야"><a href="#2-필자가-아는-국내-보안-진로-분야" class="headerlink" title="2 필자가 아는 국내 보안 진로 분야"></a>2 필자가 아는 국내 보안 진로 분야</h2><h5 id="2-1-웹-해킹"><a href="#2-1-웹-해킹" class="headerlink" title="2.1 웹 해킹"></a>2.1 웹 해킹</h5><h5 id="2-2-시스템-해킹"><a href="#2-2-시스템-해킹" class="headerlink" title="2.2 시스템 해킹"></a>2.2 시스템 해킹</h5><h5 id="2-3-어플리케이션-해킹"><a href="#2-3-어플리케이션-해킹" class="headerlink" title="2.3 어플리케이션 해킹"></a>2.3 어플리케이션 해킹</h5><h5 id="2-4-네트워크-해킹"><a href="#2-4-네트워크-해킹" class="headerlink" title="2.4 네트워크 해킹"></a>2.4 네트워크 해킹</h5><h5 id="2-5-해킹-툴-개발"><a href="#2-5-해킹-툴-개발" class="headerlink" title="2.5 해킹 툴 개발"></a>2.5 해킹 툴 개발</h5><h5 id="2-6-백신-개발"><a href="#2-6-백신-개발" class="headerlink" title="2.6 백신 개발"></a>2.6 백신 개발</h5><h5 id="2-7-기술-컨설팅"><a href="#2-7-기술-컨설팅" class="headerlink" title="2.7 기술 컨설팅"></a>2.7 기술 컨설팅</h5><h5 id="2-8-관리-컨설팅"><a href="#2-8-관리-컨설팅" class="headerlink" title="2.8 관리 컨설팅"></a>2.8 관리 컨설팅</h5><h5 id="2-9-시스템-운영"><a href="#2-9-시스템-운영" class="headerlink" title="2.9 시스템 운영"></a>2.9 시스템 운영</h5><h5 id="2-10-관제"><a href="#2-10-관제" class="headerlink" title="2.10 관제"></a>2.10 관제</h5><h6 id="해킹과-개발이-아닌-컨설팅과-운영-관제-분야는-전문적인-기술을-요하지-않는다"><a href="#해킹과-개발이-아닌-컨설팅과-운영-관제-분야는-전문적인-기술을-요하지-않는다" class="headerlink" title="해킹과 개발이 아닌 컨설팅과 운영, 관제 분야는 전문적인 기술을 요하지 않는다"></a>해킹과 개발이 아닌 컨설팅과 운영, 관제 분야는 전문적인 기술을 요하지 않는다</h6><hr><hr><hr> <blockquote><p>큰 목표를 이루고 싶으면 허락을 구하지 마라. </p><footer><strong>미상</strong></footer></blockquote>]]></content:encoded>
       
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/">IT</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
       
-      <category domain="http://hyunsuk2.github.io/categories/IT/Security/">Security</category>
-      
-      
-      <category domain="http://hyunsuk2.github.io/tags/Security/">Security</category>
+      <category domain="https://hyunsuk2.github.io/categories/IT/Security/">Security</category>
       
       
-      <comments>http://hyunsuk2.github.io/2018/01/15/secuermap/#disqus_thread</comments>
+      <category domain="https://hyunsuk2.github.io/tags/Security/">Security</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2018/01/15/secuermap/#disqus_thread</comments>
       
     </item>
     

@@ -3,22 +3,22 @@
 
 
     <sitemap>
-        <loc>http://hyunsuk2.github.io/post-sitemap.xml</loc>
+        <loc>https://hyunsuk2.github.io/post-sitemap.xml</loc>
         <lastmod>2024-09-29T14:00:07.612Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://hyunsuk2.github.io/page-sitemap.xml</loc>
+        <loc>https://hyunsuk2.github.io/page-sitemap.xml</loc>
         <lastmod>2024-09-29T14:17:36.683Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://hyunsuk2.github.io/category-sitemap.xml</loc>
+        <loc>https://hyunsuk2.github.io/category-sitemap.xml</loc>
         <lastmod>2024-09-29T14:00:07.612Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://hyunsuk2.github.io/tag-sitemap.xml</loc>
+        <loc>https://hyunsuk2.github.io/tag-sitemap.xml</loc>
         <lastmod>2024-09-29T14:00:07.612Z</lastmod>
     </sitemap>
 

@@ -2,91 +2,91 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://hyunsuk2.github.io/</loc>
+        <loc>https://hyunsuk2.github.io/</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
 
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/JAVA/</loc>
+        <loc>https://hyunsuk2.github.io/categories/IT/JAVA/</loc>
         <lastmod>2024-09-29T14:00:07.612Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/</loc>
+        <loc>https://hyunsuk2.github.io/categories/IT/</loc>
         <lastmod>2024-09-29T14:00:07.612Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/python/</loc>
+        <loc>https://hyunsuk2.github.io/categories/IT/python/</loc>
         <lastmod>2024-06-29T08:21:12.853Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/zeromq/</loc>
+        <loc>https://hyunsuk2.github.io/categories/IT/zeromq/</loc>
         <lastmod>2024-06-29T08:19:23.293Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/git/</loc>
+        <loc>https://hyunsuk2.github.io/categories/IT/git/</loc>
         <lastmod>2023-12-23T13:19:58.654Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/data-structure/</loc>
+        <loc>https://hyunsuk2.github.io/categories/IT/data-structure/</loc>
         <lastmod>2023-12-23T13:19:58.645Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/Hadoop/</loc>
+        <loc>https://hyunsuk2.github.io/categories/IT/Hadoop/</loc>
         <lastmod>2023-12-23T13:19:58.645Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/english/diary/</loc>
+        <loc>https://hyunsuk2.github.io/categories/english/diary/</loc>
         <lastmod>2023-12-23T13:19:58.645Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/english/</loc>
+        <loc>https://hyunsuk2.github.io/categories/english/</loc>
         <lastmod>2023-12-23T13:19:58.645Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/Security/</loc>
+        <loc>https://hyunsuk2.github.io/categories/IT/Linux/</loc>
         <lastmod>2023-12-23T13:19:58.629Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/Angular/</loc>
+        <loc>https://hyunsuk2.github.io/categories/IT/Security/</loc>
         <lastmod>2023-12-23T13:19:58.629Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/Linux/</loc>
+        <loc>https://hyunsuk2.github.io/categories/IT/Angular/</loc>
         <lastmod>2023-12-23T13:19:58.629Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
