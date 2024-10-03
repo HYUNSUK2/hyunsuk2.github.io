@@ -57,14 +57,6 @@
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/2019/01/30/diary/</loc>
-        <lastmod>2023-12-23T13:19:58.645Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://hyunsuk2.github.io/2021/02/23/hadoop-study-order/</loc>
         <lastmod>2023-12-23T13:19:58.645Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -74,6 +66,14 @@
 
     <url>
         <loc>http://hyunsuk2.github.io/2021/02/23/speed-up-python-code/</loc>
+        <lastmod>2023-12-23T13:19:58.645Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://hyunsuk2.github.io/2019/01/30/diary/</loc>
         <lastmod>2023-12-23T13:19:58.645Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -113,7 +113,7 @@
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/2019/01/28/diary/</loc>
+        <loc>http://hyunsuk2.github.io/2019/01/21/diary/</loc>
         <lastmod>2023-12-23T13:19:58.641Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -129,7 +129,7 @@
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/2019/01/21/diary/</loc>
+        <loc>http://hyunsuk2.github.io/2019/01/28/diary/</loc>
         <lastmod>2023-12-23T13:19:58.641Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -153,7 +153,7 @@
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/2019/01/14/diary/</loc>
+        <loc>http://hyunsuk2.github.io/2019/01/15/diary/</loc>
         <lastmod>2023-12-23T13:19:58.638Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -161,7 +161,7 @@
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/2019/01/15/diary/</loc>
+        <loc>http://hyunsuk2.github.io/2019/01/14/diary/</loc>
         <lastmod>2023-12-23T13:19:58.638Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -201,14 +201,6 @@
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/2019/01/07/diary/</loc>
-        <lastmod>2023-12-23T13:19:58.629Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://hyunsuk2.github.io/2019/01/09/diary/</loc>
         <lastmod>2023-12-23T13:19:58.629Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -217,7 +209,7 @@
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/2019/01/10/diary/</loc>
+        <loc>http://hyunsuk2.github.io/2019/01/07/diary/</loc>
         <lastmod>2023-12-23T13:19:58.629Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -234,6 +226,14 @@
 
     <url>
         <loc>http://hyunsuk2.github.io/2019/01/11/diary/</loc>
+        <lastmod>2023-12-23T13:19:58.629Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://hyunsuk2.github.io/2019/01/10/diary/</loc>
         <lastmod>2023-12-23T13:19:58.629Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

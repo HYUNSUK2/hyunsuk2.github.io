@@ -72,13 +72,6 @@
     </url>
 
     <url>
-        <loc>http://hyunsuk2.github.io/categories/IT/Linux/</loc>
-        <lastmod>2023-12-23T13:19:58.629Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hyunsuk2.github.io/categories/IT/Security/</loc>
         <lastmod>2023-12-23T13:19:58.629Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -87,6 +80,13 @@
 
     <url>
         <loc>http://hyunsuk2.github.io/categories/IT/Angular/</loc>
+        <lastmod>2023-12-23T13:19:58.629Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyunsuk2.github.io/categories/IT/Linux/</loc>
         <lastmod>2023-12-23T13:19:58.629Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
