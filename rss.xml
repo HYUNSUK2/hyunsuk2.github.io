@@ -9,8 +9,59 @@
     <atom:link href="https://hyunsuk2.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hyunsuk&#39;s Blog</description>
-    <pubDate>Thu, 03 Oct 2024 14:32:58 GMT</pubDate>
+    <pubDate>Sun, 17 Nov 2024 14:05:36 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Kafka 설치해보기</title>
+      <link>https://hyunsuk2.github.io/2024/11/17/kafka/</link>
+      <guid>https://hyunsuk2.github.io/2024/11/17/kafka/</guid>
+      <pubDate>Sun, 17 Nov 2024 13:36:13 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;목표&quot;&gt;&lt;a href=&quot;#목표&quot; class=&quot;headerlink&quot; title=&quot;목표&quot;&gt;&lt;/a&gt;목표&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;docker 카프카 RKaft 모드(no zookeepler) server 만들기&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;과정&quot;&gt;&lt;a href=&quot;#과정&quot; class=&quot;headerlink&quot; title=&quot;과정&quot;&gt;&lt;/a&gt;과정&lt;/h2&gt;&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;윈도우 wsl 우분투 설치&lt;/li&gt;
+&lt;li&gt;카프카 docker pull 하기&lt;/li&gt;
+&lt;li&gt;카프카 실행시키기&lt;/li&gt;
+&lt;li&gt;메세지 보내보기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;윈도우에-리눅스-설치&quot;&gt;&lt;a href=&quot;#윈도우에-리눅스-설치&quot; class=&quot;headerlink&quot; title=&quot;윈도우에 리눅스 설치&quot;&gt;&lt;/a&gt;윈도우에 리눅스 설치&lt;/h2&gt;&lt;blockquote&gt;
+&lt;ol start=&quot;0&quot;&gt;
+&lt;li&gt;윈도우 기능 켜기 끄기에서 linux용 하위 시스템 활성화&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;wsl -l -o 입력하여 설치 가능한 배포 확인&lt;/li&gt;
+&lt;li&gt;wsl –install [배포판]으로 설치&lt;/li&gt;
+&lt;li&gt;wsl 입력해서 가상 리눅스로 접속&lt;/li&gt;
+&lt;/ol&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="목표"><a href="#목표" class="headerlink" title="목표"></a>목표</h2><blockquote><p>docker 카프카 RKaft 모드(no zookeepler) server 만들기</p></blockquote><h2 id="과정"><a href="#과정" class="headerlink" title="과정"></a>과정</h2><blockquote><ol><li>윈도우 wsl 우분투 설치</li><li>카프카 docker pull 하기</li><li>카프카 실행시키기</li><li>메세지 보내보기</li></ol></blockquote><h2 id="윈도우에-리눅스-설치"><a href="#윈도우에-리눅스-설치" class="headerlink" title="윈도우에 리눅스 설치"></a>윈도우에 리눅스 설치</h2><blockquote><ol start="0"><li>윈도우 기능 켜기 끄기에서 linux용 하위 시스템 활성화</li></ol></blockquote><ol><li>wsl -l -o 입력하여 설치 가능한 배포 확인</li><li>wsl –install [배포판]으로 설치</li><li>wsl 입력해서 가상 리눅스로 접속</li></ol><span id="more"></span><h2 id="카프카-설치"><a href="#카프카-설치" class="headerlink" title="카프카 설치"></a>카프카 설치</h2><blockquote><ol><li>docker pull bitnami&#x2F;kafka:latest</li><li>docker-compose.yml 설정 파일 생성</li></ol></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  kafka-server:</span><br><span class="line">    image: bitnami/kafka:3.3.2 <span class="comment"># 해당 이미지 버전에 맞게 입력</span></span><br><span class="line">    container_name: kafka-server</span><br><span class="line">    hostname: kafka-server</span><br><span class="line">      <span class="comment">#network_mode: app-tier</span></span><br><span class="line">    environment:</span><br><span class="line">      - KAFKA_CFG_NODE_ID=0</span><br><span class="line">      - KAFKA_CFG_PROCESS_ROLES=controller,broker</span><br><span class="line">      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093</span><br><span class="line">      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT</span><br><span class="line">      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-server:9093</span><br><span class="line">      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;9092:9092&quot;</span>  <span class="comment"># 외부와 통신할 PLAINTEXT 포트</span></span><br><span class="line">      - <span class="string">&quot;9093:9093&quot;</span>  <span class="comment"># 컨트롤러 포트</span></span><br><span class="line">    volumes:</span><br><span class="line">      - /data/kafka-server:/var/lib/kafka/data  <span class="comment"># 데이터 저장소 (필요시 수정)</span></span><br><span class="line">    restart: always</span><br><span class="line"></span><br><span class="line">  kafka-ui:</span><br><span class="line">    image: provectuslabs/kafka-ui</span><br><span class="line">    container_name: kafka-ui</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;8080:8080&quot;</span></span><br><span class="line">    restart: always</span><br><span class="line">    environment:</span><br><span class="line">      KAFKA_CLUSTERS_0_NAME: <span class="variable">$&#123;PROFILE:-local&#125;</span>  <span class="comment"># Kafka 클러스터 이름 설정</span></span><br><span class="line">      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-server:9092  <span class="comment"># `kafka-server` 서비스에 연결</span></span><br><span class="line">    depends_on:</span><br><span class="line">      - kafka-server  <span class="comment"># `kafka-server` 컨테이너가 실행된 후 `kafka-ui` 실행</span></span><br></pre></td></tr></table></figure><blockquote><ol start="3"><li>docker-compose up -d 입력 (도커 컨테이너 생성)</li></ol></blockquote><h2 id="메세지-테스트"><a href="#메세지-테스트" class="headerlink" title="메세지 테스트"></a>메세지 테스트</h2><blockquote><ol><li>docker exec -it kafka-server bash 입력  (도커 컨테이너 접속)</li><li>kafka-topics.sh –bootstrap-server localhost:9092 –create –topic test –partitions 1 –replication-factor 1 입력 (토픽 생성)</li><li>kafka-console-producer.sh –broker-list localhost:9092 –topic test (메세지 보내보기)</li><li><a href="http://localhost:8080/ui/clusters/local/all-topics/test/messages?keySerde=String&valueSerde=String&limit=100">http://localhost:8080/ui/clusters/local/all-topics/test/messages?keySerde=String&amp;valueSerde=String&amp;limit=100</a> (메세지 확인)</li></ol></blockquote><h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><ul><li><a href="https://medium.com/mo-zza/kafka-kraft-%EB%AA%A8%EB%93%9C-with-docker-%EB%8F%99%EB%AC%BC%EC%9B%90%EC%9D%84-%ED%83%88%EC%B6%9C%ED%95%9C-kafka-8b5e7c7632fa">https://medium.com/mo-zza/kafka-kraft-%EB%AA%A8%EB%93%9C-with-docker-%EB%8F%99%EB%AC%BC%EC%9B%90%EC%9D%84-%ED%83%88%EC%B6%9C%ED%95%9C-kafka-8b5e7c7632fa</a></li><li><a href="https://hub.docker.com/r/bitnami/kafka">https://hub.docker.com/r/bitnami/kafka</a></li></ul>]]></content:encoded>
+      
+      
+      <category domain="https://hyunsuk2.github.io/categories/IT/">IT</category>
+      
+      <category domain="https://hyunsuk2.github.io/categories/IT/KAFKA/">KAFKA</category>
+      
+      
+      <category domain="https://hyunsuk2.github.io/tags/KAFKA/">KAFKA</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/RKRAFT/">RKRAFT</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/messate-queue/">messate queue</category>
+      
+      <category domain="https://hyunsuk2.github.io/tags/kafka-docker/">kafka docker</category>
+      
+      
+      <comments>https://hyunsuk2.github.io/2024/11/17/kafka/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Junit 기능 테스트</title>
