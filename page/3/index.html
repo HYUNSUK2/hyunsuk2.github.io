@@ -132,7 +132,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -158,6 +158,115 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang>
+    <link itemprop="mainEntityOfPage" href="https://hyunsuk2.github.io/2021/02/26/python-crawling-thread-async/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HyunSuk">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyunsuk's Blog">
+      <meta itemprop="description" content="Hyunsuk's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hyunsuk's Blog">
+      <meta itemprop="description" content>
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/02/26/python-crawling-thread-async/" class="post-title-link" itemprop="url">Python 병렬처리로 크롤링 시간 단축하기</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">작성일</span>
+
+      <time title="Post created: 2021-02-26 09:51:06" itemprop="dateCreated datePublished" datetime="2021-02-26T09:51:06+09:00">2021-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Updated at: 2023-12-23 22:19:58" itemprop="dateModified" datetime="2023-12-23T22:19:58+09:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="thread-와-concurrent-futures-사용으로-병렬-처리하기"><a href="#thread-와-concurrent-futures-사용으로-병렬-처리하기" class="headerlink" title="thread 와 concurrent.futures 사용으로 병렬 처리하기"></a>thread 와 concurrent.futures 사용으로 병렬 처리하기</h2><h3 id="1-thread-사용으로-병렬-처리"><a href="#1-thread-사용으로-병렬-처리" class="headerlink" title="1. thread 사용으로 병렬 처리"></a>1. thread 사용으로 병렬 처리</h3><h4 id="저번-코드에서-save-img-함수를-multi-thread로-실행하면-좀-더-빠른-결과물을-얻을-수-있을-것-같다"><a href="#저번-코드에서-save-img-함수를-multi-thread로-실행하면-좀-더-빠른-결과물을-얻을-수-있을-것-같다" class="headerlink" title="저번 코드에서 save_img 함수를 multi thread로 실행하면 좀 더 빠른 결과물을 얻을 수 있을 것 같다"></a>저번 코드에서 save_img 함수를 multi thread로 실행하면 좀 더 빠른 결과물을 얻을 수 있을 것 같다</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">t1 = time.time()</span><br><span class="line">reg = re.<span class="built_in">compile</span>(<span class="string">&#x27;oimgurl: &quot;.&#123;0,300&#125;&quot;, cpid&#x27;</span>)</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;https://search.daum.net/search?w=img&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q=%EA%B0%95%EC%95%84%EC%A7%80&#x27;</span></span><br><span class="line">html = requests.get(url=url)</span><br><span class="line">html_raw_data = <span class="built_in">str</span>(html.content)</span><br><span class="line"></span><br><span class="line">reg_iter = reg.finditer(html_raw_data)</span><br><span class="line">thread_list = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save_img</span>(<span class="params">idx, img_url</span>):</span><br><span class="line">    res = requests.get(img_url).content</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&#x27;<span class="subst">&#123;idx&#125;</span>.jpg&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(res)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;save <span class="subst">&#123;idx&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx, res_data <span class="keyword">in</span> <span class="built_in">enumerate</span>(reg_iter):</span><br><span class="line">    img_url = res_data.group().split(<span class="string">&#x27;oimgurl:&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;, cpid&#x27;</span>)[<span class="number">0</span>].replace(<span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    thread_worker = threading.Thread(target=save_img, args=(idx, img_url))</span><br><span class="line">    thread_worker.start()</span><br><span class="line">    thread_list.append(thread_worker)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> thread <span class="keyword">in</span> thread_list:</span><br><span class="line">    thread.join()</span><br><span class="line"></span><br><span class="line">t2 = time.time()</span><br><span class="line"><span class="built_in">print</span>(t2-t1)</span><br></pre></td></tr></table></figure>
+<p>작업결과</p>
+<img src="/2021/02/26/python-crawling-thread-async/result.PNG" class>
+<h5 id="작업-시간이-1초대로-단축된-걸-확인-할-수-있다"><a href="#작업-시간이-1초대로-단축된-걸-확인-할-수-있다" class="headerlink" title="작업 시간이 1초대로 단축된 걸 확인 할 수 있다"></a>작업 시간이 1초대로 단축된 걸 확인 할 수 있다</h5><h3 id="2-concurrent-futures-사용으로-병렬-처리하기"><a href="#2-concurrent-futures-사용으로-병렬-처리하기" class="headerlink" title="2. concurrent.futures 사용으로 병렬 처리하기"></a>2. concurrent.futures 사용으로 병렬 처리하기</h3><h4 id="concurrent-futures는-비동기-처리-고수준-인터페이스-모듈이다-이-모듈을-써서-작업-시간을-줄여보자"><a href="#concurrent-futures는-비동기-처리-고수준-인터페이스-모듈이다-이-모듈을-써서-작업-시간을-줄여보자" class="headerlink" title="concurrent.futures는 비동기 처리 고수준 인터페이스 모듈이다 이 모듈을 써서 작업 시간을 줄여보자"></a>concurrent.futures는 비동기 처리 고수준 인터페이스 모듈이다 이 모듈을 써서 작업 시간을 줄여보자</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor</span><br><span class="line"></span><br><span class="line">t1 = time.time()</span><br><span class="line">reg = re.<span class="built_in">compile</span>(<span class="string">&#x27;oimgurl: &quot;.&#123;0,300&#125;&quot;, cpid&#x27;</span>)</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;https://search.daum.net/search?w=img&amp;nil_search=btn&amp;DA=NTB&amp;enc=utf8&amp;q=%EA%B0%95%EC%95%84%EC%A7%80&#x27;</span></span><br><span class="line">html = requests.get(url=url)</span><br><span class="line">html_raw_data = <span class="built_in">str</span>(html.content)</span><br><span class="line"></span><br><span class="line">reg_iter = reg.finditer(html_raw_data)</span><br><span class="line">thread_list = []</span><br><span class="line"></span><br><span class="line"><span class="comment">#url 이미지를 저장하는 함수</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save_img</span>(<span class="params">idx, img_url</span>):</span><br><span class="line">    res = requests.get(img_url).content</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&#x27;<span class="subst">&#123;idx&#125;</span>.jpg&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="comment"># 이미지 관련 작업은 pillow 모듈을 사용하는게 좋다</span></span><br><span class="line">        <span class="comment"># 예제에서는 사용 안함 (따로 설치가 필요)  </span></span><br><span class="line">        f.write(res)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;save <span class="subst">&#123;idx&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">10</span>) <span class="keyword">as</span> executor:</span><br><span class="line">    <span class="keyword">for</span> idx, res_data <span class="keyword">in</span> <span class="built_in">enumerate</span>(reg_iter):</span><br><span class="line">        <span class="comment"># url 을 뽑아내는 전처리 작업</span></span><br><span class="line">        img_url = res_data.group().split(<span class="string">&#x27;oimgurl:&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;, cpid&#x27;</span>)[<span class="number">0</span>].replace(<span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        executor.submit(save_img, idx, img_url)</span><br><span class="line"></span><br><span class="line">t2 = time.time()</span><br><span class="line"><span class="built_in">print</span>(t2 - t1)</span><br></pre></td></tr></table></figure>
+<p>작업결과</p>
+<img src="/2021/02/26/python-crawling-thread-async/dog2.PNG" class>
+
+
+<h5 id="마찬가지로-작업-시간이-1초대로-단축된-걸-확인-할-수-있다"><a href="#마찬가지로-작업-시간이-1초대로-단축된-걸-확인-할-수-있다" class="headerlink" title="마찬가지로 작업 시간이 1초대로 단축된 걸 확인 할 수 있다"></a>마찬가지로 작업 시간이 1초대로 단축된 걸 확인 할 수 있다</h5><blockquote>
+<h3 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h3><ul>
+<li>I&#x2F;O 작업이 있을 때 병렬 처리 작업을 활용하여 작업 시간을 단축시킬수 있다</li>
+<li>상황에 따라 다르지만 될 수 있으면 thread 모듈보단 고수준 비동기 concurrent.futures 모듈을 사용하자 병렬처리 작업의 결과물을 리턴 받는 등 다양한 함수를 제공한다 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.python.org/ko/3/library/concurrent.futures.html">참조링크</a></li>
+</ul>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/26/python-crawling-thread-async/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -552,95 +661,6 @@
 <li>빅데이터 처리하기에 운영 비용이 기하급수적으로 비싸진다</li>
 <li>빅데이터 처리 속도가 하둡 보다 느리다</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang>
-    <link itemprop="mainEntityOfPage" href="https://hyunsuk2.github.io/2019/01/30/diary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HyunSuk">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hyunsuk's Blog">
-      <meta itemprop="description" content="Hyunsuk's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Hyunsuk's Blog">
-      <meta itemprop="description" content>
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/30/diary/" class="post-title-link" itemprop="url">'Diary'</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">작성일</span>
-
-      <time title="Post created: 2019-01-30 23:12:02" itemprop="dateCreated datePublished" datetime="2019-01-30T23:12:02+09:00">2019-01-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Updated at: 2023-12-23 22:19:58" itemprop="dateModified" datetime="2023-12-23T22:19:58+09:00">2023-12-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/english/" itemprop="url" rel="index"><span itemprop="name">english</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/english/diary/" itemprop="url" rel="index"><span itemprop="name">diary</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>i asked that how should i try to learn speak english to teacher.<br>the teacher said that dont think in korean just think in english.<br>if i think in korean i have to translate to english, so when i think speaking english,<br>that make me bother and take time.<br>although it is unfamiliar to think in english first time i should do it to improve of it<br>let’s start to think in english during speaking or writing english</p>
 
       
     </div>
