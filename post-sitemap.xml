@@ -9,6 +9,14 @@
 
 
     <url>
+        <loc>https://hyunsuk2.github.io/2025/03/09/design-pattern/</loc>
+        <lastmod>2025-06-01T01:59:41.323Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://hyunsuk2.github.io/2024/11/17/kafka/</loc>
         <lastmod>2024-11-17T14:05:36.419Z</lastmod>
         <changefreq>weekly</changefreq>
