@@ -132,7 +132,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -146,6 +146,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hyunsuk2" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hyunsuk2" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ohs11244@naver.com" title="E-Mail → mailto:ohs11244@naver.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -158,6 +166,170 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang>
+    <link itemprop="mainEntityOfPage" href="https://hyunsuk2.github.io/2021/02/26/data-structure-timecomplexity/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HyunSuk">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyunsuk's Blog">
+      <meta itemprop="description" content="Hyunsuk's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hyunsuk's Blog">
+      <meta itemprop="description" content>
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/02/26/data-structure-timecomplexity/" class="post-title-link" itemprop="url">자료구조 시간 복잡도</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">작성일</span>
+
+      <time title="Post created: 2021-02-26 23:17:06" itemprop="dateCreated datePublished" datetime="2021-02-26T23:17:06+09:00">2021-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Updated at: 2023-12-23 22:19:58" itemprop="dateModified" datetime="2023-12-23T22:19:58+09:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT/data-structure/" itemprop="url" rel="index"><span itemprop="name">data structure</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="자료구조별-시간-복잡도"><a href="#자료구조별-시간-복잡도" class="headerlink" title="자료구조별 시간 복잡도"></a>자료구조별 시간 복잡도</h2><h4 id="실무에서-주로-사용했던-자료구조-시간복잡도를-정리해봤다-작업의-시간복잡도를-보고-효율적인-자료구조를-선택하자"><a href="#실무에서-주로-사용했던-자료구조-시간복잡도를-정리해봤다-작업의-시간복잡도를-보고-효율적인-자료구조를-선택하자" class="headerlink" title="실무에서 주로 사용했던 자료구조 시간복잡도를 정리해봤다 작업의 시간복잡도를 보고 효율적인 자료구조를 선택하자"></a>실무에서 주로 사용했던 자료구조 시간복잡도를 정리해봤다 작업의 시간복잡도를 보고 효율적인 자료구조를 선택하자</h4><table>
+<thead>
+<tr>
+<th>자료구조</th>
+<th>접근</th>
+<th>검색</th>
+<th>입력</th>
+<th>삭제</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>array list</td>
+<td>O(1)</td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>set</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>stack</td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>queue</td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>singled-linked list</td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>doubly-linked list</td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>hash table</td>
+<td>N&#x2F;A</td>
+<td>O(log(n))</td>
+<td>O(log(n)</td>
+<td>O(log(n)</td>
+</tr>
+<tr>
+<td>binary tree</td>
+<td>O(log(n))</td>
+<td>O(log(n))</td>
+<td>O(log(n))</td>
+<td>O(log(n))</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>습관적으로 탐색할 때도 list를 많이 사용했는데 탐색할 때는 list 대신 set을 사용하자</p>
+</blockquote>
+<h2 id="시간-복잡도-그래프"><a href="#시간-복잡도-그래프" class="headerlink" title="시간 복잡도 그래프"></a>시간 복잡도 그래프</h2><img src="/2021/02/26/data-structure-timecomplexity/time%20complexity.PNG" class>
+
+<h4 id="참조링크"><a href="#참조링크" class="headerlink" title="참조링크"></a>참조링크</h4><ol>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ics.uci.edu/~pattis/ICS-33/lectures/complexitypython.txt">파이썬 자료구조 시간복잡도</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.bigocheatsheet.com/">자료구조 시간복잡도</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -563,104 +735,6 @@
 <li>큰 데이터 처리는 pandas, numpy, scipy 사용</li>
 </ul>
 <p> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.loginradius.com/blog/async/speed-up-python-code/">참조링크</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang>
-    <link itemprop="mainEntityOfPage" href="https://hyunsuk2.github.io/2021/02/21/start-hadoop-study/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HyunSuk">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hyunsuk's Blog">
-      <meta itemprop="description" content="Hyunsuk's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Hyunsuk's Blog">
-      <meta itemprop="description" content>
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/02/21/start-hadoop-study/" class="post-title-link" itemprop="url">하둡을 왜 쓰는 것일까?</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">작성일</span>
-
-      <time title="Post created: 2021-02-21 21:34:49" itemprop="dateCreated datePublished" datetime="2021-02-21T21:34:49+09:00">2021-02-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Updated at: 2023-12-23 22:19:58" itemprop="dateModified" datetime="2023-12-23T22:19:58+09:00">2023-12-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IT/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="하둡을-왜-쓰는-것일까"><a href="#하둡을-왜-쓰는-것일까" class="headerlink" title="하둡을 왜 쓰는 것일까?"></a>하둡을 왜 쓰는 것일까?</h3><h4 id="빅데이터-처리"><a href="#빅데이터-처리" class="headerlink" title="빅데이터 처리"></a>빅데이터 처리</h4><ul>
-<li>인터넷 사용자들의 기록(비정형 데이터)</li>
-<li>생물학의 데이터 과학 등</li>
-</ul>
-<h4 id="대용량-처리하기에는-기존-RDBMS는-비효율적"><a href="#대용량-처리하기에는-기존-RDBMS는-비효율적" class="headerlink" title="대용량 처리하기에는 기존 RDBMS는 비효율적"></a>대용량 처리하기에는 기존 RDBMS는 비효율적</h4><ul>
-<li>비정형 데이터 분석 불가</li>
-<li>확장하기가 힘들다</li>
-<li>빅데이터 처리하기에 운영 비용이 기하급수적으로 비싸진다</li>
-<li>빅데이터 처리 속도가 하둡 보다 느리다</li>
-</ul>
 
       
     </div>

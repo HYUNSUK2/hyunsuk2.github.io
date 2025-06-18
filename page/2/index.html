@@ -132,7 +132,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -146,6 +146,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hyunsuk2" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hyunsuk2" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ohs11244@naver.com" title="E-Mail → mailto:ohs11244@naver.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -158,6 +166,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang>
+    <link itemprop="mainEntityOfPage" href="https://hyunsuk2.github.io/2024/09/29/thread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HyunSuk">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyunsuk's Blog">
+      <meta itemprop="description" content="Hyunsuk's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hyunsuk's Blog">
+      <meta itemprop="description" content>
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/09/29/thread/" class="post-title-link" itemprop="url">Java 가상쓰레드 속도 비교</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">작성일</span>
+      
+
+      <time title="Post created: 2024-09-29 22:20:36 / Updated at: 23:00:07" itemprop="dateCreated datePublished" datetime="2024-09-29T22:20:36+09:00">2024-09-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="목표"><a href="#목표" class="headerlink" title="목표"></a>목표</h2><blockquote>
+<p>일반 thread 와 가상 thread 속도 비교하기(IO작업)</p>
+</blockquote>
+<h2 id="일반-thread-코드"><a href="#일반-thread-코드" class="headerlink" title="일반 thread 코드"></a>일반 thread 코드</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.URI;</span><br><span class="line"><span class="keyword">import</span> java.net.http.HttpClient;</span><br><span class="line"><span class="keyword">import</span> java.net.http.HttpRequest;</span><br><span class="line"><span class="keyword">import</span> java.net.http.HttpResponse;</span><br><span class="line"><span class="keyword">import</span> java.time.Duration;</span><br><span class="line"><span class="keyword">import</span> java.time.Instant;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CompletableFuture;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PlatformThreadTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">client</span> <span class="operator">=</span> HttpClient.newHttpClient();</span><br><span class="line">        <span class="type">var</span> <span class="variable">request</span> <span class="operator">=</span> HttpRequest.newBuilder()</span><br><span class="line">                .uri(<span class="keyword">new</span> <span class="title class_">URI</span>(<span class="string">&quot;http://localhost:4000/&quot;</span>))</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">totalRequests</span> <span class="operator">=</span> <span class="number">100000</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">batchSize</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">numBatches</span> <span class="operator">=</span> totalRequests / batchSize;</span><br><span class="line"></span><br><span class="line">        <span class="type">Instant</span> <span class="variable">start</span> <span class="operator">=</span> Instant.now();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">batch</span> <span class="operator">=</span> <span class="number">0</span>; batch &lt; numBatches; batch++) &#123;</span><br><span class="line">            <span class="type">var</span> <span class="variable">executor</span> <span class="operator">=</span> Executors.newFixedThreadPool(batchSize);</span><br><span class="line">            CompletableFuture&lt;?&gt;[] futures = <span class="keyword">new</span> <span class="title class_">CompletableFuture</span>&lt;?&gt;[batchSize];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; batchSize; i++) &#123;</span><br><span class="line">                futures[i] = CompletableFuture.runAsync(() -&gt; &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        HttpResponse&lt;String&gt; response = client.send(request, HttpResponse.BodyHandlers.ofString());</span><br><span class="line">                        <span class="comment">// System.out.println(&quot;Response code: &quot; + response.statusCode());</span></span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, executor);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            CompletableFuture.allOf(futures).join();</span><br><span class="line">            executor.shutdown();</span><br><span class="line">            executor.awaitTermination(<span class="number">1</span>, TimeUnit.MINUTES);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">Instant</span> <span class="variable">end</span> <span class="operator">=</span> Instant.now();</span><br><span class="line">        System.out.println(<span class="string">&quot;Time taken with platform threads: &quot;</span> + Duration.between(start, end).toMillis() + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/09/29/thread/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -548,170 +649,6 @@ False
 <blockquote>
 <p>간단한 예시지만 이런 특징을 사용해서 좀 더 유연한 프로그램을 만들 수 있다<br>thread 프로그래밍이 장점이 많지만 메모리를 공유하기 때문에 <strong>연산 작업할 때는 lock을 사용하여 thread-safe</strong>하게 신경 써야 한다<br>하지만 <strong>lock은 처리 시간을 느리게 하므로</strong> 주의가 필요하다 </p>
 </blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang>
-    <link itemprop="mainEntityOfPage" href="https://hyunsuk2.github.io/2021/02/26/data-structure-timecomplexity/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HyunSuk">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hyunsuk's Blog">
-      <meta itemprop="description" content="Hyunsuk's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Hyunsuk's Blog">
-      <meta itemprop="description" content>
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/02/26/data-structure-timecomplexity/" class="post-title-link" itemprop="url">자료구조 시간 복잡도</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">작성일</span>
-
-      <time title="Post created: 2021-02-26 23:17:06" itemprop="dateCreated datePublished" datetime="2021-02-26T23:17:06+09:00">2021-02-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Updated at: 2023-12-23 22:19:58" itemprop="dateModified" datetime="2023-12-23T22:19:58+09:00">2023-12-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IT/data-structure/" itemprop="url" rel="index"><span itemprop="name">data structure</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="자료구조별-시간-복잡도"><a href="#자료구조별-시간-복잡도" class="headerlink" title="자료구조별 시간 복잡도"></a>자료구조별 시간 복잡도</h2><h4 id="실무에서-주로-사용했던-자료구조-시간복잡도를-정리해봤다-작업의-시간복잡도를-보고-효율적인-자료구조를-선택하자"><a href="#실무에서-주로-사용했던-자료구조-시간복잡도를-정리해봤다-작업의-시간복잡도를-보고-효율적인-자료구조를-선택하자" class="headerlink" title="실무에서 주로 사용했던 자료구조 시간복잡도를 정리해봤다 작업의 시간복잡도를 보고 효율적인 자료구조를 선택하자"></a>실무에서 주로 사용했던 자료구조 시간복잡도를 정리해봤다 작업의 시간복잡도를 보고 효율적인 자료구조를 선택하자</h4><table>
-<thead>
-<tr>
-<th>자료구조</th>
-<th>접근</th>
-<th>검색</th>
-<th>입력</th>
-<th>삭제</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>array list</td>
-<td>O(1)</td>
-<td>O(n)</td>
-<td>O(n)</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>set</td>
-<td>O(1)</td>
-<td>O(1)</td>
-<td>O(1)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>stack</td>
-<td>O(n)</td>
-<td>O(n)</td>
-<td>O(1)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>queue</td>
-<td>O(n)</td>
-<td>O(n)</td>
-<td>O(1)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>singled-linked list</td>
-<td>O(n)</td>
-<td>O(n)</td>
-<td>O(1)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>doubly-linked list</td>
-<td>O(n)</td>
-<td>O(n)</td>
-<td>O(1)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>hash table</td>
-<td>N&#x2F;A</td>
-<td>O(log(n))</td>
-<td>O(log(n)</td>
-<td>O(log(n)</td>
-</tr>
-<tr>
-<td>binary tree</td>
-<td>O(log(n))</td>
-<td>O(log(n))</td>
-<td>O(log(n))</td>
-<td>O(log(n))</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>습관적으로 탐색할 때도 list를 많이 사용했는데 탐색할 때는 list 대신 set을 사용하자</p>
-</blockquote>
-<h2 id="시간-복잡도-그래프"><a href="#시간-복잡도-그래프" class="headerlink" title="시간 복잡도 그래프"></a>시간 복잡도 그래프</h2><img src="/2021/02/26/data-structure-timecomplexity/time%20complexity.PNG" class>
-
-<h4 id="참조링크"><a href="#참조링크" class="headerlink" title="참조링크"></a>참조링크</h4><ol>
-<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ics.uci.edu/~pattis/ICS-33/lectures/complexitypython.txt">파이썬 자료구조 시간복잡도</a></li>
-<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.bigocheatsheet.com/">자료구조 시간복잡도</a></li>
-</ol>
 
       
     </div>
