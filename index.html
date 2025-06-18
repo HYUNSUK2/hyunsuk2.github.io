@@ -52,6 +52,8 @@
 
   
 
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.5.0/mermaid.min.js","integrity":"sha256-2obLuIPcceEhkE3G09G33hBdmE55ivVcZUlcKcGNHjU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
 
 
 
@@ -205,7 +207,7 @@
       <span class="post-meta-item-text">작성일</span>
       
 
-      <time title="Post created: 2025-06-18 22:07:10 / Updated at: 22:16:46" itemprop="dateCreated datePublished" datetime="2025-06-18T22:07:10+09:00">2025-06-18</time>
+      <time title="Post created: 2025-06-18 22:07:10 / Updated at: 22:37:32" itemprop="dateCreated datePublished" datetime="2025-06-18T22:07:10+09:00">2025-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -239,6 +241,41 @@
 <li>런타임에 객체의 동작을 변경하고 싶을 때</li>
 <li>상속 대신 유연한 구조가 필요할 때</li>
 </ul>
+<h3 id="클래스-다이어그램"><a href="#클래스-다이어그램" class="headerlink" title="클래스 다이어그램"></a>클래스 다이어그램</h3><pre><code class="highlight mermaid">classDiagram
+    class WeaponBehavior &#123;
+        &lt;&lt;interface&gt;&gt;
+        +useWeapon()
+    &#125;
+    
+    class Character &#123;
+        #weaponBehavior: WeaponBehavior
+        +setWeaponBehavior(wb: WeaponBehavior)
+        +performWeapon()
+        +display()*
+    &#125;
+    
+    class Knight &#123;
+        +display()
+    &#125;
+    
+    class Archer &#123;
+        +display()
+    &#125;
+    
+    class SwordBehavior &#123;
+        +useWeapon()
+    &#125;
+    
+    class BowBehavior &#123;
+        +useWeapon()
+    &#125;
+    
+    WeaponBehavior &lt;|.. SwordBehavior : implements
+    WeaponBehavior &lt;|.. BowBehavior : implements
+    Character &lt;|-- Knight : extends
+    Character &lt;|-- Archer : extends
+    Character *-- WeaponBehavior : has</code></pre>
+
 <h3 id="예시-코드"><a href="#예시-코드" class="headerlink" title="예시 코드"></a>예시 코드</h3><p>게임 캐릭터와 무기 시스템을 구현한 예시를 통해 컴포지션을 살펴보겠습니다.</p>
 <h4 id="1-무기-행동-인터페이스"><a href="#1-무기-행동-인터페이스" class="headerlink" title="1. 무기 행동 인터페이스"></a>1. 무기 행동 인터페이스</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">WeaponBehavior</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">useWeapon</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
