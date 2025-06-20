@@ -134,7 +134,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -143,7 +143,7 @@
         <span class="site-state-item-name">카테고리</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">태그</span>
       </div>
   </nav>
@@ -168,6 +168,115 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang>
+    <link itemprop="mainEntityOfPage" href="https://hyunsuk2.github.io/2021/02/27/python-heap-memory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HyunSuk">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyunsuk's Blog">
+      <meta itemprop="description" content="Hyunsuk's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hyunsuk's Blog">
+      <meta itemprop="description" content>
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/02/27/python-heap-memory/" class="post-title-link" itemprop="url">예시로 알아보는 Python Heap Memory</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">작성일</span>
+
+      <time title="Post created: 2021-02-27 15:47:51" itemprop="dateCreated datePublished" datetime="2021-02-27T15:47:51+09:00">2021-02-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Updated at: 2023-12-23 22:19:58" itemprop="dateModified" datetime="2023-12-23T22:19:58+09:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="프로세스-메모리는-크게-code-data-stack-heap-영역이-있는데-이번-글에서는-stack-heap-영역을-다룰-예정이다"><a href="#프로세스-메모리는-크게-code-data-stack-heap-영역이-있는데-이번-글에서는-stack-heap-영역을-다룰-예정이다" class="headerlink" title="프로세스 메모리는 크게 code, data, stack, heap 영역이 있는데 이번 글에서는 stack, heap 영역을 다룰 예정이다"></a>프로세스 메모리는 크게 code, data, stack, heap 영역이 있는데 이번 글에서는 stack, heap 영역을 다룰 예정이다</h3><h4 id="그럼-heap-영역은-왜-알아야-할까"><a href="#그럼-heap-영역은-왜-알아야-할까" class="headerlink" title="그럼 heap 영역은 왜 알아야 할까?"></a>그럼 heap 영역은 왜 알아야 할까?</h4><ol>
+<li>파이썬은 모든 게 객체이기 때문, 즉 값을 heap에 저장하고 stack에서 참조한다</li>
+<li>모든 thread는 자기 process heap memory 영역을 공유한다 이걸 이용해서 좀 더 유연한 프로세스를 만들 수 있다</li>
+<li>객체를 무분별하게 생성하지 않기 위해서</li>
+<li>버그를 찾기 위해</li>
+<li>기타 등등…</li>
+</ol>
+<h4 id="간단하게-예시를-들면"><a href="#간단하게-예시를-들면" class="headerlink" title="간단하게 예시를 들면"></a>간단하게 예시를 들면</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"></span><br><span class="line">detect_word = <span class="string">&#x27;dog&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 문장에 탐지 단어가 있는지 확인하는 함수</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_worker</span>():</span><br><span class="line">    <span class="keyword">global</span> detect_word</span><br><span class="line">    text = <span class="string">&#x27;dogs are cute&#x27;</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        check = detect_word <span class="keyword">in</span> text</span><br><span class="line">        <span class="built_in">print</span>(check)</span><br><span class="line">        <span class="keyword">if</span> check <span class="keyword">is</span> <span class="literal">False</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 탐지 단어를 바꾸는 함수</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">change_worker</span>():</span><br><span class="line">    <span class="keyword">global</span> detect_word</span><br><span class="line">    sleep(<span class="number">3</span>)</span><br><span class="line">    detect_word = <span class="string">&#x27;cat&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tread1 = Thread(target=print_worker)</span><br><span class="line">tread1.start()</span><br><span class="line"></span><br><span class="line">tread2 = Thread(target=change_worker)</span><br><span class="line">tread2.start()</span><br></pre></td></tr></table></figure>
+<pre><code>실행 결과는 
+True
+True
+True
+False
+</code></pre>
+<blockquote>
+<p>heap 메모리 그림을 보면 프로세스 실행 3초 뒤<br>thread2가 detect_word를 cat으로 바꾸었기 때문에<br>heap 메모리를 공유하는 thread1의 detect_word도 cat을 가리키고 있다<br>dog는 reference counting이 0이 되어 GC에 의해 메모리 해제된다</p>
+</blockquote>
+<img src="/2021/02/27/python-heap-memory/thread-heap.PNG" class>
+<blockquote>
+<p>간단한 예시지만 이런 특징을 사용해서 좀 더 유연한 프로그램을 만들 수 있다<br>thread 프로그래밍이 장점이 많지만 메모리를 공유하기 때문에 <strong>연산 작업할 때는 lock을 사용하여 thread-safe</strong>하게 신경 써야 한다<br>하지만 <strong>lock은 처리 시간을 느리게 하므로</strong> 주의가 필요하다 </p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -636,107 +745,6 @@
 <blockquote>
 <p><strong>HDFS</strong>, <strong>MapReduce</strong>, <strong>YARN</strong>은 하둡 기반 구성 요소라서 정확하게 이해할 필요성이 있다<br>다른 요소들은 필요한 순서대로 공부하면 될 듯</p>
 </blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang>
-    <link itemprop="mainEntityOfPage" href="https://hyunsuk2.github.io/2021/02/23/speed-up-python-code/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HyunSuk">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hyunsuk's Blog">
-      <meta itemprop="description" content="Hyunsuk's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Hyunsuk's Blog">
-      <meta itemprop="description" content>
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/02/23/speed-up-python-code/" class="post-title-link" itemprop="url">속도를 높이는 파이썬 코드</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">작성일</span>
-
-      <time title="Post created: 2021-02-23 12:48:42" itemprop="dateCreated datePublished" datetime="2021-02-23T12:48:42+09:00">2021-02-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Updated at: 2023-12-23 22:19:58" itemprop="dateModified" datetime="2023-12-23T22:19:58+09:00">2023-12-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IT/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="기존-파이썬-코드를-빠르게-만드는-방법"><a href="#기존-파이썬-코드를-빠르게-만드는-방법" class="headerlink" title="기존 파이썬 코드를 빠르게 만드는 방법"></a>기존 파이썬 코드를 빠르게 만드는 방법</h3><ul>
-<li>상황에 맞는 정확한 데이터 구조 사용<br> (list, tuple, set, dict, etc…)</li>
-<li>for 루프 대신 while 루프 사용</li>
-<li>컴프레헨션 사용</li>
-<li>복수 할당 사용 ( a, b &#x3D; 1, 2)</li>
-<li>될 수 있으면 global 키워드를 줄이자 연산 작업에 많은 시간을 소요한다</li>
-<li>라이브러리를 활용</li>
-<li>제너레이터 사용</li>
-<li>.사용 자제 (use sqart instead of math.sqart)</li>
-<li>무한 반복문에 1 사용 True 사용 보다 런타임 줄일수 있음</li>
-<li>큰 데이터 처리는 pandas, numpy, scipy 사용</li>
-</ul>
-<p> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.loginradius.com/blog/async/speed-up-python-code/">참조링크</a></p>
 
       
     </div>

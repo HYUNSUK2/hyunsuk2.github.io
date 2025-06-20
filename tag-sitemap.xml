@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://hyunsuk2.github.io/tags/observer-pattern/</loc>
+        <lastmod>2025-06-20T01:56:09.260Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://hyunsuk2.github.io/tags/java/</loc>
+        <lastmod>2025-06-20T01:56:09.260Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://hyunsuk2.github.io/tags/refactor/</loc>
         <lastmod>2025-06-01T12:04:33.764Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -46,13 +60,6 @@
 
     <url>
         <loc>https://hyunsuk2.github.io/tags/junit/</loc>
-        <lastmod>2024-10-03T14:32:58.412Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://hyunsuk2.github.io/tags/java/</loc>
         <lastmod>2024-10-03T14:32:58.412Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
