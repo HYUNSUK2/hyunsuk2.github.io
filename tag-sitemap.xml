@@ -3,14 +3,21 @@
 
 
     <url>
-        <loc>https://hyunsuk2.github.io/tags/observer-pattern/</loc>
-        <lastmod>2025-06-20T01:56:09.260Z</lastmod>
+        <loc>https://hyunsuk2.github.io/tags/decorator-pattern/</loc>
+        <lastmod>2025-06-24T21:09:48.252Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://hyunsuk2.github.io/tags/java/</loc>
+        <lastmod>2025-06-24T21:09:48.252Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://hyunsuk2.github.io/tags/observer-pattern/</loc>
         <lastmod>2025-06-20T01:56:09.260Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
