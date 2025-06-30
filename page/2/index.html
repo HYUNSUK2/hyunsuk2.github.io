@@ -138,16 +138,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">카테고리</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">태그</span>
       </div>
   </nav>
@@ -172,6 +172,115 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang>
+    <link itemprop="mainEntityOfPage" href="https://hyunsuk2.github.io/2025/06/01/design-pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HyunSuk">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyunsuk's Blog">
+      <meta itemprop="description" content="Hyunsuk's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hyunsuk's Blog">
+      <meta itemprop="description" content>
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/06/01/design-pattern/" class="post-title-link" itemprop="url">디자인 패턴</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">작성일</span>
+      
+
+      <time title="Post created: 2025-06-01 11:14:15 / Updated at: 11:13:55" itemprop="dateCreated datePublished" datetime="2025-06-01T11:14:15+09:00">2025-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT/design-pattern/" itemprop="url" rel="index"><span itemprop="name">design-pattern</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="목표"><a href="#목표" class="headerlink" title="목표"></a>목표</h1><ul>
+<li>전략 패턴 사용</li>
+<li>옵저버 패턴 사용</li>
+</ul>
+<h2 id="1-전략-패턴-Strategy-Pattern"><a href="#1-전략-패턴-Strategy-Pattern" class="headerlink" title="1.전략 패턴 (Strategy Pattern)"></a>1.전략 패턴 (Strategy Pattern)</h2><h3 id="사용-시점"><a href="#사용-시점" class="headerlink" title="사용 시점"></a>사용 시점</h3><ul>
+<li><strong>유사한 기능을 하는 여러 클래스</strong>가 존재할 때<ul>
+<li>예: 다양한 결제 수단 (신용카드, 카카오페이, 토스페이)</li>
+<li>예: 다양한 인증 방식 (JWT, OAuth, Basic Auth)</li>
+<li>예: 다양한 캐싱 전략 (Redis, Memcached, Local Cache)</li>
+<li>예: 다양한 로깅 방식 (File, Console, Cloud)</li>
+</ul>
+</li>
+</ul>
+<h3 id="구현-예제"><a href="#구현-예제" class="headerlink" title="구현 예제"></a>구현 예제</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABC, abstractmethod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 결제 수단 인터페이스 (Strategy)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PaymentStrategy</span>(<span class="title class_ inherited__">ABC</span>):</span><br><span class="line"><span class="meta">    @abstractmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pay</span>(<span class="params">self, amount</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 결제 수단 구현 (Concrete Strategies)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CreditCardPayment</span>(<span class="title class_ inherited__">PaymentStrategy</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pay</span>(<span class="params">self, amount</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;신용카드로 <span class="subst">&#123;amount&#125;</span>원 결제 완료!&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">KakaoPayPayment</span>(<span class="title class_ inherited__">PaymentStrategy</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pay</span>(<span class="params">self, amount</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;카카오페이로 <span class="subst">&#123;amount&#125;</span>원 결제 완료!&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 결제 프로세서 (Context)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PaymentProcessor</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, payment_strategy: PaymentStrategy</span>):</span><br><span class="line">        <span class="variable language_">self</span>.payment_strategy = payment_strategy</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pay</span>(<span class="params">self, amount</span>):</span><br><span class="line">        <span class="variable language_">self</span>.payment_strategy.pay(amount)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 사용 예시</span></span><br><span class="line">payment = PaymentProcessor(KakaoPayPayment())</span><br><span class="line">payment.pay(<span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-옵저버-패턴-Observer-Pattern"><a href="#2-옵저버-패턴-Observer-Pattern" class="headerlink" title="2.옵저버 패턴 (Observer Pattern)"></a>2.옵저버 패턴 (Observer Pattern)</h2><h3 id="사용-시점-1"><a href="#사용-시점-1" class="headerlink" title="사용 시점"></a>사용 시점</h3><ul>
+<li><strong>한 객체의 상태 변화를 다른 객체들에게 알려야</strong> 할 때<ul>
+<li>예: 결제 상태 변경 알림</li>
+<li>예: 이벤트 처리 시스템 (버튼 클릭, 키보드 입력)</li>
+<li>예: 실시간 데이터 업데이트 (주식 가격, 날씨 정보)</li>
+<li>예: 사용자 인터페이스 업데이트 (데이터 변경 시 화면 갱신)</li>
+</ul>
+</li>
+</ul>
+<h3 id="구현-예제-1"><a href="#구현-예제-1" class="headerlink" title="구현 예제"></a>구현 예제</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 옵저버(Observer) 인터페이스</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Notifier</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_notification</span>(<span class="params">self, message</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 알림 방식 구현</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SMSNotifier</span>(<span class="title class_ inherited__">Notifier</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_notification</span>(<span class="params">self, message</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;📱 SMS: <span class="subst">&#123;message&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">EmailNotifier</span>(<span class="title class_ inherited__">Notifier</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_notification</span>(<span class="params">self, message</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;📧 Email: <span class="subst">&#123;message&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 결제 프로세서 (Subject)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PaymentProcessor</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.notifiers = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add_notifier</span>(<span class="params">self, notifier: Notifier</span>):</span><br><span class="line">        <span class="variable language_">self</span>.notifiers.append(notifier)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pay</span>(<span class="params">self, amount</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;💳 <span class="subst">&#123;amount&#125;</span>원 결제 완료!&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> notifier <span class="keyword">in</span> <span class="variable language_">self</span>.notifiers:</span><br><span class="line">            notifier.send_notification(<span class="string">f&quot;<span class="subst">&#123;amount&#125;</span>원 결제가 완료되었습니다.&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 사용 예시</span></span><br><span class="line">payment = PaymentProcessor()</span><br><span class="line">payment.add_notifier(SMSNotifier())</span><br><span class="line">payment.add_notifier(EmailNotifier())</span><br><span class="line">payment.pay(<span class="number">20000</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h2><p>각 디자인 패턴은 특정 상황에서 코드의 유지보수성과 확장성을 높이는 데 도움을 줍니다. 실제 프로젝트에서는 이러한 패턴들을 적절히 조합하여 사용하는 것이 중요합니다.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -551,108 +660,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/06/29/mysql-db-timeout/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang>
-    <link itemprop="mainEntityOfPage" href="https://hyunsuk2.github.io/2023/12/22/git-command/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HyunSuk">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hyunsuk's Blog">
-      <meta itemprop="description" content="Hyunsuk's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Hyunsuk's Blog">
-      <meta itemprop="description" content>
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/22/git-command/" class="post-title-link" itemprop="url">Git 설정과 자주 쓰는 명령어</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">작성일</span>
-
-      <time title="Post created: 2023-12-22 15:02:39" itemprop="dateCreated datePublished" datetime="2023-12-22T15:02:39+09:00">2023-12-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Updated at: 2023-12-23 22:19:58" itemprop="dateModified" datetime="2023-12-23T22:19:58+09:00">2023-12-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IT/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="git-세팅"><a href="#git-세팅" class="headerlink" title="git 세팅"></a>git 세팅</h2><hr>
-<h4 id="이름-세팅"><a href="#이름-세팅" class="headerlink" title="이름 세팅"></a>이름 세팅</h4><ul>
-git config --global user.name "Your Name"
-
-<p>ex) 이름 세팅</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;hyunsuk&quot;</span></span><br></pre></td></tr></table></figure>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/22/git-command/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
